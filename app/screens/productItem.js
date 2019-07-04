@@ -6,10 +6,11 @@ import {
   Image,
   View
 } from 'react-native';
+
 import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-export default class BookcaseItem extends Component {
+export default class ProductItem extends Component {
 
   _onEditBook = () => {
     let id = this.props.id;

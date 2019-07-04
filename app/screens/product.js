@@ -7,13 +7,13 @@ import {
   View
 } from 'react-native';
 
-import BookcaseItem from './bookcaseItem';
+import ProductItem from './productItem';
 
-export default class Boookcase extends Component {
+export default class Product extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: [
+      products: [
         {
           id: 1,
           title: 'Harry Potter and the Goblet of Fire',
@@ -37,7 +37,7 @@ export default class Boookcase extends Component {
   }
 
   _renderItem = ({ item }) => (
-    <BookcaseItem
+    <ProductItem
       id={item.id}
       title={item.title}
       author={item.author}
@@ -55,7 +55,7 @@ export default class Boookcase extends Component {
           barStyle="light-content"
         />
         <FlatList
-          data={this.state.books}
+          data={this.state.products}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />

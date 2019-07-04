@@ -8,12 +8,13 @@ import {
 import { Icon } from "react-native-elements";
 
 import IntroPage from "./app/screens/introPage";
-import Bookcase from "./app/screens/bookcase";
+import Product from "./app/screens/product";
 import Explore from "./app/screens/explore";
 import AddBook from "./app/screens/addBook";
 import Lists from "./app/screens/lists";
 import Profile from "./app/screens/profile";
 import EditBook from "./app/screens/editBook";
+
 
 export const Tabs = createBottomTabNavigator({
   IntroPage: {
@@ -34,10 +35,10 @@ export const Tabs = createBottomTabNavigator({
       )
     }
   },
-  Bookcase: {
-    screen: Bookcase,
+  Product: {
+    screen: Product,
     navigationOptions: {
-      tabBarLabel: "Bookcase",
+      tabBarLabel: "Product",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="open-book" type="entypo" size={28} color={tintColor} />
       )
@@ -77,9 +78,9 @@ export const Tabs = createBottomTabNavigator({
   }
 });
 
-export const BookcaseStack = createStackNavigator({
-  Bookcase: {
-    screen: Bookcase,
+export const ProductStack = createStackNavigator({
+  Product: {
+    screen: Product,
     navigationOptions: () => ({
       header: null
     })
@@ -103,8 +104,8 @@ export const createRootNavigator = () => {
           gesturesEnabled: false
         })
       },
-      BookcaseStack: {
-        screen: BookcaseStack,
+      ProductStack: {
+        screen: ProductStack,
         navigationOptions: () => ({
           gesturesEnabled: false
         })

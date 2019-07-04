@@ -17,7 +17,7 @@ export default class EditBook extends Component {
           EditBook #{JSON.stringify(itemId)}
         </Text>
         <Button
-          title="Back To books"
+          title="Back To products"
           onPress={() => this.props.navigation.navigate('Tabs')}
         />
       </View>
