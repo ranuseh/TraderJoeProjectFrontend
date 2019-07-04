@@ -12,16 +12,13 @@ import {
 import { Card } from "react-native-elements";
 
 export default class Explore extends Component {
-  onClickListener = viewId => {
-    Alert.alert("Alert", "Button pressed " + viewId);
-  };
 
   render() {
     return (
       <View style={styles.container}>
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.onClickListener("Play for Matches")}
+          onPress={() => this.props.navigation.navigate("Product")}
         >
           <Card>
             <Text style={styles.paragraph}>PLAY TJINDER MATCH</Text>
@@ -33,7 +30,7 @@ export default class Explore extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.onClickListener("See Matches")}
+          onPress={() => this.props.navigation.navigate("Add Book")}
         >
           <Card>
             <Text style={styles.paragraph}>SEE TJINDER MATCHES</Text>
@@ -45,7 +42,7 @@ export default class Explore extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.onClickListener("My Likes")}
+          onPress={() => this.props.navigation.navigate("Lists")}
         >
           <Card>
             <Text style={styles.paragraph}>MY LIKES </Text>
@@ -55,7 +52,7 @@ export default class Explore extends Component {
         <Text> </Text>
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.onClickListener("My Recommendations")}
+          onPress={() => this.props.navigation.navigate("My Profile")}
         >
           <Card>
             <Text style={styles.paragraph}>MY RECOMMENDATIONS</Text>

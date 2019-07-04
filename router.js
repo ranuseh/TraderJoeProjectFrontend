@@ -17,6 +17,7 @@ import EditBook from "./app/screens/editBook";
 
 
 export const Tabs = createBottomTabNavigator({
+  // Defines a button that on click will render the screen component
   IntroPage: {
     screen: IntroPage,
     navigationOptions: {
