@@ -30,7 +30,7 @@ export const Tabs = createBottomTabNavigator({
   Explore: {
     screen: Explore,
     navigationOptions: {
-      tabBarLabel: "Explore",
+      tabBarLabel: "Home",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="ios-map" type="ionicon" size={28} color={tintColor} />
       )
@@ -39,7 +39,7 @@ export const Tabs = createBottomTabNavigator({
   Product: {
     screen: Product,
     navigationOptions: {
-      tabBarLabel: "Product",
+      tabBarLabel: "Play",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="open-book" type="entypo" size={28} color={tintColor} />
       )
@@ -48,7 +48,7 @@ export const Tabs = createBottomTabNavigator({
   "Add Book": {
     screen: AddBook,
     navigationOptions: {
-      tabBarLabel: "Add Book",
+      tabBarLabel: "Matches",
       tabBarIcon: ({ tintColor }) => (
         <Icon
           name="ios-add-circle-outline"
@@ -62,7 +62,7 @@ export const Tabs = createBottomTabNavigator({
   Lists: {
     screen: Lists,
     navigationOptions: {
-      tabBarLabel: "Lists",
+      tabBarLabel: "Likes",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="list" type="entypo" size={28} color={tintColor} />
       )
@@ -71,7 +71,7 @@ export const Tabs = createBottomTabNavigator({
   "My Profile": {
     screen: Profile,
     navigationOptions: {
-      tabBarLabel: "Profile",
+      tabBarLabel: "New",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="ios-person" type="ionicon" size={28} color={tintColor} />
       )
@@ -88,6 +88,14 @@ export const ProductStack = createStackNavigator({
   },
   EditBook: {
     screen: EditBook,
+    navigationOptions: () => ({
+      header: null,
+      tabBarVisible: false,
+      gesturesEnabled: false
+    })
+  },
+  'Add Book': {
+    screen: AddBook,
     navigationOptions: () => ({
       header: null,
       tabBarVisible: false,

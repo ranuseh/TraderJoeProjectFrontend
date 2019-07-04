@@ -35,7 +35,10 @@ class NoMoreCards extends Component {
     return (
       <View>
         <Text style={styles.noMoreCardsText}>No more cards</Text>
-        <Text> Go to my matches</Text>
+        <Text onPress={() => this.props.navigation.navigate("Add Book")}>
+          {" "}
+          <Text> Go to my matches</Text>
+        </Text>
       </View>
     );
   }
@@ -87,7 +90,7 @@ export default class extends React.Component {
       <SwipeCards
         cards={this.state.cards}
         renderCard={cardData => <Card {...cardData} />}
-        renderNoMoreCards={() => <NoMoreCards />}
+        renderNoMoreCards={() => <NoMoreCards navigation={this.props.navigation} />}
         handleYup={this.handleYup}
         handleNope={this.handleNope}
         handleMaybe={this.handleMaybe}

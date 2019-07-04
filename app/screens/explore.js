@@ -9,10 +9,10 @@ import {
   Image,
   Alert
 } from "react-native";
+
 import { Card } from "react-native-elements";
 
 export default class Explore extends Component {
-
   render() {
     return (
       <View style={styles.container}>
