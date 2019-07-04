@@ -35,7 +35,7 @@ class NoMoreCards extends Component {
     return (
       <View>
         <Text style={styles.noMoreCardsText}>No more cards</Text>
-        <Text onPress={() => this.props.navigation.navigate("Add Book")}>
+        <Text onPress={() => this.props.navigation.navigate("Matches")}>
           {" "}
           <Text> Go to my matches</Text>
         </Text>

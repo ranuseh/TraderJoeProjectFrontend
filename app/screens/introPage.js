@@ -63,7 +63,8 @@ export default class IntroPage extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.props.navigation.navigate("Explore")}
+          onPress={() => this.onClickListener('Login')}
+          onPress={() => this.props.navigation.navigate("Home")}
         >
           <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight>

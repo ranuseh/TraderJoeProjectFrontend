@@ -12,7 +12,7 @@ import {
 
 import { Card } from "react-native-elements";
 
-export default class Explore extends Component {
+export default class Home extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -30,7 +30,7 @@ export default class Explore extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.props.navigation.navigate("Add Book")}
+          onPress={() => this.props.navigation.navigate("Matches")}
         >
           <Card>
             <Text style={styles.paragraph}>SEE TJINDER MATCHES</Text>
@@ -42,7 +42,7 @@ export default class Explore extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.props.navigation.navigate("Lists")}
+          onPress={() => this.props.navigation.navigate("Recommend")}
         >
           <Card>
             <Text style={styles.paragraph}>MY LIKES </Text>
@@ -50,14 +50,6 @@ export default class Explore extends Component {
         </TouchableHighlight>
         <Text> </Text>
         <Text> </Text>
-        <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.props.navigation.navigate("My Profile")}
-        >
-          <Card>
-            <Text style={styles.paragraph}>MY RECOMMENDATIONS</Text>
-          </Card>
-        </TouchableHighlight>
       </View>
     );
   }
@@ -66,8 +58,7 @@ export default class Explore extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
+    justifyContent: "center",
     padding: 30,
     backgroundColor: "#ecf0f1"
   },

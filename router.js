@@ -9,9 +9,9 @@ import { Icon } from "react-native-elements";
 
 import IntroPage from "./app/screens/introPage";
 import Product from "./app/screens/product";
-import Explore from "./app/screens/explore";
-import AddBook from "./app/screens/addBook";
-import Lists from "./app/screens/lists";
+import Home from "./app/screens/home";
+import Matches from "./app/screens/matches";
+import Recommend from "./app/screens/recommend";
 import Profile from "./app/screens/profile";
 import EditBook from "./app/screens/editBook";
 
@@ -27,8 +27,8 @@ export const Tabs = createBottomTabNavigator({
       )
     }
   },
-  Explore: {
-    screen: Explore,
+  Home: {
+    screen: Home,
     navigationOptions: {
       tabBarLabel: "Home",
       tabBarIcon: ({ tintColor }) => (
@@ -45,8 +45,8 @@ export const Tabs = createBottomTabNavigator({
       )
     }
   },
-  "Add Book": {
-    screen: AddBook,
+  Matches: {
+    screen: Matches,
     navigationOptions: {
       tabBarLabel: "Matches",
       tabBarIcon: ({ tintColor }) => (
@@ -59,24 +59,15 @@ export const Tabs = createBottomTabNavigator({
       )
     }
   },
-  Lists: {
-    screen: Lists,
+  Recommend: {
+    screen: Recommend,
     navigationOptions: {
-      tabBarLabel: "Likes",
+      tabBarLabel: "To Try",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="list" type="entypo" size={28} color={tintColor} />
       )
     }
   },
-  "My Profile": {
-    screen: Profile,
-    navigationOptions: {
-      tabBarLabel: "New",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-person" type="ionicon" size={28} color={tintColor} />
-      )
-    }
-  }
 });
 
 export const ProductStack = createStackNavigator({
@@ -94,8 +85,8 @@ export const ProductStack = createStackNavigator({
       gesturesEnabled: false
     })
   },
-  'Add Book': {
-    screen: AddBook,
+  'Matches': {
+    screen: Matches,
     navigationOptions: () => ({
       header: null,
       tabBarVisible: false,
