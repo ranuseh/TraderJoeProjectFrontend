@@ -7,6 +7,7 @@ import {
 } from "react-navigation";
 import { Icon } from "react-native-elements";
 
+import IntroPage from "./app/screens/introPage";
 import Bookcase from "./app/screens/bookcase";
 import Explore from "./app/screens/explore";
 import AddBook from "./app/screens/addBook";
@@ -15,12 +16,12 @@ import Profile from "./app/screens/profile";
 import EditBook from "./app/screens/editBook";
 
 export const Tabs = createBottomTabNavigator({
-  Bookcase: {
-    screen: Bookcase,
+  IntroPage: {
+    screen: IntroPage,
     navigationOptions: {
-      tabBarLabel: "Bookcase",
+      tabBarLabel: "Login",
       tabBarIcon: ({ tintColor }) => (
-        <Icon name="open-book" type="entypo" size={28} color={tintColor} />
+        <Icon name="ios-key" type="ionicon" size={28} color={tintColor} />
       )
     }
   },
@@ -30,6 +31,15 @@ export const Tabs = createBottomTabNavigator({
       tabBarLabel: "Explore",
       tabBarIcon: ({ tintColor }) => (
         <Icon name="ios-map" type="ionicon" size={28} color={tintColor} />
+      )
+    }
+  },
+  Bookcase: {
+    screen: Bookcase,
+    navigationOptions: {
+      tabBarLabel: "Bookcase",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="open-book" type="entypo" size={28} color={tintColor} />
       )
     }
   },
