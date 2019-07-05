@@ -13,6 +13,8 @@ import {
 import { Card } from "react-native-elements";
 
 export default class Home extends Component {
+
+  
   render() {
     return (
       <View style={styles.container}>

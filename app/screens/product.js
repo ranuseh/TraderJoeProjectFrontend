@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, ActivityIndicator } from "react-native";
 
 import SwipeCards from "react-native-swipe-cards";
 
@@ -48,30 +48,44 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       cards: [
-        {
-          id: 1,
-          title: "Harry Potter and the Goblet of Fire",
-          author: "J. K. Rowling",
-          thumbnail: "https://covers.openlibrary.org/w/id/7984916-M.jpg",
-          backgroundColor: "white"
-        },
-        {
-          id: 2,
-          title: "The Hobbit",
-          author: "J. R. R. Tolkien",
-          thumbnail: "https://covers.openlibrary.org/w/id/6979861-M.jpg",
-          backgroundColor: "white"
-        },
-        {
-          id: 3,
-          title: "1984",
-          author: "George Orwell",
-          thumbnail: "https://covers.openlibrary.org/w/id/7222246-M.jpg",
-          backgroundColor: "white"
-        }
+        // {
+        //   id: 1,
+        //   title: "Harry Potter and the Goblet of Fire",
+        //   author: "J. K. Rowling",
+        //   thumbnail: "https://covers.openlibrary.org/w/id/7984916-M.jpg",
+        //   backgroundColor: "white"
+        // },
+        // {
+        //   id: 2,
+        //   title: "The Hobbit",
+        //   author: "J. R. R. Tolkien",
+        //   thumbnail: "https://covers.openlibrary.org/w/id/6979861-M.jpg",
+        //   backgroundColor: "white"
+        // },
+        // {
+        //   id: 3,
+        //   title: "1984",
+        //   author: "George Orwell",
+        //   thumbnail: "https://covers.openlibrary.org/w/id/7222246-M.jpg",
+        //   backgroundColor: "white"
+        // }
       ]
     };
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:4000/listing")
+      .then(response => response.json())
+      .then((responseJson) => {
+        this.setState({
+          loading: false,
+          cards: responseJson
+
+        })
+      })
+      .catch(error => console.log(error)) //to catch the errors if any
   }
 
   handleYup(card) {
@@ -84,13 +98,22 @@ export default class extends React.Component {
     console.log(`Maybe for ${card.text}`);
   }
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={styles.loader}>
+          <ActivityIndicator size="large" color="#0c9" />
+        </View>
+      );
+    }
     // If you want a stack of cards instead of one-per-one view, activate stack mode
     // stack={true}
     return (
       <SwipeCards
         cards={this.state.cards}
         renderCard={cardData => <Card {...cardData} />}
-        renderNoMoreCards={() => <NoMoreCards navigation={this.props.navigation} />}
+        renderNoMoreCards={() => (
+          <NoMoreCards navigation={this.props.navigation} />
+        )}
         handleYup={this.handleYup}
         handleNope={this.handleNope}
         handleMaybe={this.handleMaybe}
