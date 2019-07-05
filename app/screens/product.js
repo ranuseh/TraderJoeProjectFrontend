@@ -76,16 +76,18 @@ export default class extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:4000/listing")
+    fetch(
+      "http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/listing"
+    )
       .then(response => response.json())
-      .then((responseJson) => {
+      .then(responseJson => {
         this.setState({
           loading: false,
           cards: responseJson
-
-        })
+        });
+        console.log({ responseJson });
       })
-      .catch(error => console.log(error)) //to catch the errors if any
+      .catch(error => console.log(error)); //to catch the errors if any
   }
 
   handleYup(card) {
