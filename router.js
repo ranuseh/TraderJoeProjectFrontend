@@ -7,7 +7,7 @@ import {
 } from "react-navigation";
 import { Icon } from "react-native-elements";
 
-import IntroPage from "./app/screens/introPage";
+import Login from "./app/screens/login";
 import Product from "./app/screens/product";
 import Home from "./app/screens/home";
 import Matches from "./app/screens/matches";
@@ -18,8 +18,8 @@ import EditBook from "./app/screens/editBook";
 
 export const Tabs = createBottomTabNavigator({
   // Defines a button that on click will render the screen component
-  IntroPage: {
-    screen: IntroPage,
+  Login: {
+    screen: Login,
     navigationOptions: {
       tabBarLabel: "Login",
       tabBarIcon: ({ tintColor }) => (

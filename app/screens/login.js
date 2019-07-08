@@ -10,7 +10,7 @@ import {
   Alert
 } from "react-native";
 
-export default class IntroPage extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
     state = {

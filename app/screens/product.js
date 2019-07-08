@@ -13,11 +13,10 @@ class Card extends React.Component {
       <View
         style={[styles.card, { backgroundColor: this.props.backgroundColor }]}
       >
-        <Text>{this.props.id}</Text>
         <Text>{this.props.title}</Text>
-        <Text>{this.props.author}</Text>
+        <Text>{this.props.inventory}</Text>
         <Image
-          source={{ uri: this.props.thumbnail }}
+          source={{ uri: this.props.imageURL }}
           style={styles.thumbnail}
           resizeMode="contain"
         />
@@ -49,35 +48,13 @@ export default class extends React.Component {
     super(props);
     this.state = {
       loading: true,
-      cards: [
-        // {
-        //   id: 1,
-        //   title: "Harry Potter and the Goblet of Fire",
-        //   author: "J. K. Rowling",
-        //   thumbnail: "https://covers.openlibrary.org/w/id/7984916-M.jpg",
-        //   backgroundColor: "white"
-        // },
-        // {
-        //   id: 2,
-        //   title: "The Hobbit",
-        //   author: "J. R. R. Tolkien",
-        //   thumbnail: "https://covers.openlibrary.org/w/id/6979861-M.jpg",
-        //   backgroundColor: "white"
-        // },
-        // {
-        //   id: 3,
-        //   title: "1984",
-        //   author: "George Orwell",
-        //   thumbnail: "https://covers.openlibrary.org/w/id/7222246-M.jpg",
-        //   backgroundColor: "white"
-        // }
-      ]
+      cards: []
     };
   }
 
   componentDidMount() {
     fetch(
-      "http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/listing"
+      "http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/items"
     )
       .then(response => response.json())
       .then(responseJson => {
