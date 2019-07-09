@@ -7,7 +7,6 @@ import {
 } from "react-navigation";
 import { Icon } from "react-native-elements";
 
-import Login from "./app/screens/login";
 import Product from "./app/screens/product";
 import Home from "./app/screens/home";
 import Matches from "./app/screens/matches";
@@ -18,15 +17,6 @@ import EditBook from "./app/screens/editBook";
 
 export const Tabs = createBottomTabNavigator({
   // Defines a button that on click will render the screen component
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      tabBarLabel: "Login",
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-key" type="ionicon" size={28} color={tintColor} />
-      )
-    }
-  },
   Home: {
     screen: Home,
     navigationOptions: {
@@ -68,6 +58,16 @@ export const Tabs = createBottomTabNavigator({
       )
     }
   },
+
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      tabBarLabel: "Profile",
+      tabBarIcon: ({ tintColor }) => (
+        <Icon name="cake" type="entypo" size={28} color={tintColor} />
+      )
+    }
+  }
 });
 
 export const ProductStack = createStackNavigator({
