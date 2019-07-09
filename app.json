@@ -1,10 +1,14 @@
 {
   "expo": {
-    "name": "TJFoodies",
+    "name": "TJinder",
     "slug": "TraderJoeProjectFrontend",
     "privacy": "public",
     "sdkVersion": "33.0.0",
-    "platforms": ["ios", "android", "web"],
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -16,12 +20,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
     "facebookScheme": "fb457065005090623",
     "facebookAppId": "457065005090623",
-    "facebookDisplayName": "ranuseh"
+    "facebookDisplayName": "ranuseh",
+    "description": ""
   }
 }

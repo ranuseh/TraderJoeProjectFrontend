@@ -14,7 +14,6 @@ import { Card } from "react-native-elements";
 
 export default class Home extends Component {
 
-  
   render() {
     return (
       <View style={styles.container}>
@@ -52,6 +51,16 @@ export default class Home extends Component {
         </TouchableHighlight>
         <Text> </Text>
         <Text> </Text>
+
+        <TouchableHighlight
+          style={[styles.buttonContainer, styles.loginButton]}
+          onPress={() => this.props.navigation.navigate("Profile")}
+        >
+          <Card>
+            <Text style={styles.paragraph}>MY PROFILE </Text>
+          </Card>
+        </TouchableHighlight>
+
       </View>
     );
   }

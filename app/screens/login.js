@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { View, Button, StyleSheet, Text } from "react-native";
 import * as Facebook from "expo-facebook";
+import { AsyncStorage } from "react-native";
 
 export default class Login extends Component {
   async logIn() {
@@ -13,13 +14,29 @@ export default class Login extends Component {
 
     const { type, token, expires, permissions, declinedPermissions } = result;
 
+    console.log("before");
+    console.log(token);
+
     const response = await fetch(
       `https://graph.facebook.com/me?access_token=${token}`
     );
     const json = await response.json();
 
-    this.props.onLoginCallback({ userId: json.id, token: token })
+    this.props.onLoginCallback({ userId: json.id, token: token });
+
+    this.saveUserInfo(token);
   }
+  
+  saveUserId = token => {
+    userToken = token;
+    saveUserId = async userToken => {
+      try {
+        await AsyncStorage.setItem("userToken", userToken);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+  };
 
   // async logOut() {
   //   await fetch(
