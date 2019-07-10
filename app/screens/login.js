@@ -14,28 +14,45 @@ export default class Login extends Component {
 
     const { type, token, expires, permissions, declinedPermissions } = result;
 
-    console.log("before");
-    console.log(token);
+    this.getUserId(token)
 
+  }
+
+  getUserId = async (token) => {
     const response = await fetch(
       `https://graph.facebook.com/me?access_token=${token}`
     );
     const json = await response.json();
 
-    this.props.onLoginCallback({ userId: json.id, token: token });
+    console.log("json id", json.id);
+    console.log("token", token);
 
-    this.saveUserInfo(token);
+    
+    if (json.id) {
+      this.saveUserToken(token);
+      this.props.onLoginCallback({ userId: json.id, token: token });
+    } else {
+      this.props.onLoginCallback({ userId: null, token: null });
+    }
+
   }
-  
-  saveUserId = token => {
-    userToken = token;
-    saveUserId = async userToken => {
-      try {
-        await AsyncStorage.setItem("userToken", userToken);
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
+
+  async componentDidMount() {
+    try {
+      const token = await AsyncStorage.getItem("userToken");
+      this.getUserId(token)
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
+  saveUserToken = async userToken => {
+    try {
+      await AsyncStorage.setItem("userToken", userToken);
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   // async logOut() {

@@ -6,13 +6,12 @@ import { AsyncStorage } from "react-native";
 
 interface State {
   token: string;
-  id: string;
+  userId: string;
 }
 
 interface LoginInfo {
-  userId: number;
+  userId: string;
   token: string;
-  id: string;
 }
 
 export default class App extends React.Component<{}, State> {
@@ -20,40 +19,31 @@ export default class App extends React.Component<{}, State> {
     super(props);
 
     this.state = {
-      token: "",
-      id: ""
+      token: null,
+      userId: null
     };
   }
-
   onLogIn = (loginInfo: LoginInfo) => {
+    console.log("on login:", loginInfo.userId);
+
     this.setState({
       token: loginInfo.token,
-      id: loginInfo.id
+      userId: loginInfo.userId
     });
-
-    console.log("AppState")
-    console.log(this.state.token)
   };
 
-  // componentDidMount() {
-  //   const getUserId = async () => {
-  //     let userId = "";
-  //     try {
-  //       userId = (await AsyncStorage.getItem("userId")) || "none";
-  //     } catch (error) {
-  //       // Error retrieving data
-  //       console.log(error.message);
-  //     }
-  //     return userId;
-  //   };
-  // }
-
   render() {
-    if (this.state.token) {
+    console.log("in render:", this.state.userId);
+
+    if (this.state.userId == null) {
+      console.log("in if:", this.state.userId);
+
+      return <Login onLoginCallback={this.onLogIn} />;
+    } else {
+      console.log("in else:", this.state.userId);
+
       const AppContainer = createRootNavigator();
       return <AppContainer />;
-    } else {
-      return <Login onLoginCallback={this.onLogIn} />;
     }
   }
 }
