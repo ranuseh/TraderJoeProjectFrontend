@@ -1,16 +1,7 @@
-import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  TouchableHighlight,
-  Image,
-  Alert
-} from "react-native";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
-import { Card } from "react-native-elements";
+import { Card } from 'react-native-elements';
 
 export default class Matches extends Component {
   render() {
@@ -69,13 +60,13 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     // justifyContent: "center",
     padding: 30,
-    backgroundColor: "#ecf0f1"
+    backgroundColor: '#ecf0f1',
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
-    fontWeight: "bold",
-    textAlign: "center",
-    color: "#34495e"
-  }
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#34495e',
+  },
 });

@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Image, ActivityIndicator } from "react-native";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native';
 
-import SwipeCards from "react-native-swipe-cards";
+import SwipeCards from 'react-native-swipe-cards';
 
 class Card extends React.Component {
   constructor(props) {
@@ -34,8 +34,8 @@ class NoMoreCards extends Component {
     return (
       <View>
         <Text style={styles.noMoreCardsText}>No more cards</Text>
-        <Text onPress={() => this.props.navigation.navigate("Matches")}>
-          {" "}
+        <Text onPress={() => this.props.navigation.navigate('Matches')}>
+          {' '}
           <Text> Go to my matches</Text>
         </Text>
       </View>
@@ -43,24 +43,24 @@ class NoMoreCards extends Component {
   }
 }
 
-export default class extends React.Component {
+export default class Product extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      cards: []
+      cards: [],
     };
   }
 
   componentDidMount() {
     fetch(
-      "http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/items"
+      'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/items',
     )
       .then(response => response.json())
       .then(responseJson => {
         this.setState({
           loading: false,
-          cards: responseJson
+          cards: responseJson,
         });
         console.log({ responseJson });
       })
@@ -104,17 +104,17 @@ export default class extends React.Component {
 
 const styles = StyleSheet.create({
   card: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 300,
-    height: 300
+    height: 300,
   },
   noMoreCardsText: {
-    fontSize: 22
+    fontSize: 22,
   },
   thumbnail: {
     flex: 1,
     height: 300,
-    width: 300
-  }
+    width: 300,
+  },
 });

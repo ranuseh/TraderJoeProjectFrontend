@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { View, Button, StyleSheet, Text } from "react-native";
+import React, { Component } from 'react';
+import { View, Button, StyleSheet, Text } from 'react-native';
 // import { LoginButton } from "react-native-fbsdk";
-import * as Facebook from "expo-facebook";
+import * as Facebook from 'expo-facebook';
 
 export default class Login extends Component {
   constructor() {
@@ -9,36 +9,34 @@ export default class Login extends Component {
 
     this.state = {
       userId: null,
-      token: null
+      token: null,
     };
   }
 
   async logIn() {
     const result = await Facebook.logInWithReadPermissionsAsync(
-      "457065005090623",
+      '457065005090623',
       {
-        permissions: ["public_profile", "email"]
-      }
+        permissions: ['public_profile', 'email'],
+      },
     );
 
-    const { type, token, expires, permissions, declinedPermissions } = result;
+    const { token } = result;
 
     const response = await fetch(
-      `https://graph.facebook.com/me?access_token=${token}`
+      `https://graph.facebook.com/me?access_token=${token}`,
     );
     const json = await response.json();
 
-    this.setState({ userId: json.id, token: token });
+    this.setState({ userId: json.id, token });
   }
 
   async logOut() {
     await fetch(
-      `https://graph.facebook.com/${
-      this.state.userId
-      }/permissions?access_token=${this.state.token}`,
+      `https://graph.facebook.com/${this.state.userId}/permissions?access_token=${this.state.token}`,
       {
-        method: "DELETE"
-      }
+        method: 'DELETE',
+      },
     );
 
     this.setState({ userId: null, token: null });
@@ -52,65 +50,68 @@ export default class Login extends Component {
         </View>
         <View style={styles.buttonContainer}>
           {/* <Button style={styles.loginButton} title={"Login"} onPress={() => this.logIn()} /> */}
-          <Button style={styles.loginButton} title={"LogOut"} onPress={() => this.logOut()} />
+          <Button
+            style={styles.loginButton}
+            title={'LogOut'}
+            onPress={() => this.logOut()}
+          />
         </View>
       </View>
     );
   }
 }
 
-
 const styles = StyleSheet.create({
   header: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#DCDCDC",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DCDCDC',
     fontSize: 20,
-    fontWeight: "bold"
+    fontWeight: 'bold',
   },
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#DCDCDC"
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#DCDCDC',
   },
   inputContainer: {
-    borderBottomColor: "#F5FCFF",
-    backgroundColor: "#FFFFFF",
+    borderBottomColor: '#F5FCFF',
+    backgroundColor: '#FFFFFF',
     borderRadius: 30,
     borderBottomWidth: 1,
     width: 250,
     height: 45,
     marginBottom: 20,
-    flexDirection: "row",
-    alignItems: "center"
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   inputs: {
     height: 45,
     marginLeft: 16,
-    borderBottomColor: "#FFFFFF",
-    flex: 1
+    borderBottomColor: '#FFFFFF',
+    flex: 1,
   },
   inputIcon: {
     width: 30,
     height: 30,
     marginLeft: 15,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
   buttonContainer: {
     height: 45,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 20,
     width: 250,
-    borderRadius: 30
+    borderRadius: 30,
   },
   loginButton: {
-    backgroundColor: "#00b5ec"
+    backgroundColor: '#00b5ec',
   },
   loginText: {
-    color: "white"
-  }
+    color: 'white',
+  },
 });

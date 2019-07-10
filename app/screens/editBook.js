@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Button
-} from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
 export default class EditBook extends Component {
   render() {
@@ -13,9 +8,7 @@ export default class EditBook extends Component {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>
-          EditBook #{JSON.stringify(itemId)}
-        </Text>
+        <Text style={styles.title}>EditBook #{JSON.stringify(itemId)}</Text>
         <Button
           title="Back To products"
           onPress={() => this.props.navigation.navigate('Tabs')}
@@ -36,5 +29,5 @@ const styles = StyleSheet.create({
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
-  }
+  },
 });
