@@ -1,46 +1,51 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Text } from 'react-native';
-// import { LoginButton } from "react-native-fbsdk";
-import * as Facebook from 'expo-facebook';
+import {
+  Alert,
+  View,
+  Button,
+  StyleSheet,
+  Text,
+  AsyncStorage,
+} from 'react-native';
 
-export default class Login extends Component {
-  constructor() {
-    super();
+export default class Profile extends Component {
+  async componentDidMount() {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
 
-    this.state = {
-      userId: null,
-      token: null,
-    };
+      this.getUserIdForLogOut(token);
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 
-  async logIn() {
-    const result = await Facebook.logInWithReadPermissionsAsync(
-      '457065005090623',
-      {
-        permissions: ['public_profile', 'email'],
-      },
-    );
-
-    const { token } = result;
-
+  getUserIdForLogOut = async token => {
     const response = await fetch(
       `https://graph.facebook.com/me?access_token=${token}`,
     );
     const json = await response.json();
 
-    this.setState({ userId: json.id, token });
-  }
+    if (json.id) {
+      this.logOut(token, json.id);
+    }
+  };
 
-  async logOut() {
+  logOut = async (token, jsonId) => {
+    console.log('inside logout');
+    console.log('state in logout:', jsonId);
+    console.log('state in logout:', token);
+
     await fetch(
-      `https://graph.facebook.com/${this.state.userId}/permissions?access_token=${this.state.token}`,
+      `https://graph.facebook.com/${jsonId}/permissions?access_token=${token}`,
       {
         method: 'DELETE',
       },
     );
 
-    this.setState({ userId: null, token: null });
-  }
+    Alert.alert('You have successfully logged out');
+
+    this.props.onLogOutCallback({ userId: jsonId, token });
+  };
 
   render() {
     return (
@@ -49,7 +54,6 @@ export default class Login extends Component {
           <Text>TJinder</Text>
         </View>
         <View style={styles.buttonContainer}>
-          {/* <Button style={styles.loginButton} title={"Login"} onPress={() => this.logIn()} /> */}
           <Button
             style={styles.loginButton}
             title={'LogOut'}

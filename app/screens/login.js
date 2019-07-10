@@ -3,6 +3,16 @@ import { View, Button, StyleSheet, Text, AsyncStorage } from 'react-native';
 import * as Facebook from 'expo-facebook';
 
 export default class Login extends Component {
+  async componentDidMount() {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+
+      this.getUserId(token);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   async logIn() {
     const result = await Facebook.logInWithReadPermissionsAsync(
       '457065005090623',
@@ -33,16 +43,6 @@ export default class Login extends Component {
     }
   };
 
-  async componentDidMount() {
-    try {
-      const token = await AsyncStorage.getItem('userToken');
-
-      this.getUserId(token);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
   saveUserToken = async userToken => {
     try {
       await AsyncStorage.setItem('userToken', userToken);
@@ -50,19 +50,6 @@ export default class Login extends Component {
       console.log(error.message);
     }
   };
-
-  // async logOut() {
-  //   await fetch(
-  //     `https://graph.facebook.com/${
-  //       this.state.userId
-  //     }/permissions?access_token=${this.state.token}`,
-  //     {
-  //       method: "DELETE"
-  //     }
-  //   );
-
-  //   this.setState({ userId: null, token: null });
-  // }
 
   render() {
     return (
