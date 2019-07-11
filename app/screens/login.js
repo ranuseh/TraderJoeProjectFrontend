@@ -32,22 +32,10 @@ export default class Login extends Component {
     );
     const json = await response.json();
 
-    console.log('json id', json.id);
-    console.log('token', token);
-
     if (json.id) {
-      this.saveUserToken(token);
       this.props.onLoginCallback({ userId: json.id, token });
     } else {
       this.props.onLoginCallback({ userId: null, token: null });
-    }
-  };
-
-  saveUserToken = async userToken => {
-    try {
-      await AsyncStorage.setItem('userToken', userToken);
-    } catch (error) {
-      console.log(error.message);
     }
   };
 

@@ -14,7 +14,6 @@ import Recommend from './app/screens/recommend';
 import Profile from './app/screens/profile';
 import EditBook from './app/screens/editBook';
 
-
 export const Tabs = createBottomTabNavigator({
   // Defines a button that on click will render the screen component
   Home: {
@@ -60,7 +59,10 @@ export const Tabs = createBottomTabNavigator({
   },
 
   Profile: {
-    screen: Profile,
+    screen: props => {
+      console.log(JSON.stringify(props));
+      return <Profile {...props.screenProps}></Profile>;
+    },
     navigationOptions: {
       tabBarLabel: 'Profile',
       tabBarIcon: ({ tintColor }) => (
@@ -70,30 +72,30 @@ export const Tabs = createBottomTabNavigator({
   },
 });
 
-export const ProductStack = createStackNavigator({
-  Product: {
-    screen: Product,
-    navigationOptions: () => ({
-      header: null,
-    }),
-  },
-  EditBook: {
-    screen: EditBook,
-    navigationOptions: () => ({
-      header: null,
-      tabBarVisible: false,
-      gesturesEnabled: false,
-    }),
-  },
-  Matches: {
-    screen: Matches,
-    navigationOptions: () => ({
-      header: null,
-      tabBarVisible: false,
-      gesturesEnabled: false,
-    }),
-  },
-});
+// export const ProductStack = createStackNavigator({
+//   Product: {
+//     screen: Product,
+//     navigationOptions: () => ({
+//       header: null,
+//     }),
+//   },
+//   EditBook: {
+//     screen: EditBook,
+//     navigationOptions: () => ({
+//       header: null,
+//       tabBarVisible: false,
+//       gesturesEnabled: false,
+//     }),
+//   },
+//   Matches: {
+//     screen: Matches,
+//     navigationOptions: () => ({
+//       header: null,
+//       tabBarVisible: false,
+//       gesturesEnabled: false,
+//     }),
+//   },
+// });
 
 export const createRootNavigator = () => {
   const stackNavigator = createStackNavigator(
@@ -104,16 +106,16 @@ export const createRootNavigator = () => {
           gesturesEnabled: false,
         }),
       },
-      ProductStack: {
-        screen: ProductStack,
-        navigationOptions: () => ({
-          gesturesEnabled: false,
-        }),
-      },
+      // ProductStack: {
+      //   screen: ProductStack,
+      //   navigationOptions: () => ({
+      //     gesturesEnabled: false,
+      //   }),
+      // },
     },
     {
       headerMode: 'none',
-      mode: 'modal'
+      mode: 'modal',
     },
   );
 

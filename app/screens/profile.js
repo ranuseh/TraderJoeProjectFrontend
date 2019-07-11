@@ -9,45 +9,51 @@ import {
 } from 'react-native';
 
 export default class Profile extends Component {
-  async componentDidMount() {
-    try {
-      const token = await AsyncStorage.getItem('userToken');
+  // async componentDidMount() {
+  //   // try {
+  //   //   const token = await AsyncStorage.getItem('userToken');
 
-      this.getUserIdForLogOut(token);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
+  //   //   this.getUserIdForLogOut(token);
+  //   // } catch (error) {
+  //   //   console.log(error.message);
+  //   // }
+  // }
 
-  getUserIdForLogOut = async token => {
-    const response = await fetch(
-      `https://graph.facebook.com/me?access_token=${token}`,
-    );
-    const json = await response.json();
+  // getUserIdForLogOut = async token => {
+  //   const response = await fetch(
+  //     `https://graph.facebook.com/me?access_token=${token}`,
+  //   );
+  //   const json = await response.json();
 
-    if (json.id) {
-      this.logOut(token, json.id);
-    }
-  };
+  //   if (json.id) {
+  //     this.logOut(token, json.id);
+  //   }
+  // };
 
-  logOut = async (token, jsonId) => {
-    console.log('inside logout');
-    console.log('state in logout:', jsonId);
-    console.log('state in logout:', token);
+  logOut = async () => {
+    console.log('state in logout:', this.props.userId);
+    console.log('state in logout:', this.props.token);
+    console.log('inside logout in profile');
 
     await fetch(
-      `https://graph.facebook.com/${jsonId}/permissions?access_token=${token}`,
+      `https://graph.facebook.com/${this.props.userId}/permissions?access_token=${this.props.token}`,
       {
         method: 'DELETE',
       },
     );
 
-    Alert.alert('You have successfully logged out');
+    console.log('state in logout:', this.props.userId);
+    console.log('state in logout:', this.props.token);
 
-    this.props.onLogOutCallback({ userId: jsonId, token });
+    //Alert.alert('You have successfully logged out');
+
+    this.props.onLogOutCallback();
   };
 
   render() {
+    console.log('state in profile render:', this.props.userId);
+    console.log('state in token profile render:', this.props.token);
+
     return (
       <View style={styles.container}>
         <View style={styles.header}>

@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import { createRootNavigator } from "./router";
-import Login from "./app/screens/login";
-import Profile from "./app/screens/profile";
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
+import { createRootNavigator } from './router';
+import Login from './app/screens/login';
+import Profile from './app/screens/profile';
 
-import { AsyncStorage } from "react-native";
+import { AsyncStorage } from 'react-native';
 
 interface State {
   token: string;
@@ -27,46 +27,61 @@ export default class App extends React.Component<{}, State> {
 
     this.state = {
       token: null,
-      userId: null
+      userId: null,
     };
   }
   onLogIn = (loginInfo: LoginInfo) => {
-    console.log("on login:", loginInfo.userId);
+    console.log('on login:', loginInfo.userId);
 
     this.setState({
       token: loginInfo.token,
-      userId: loginInfo.userId
+      userId: loginInfo.userId,
     });
+
+    if (loginInfo.token != null) {
+      try {
+        AsyncStorage.setItem('userToken', loginInfo.token);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
   };
 
-  onLogOut = (logOutInfo: LogOutInfo) => {
-    console.log("on logOut:", logOutInfo.userId);
+  onLogOut = () => {
+    console.log('inside log out in app');
 
     this.setState({
-      token: "logged out",
-      userId: "logged out"
+      token: null,
+      userId: null,
     });
+
+    try {
+      AsyncStorage.removeItem('userToken');
+    } catch (error) {
+      // Error retrieving data
+      console.log(error.message);
+    }
   };
 
   render() {
-    console.log("in render:", this.state.userId);
+    console.log('in render:', this.state.userId == null);
 
     if (this.state.userId == null) {
-      console.log("in if:", this.state.userId);
-
+      console.log('in render if:', this.state.userId);
       return <Login onLoginCallback={this.onLogIn} />;
-
-    } else if (this.state.userId === "logged out") {
-      console.log("in else if:", this.state.userId)
-      
-      return <Profile onLogOutCallback={this.onLogOut} />;
-
     } else {
-      console.log("in else:", this.state.userId);
-
+      console.log('in render else:', this.state.userId);
       const AppContainer = createRootNavigator();
 
-      return <AppContainer />;
+      return (
+        <AppContainer
+          screenProps={{
+            onLogOutCallback: this.onLogOut,
+            token: this.state.token,
+            userId: this.state.userId,
+          }}
+        />
+      );
     }
   }
 }
