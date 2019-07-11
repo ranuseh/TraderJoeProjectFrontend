@@ -17,7 +17,10 @@ import EditBook from './app/screens/editBook';
 export const Tabs = createBottomTabNavigator({
   // Defines a button that on click will render the screen component
   Home: {
-    screen: Home,
+    screen: props => {
+      console.log(JSON.stringify(props));
+      return <Home {...props.screenProps}></Home>;
+    },
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: ({ tintColor }) => (
