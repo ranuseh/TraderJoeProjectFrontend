@@ -14,14 +14,14 @@ module.exports = {
       experimentalObjectRestSpread: true
     }
   },
-  plugins: ["react", "prettier", "@typescript-eslint"],
+plugins: ['react', 'prettier', '@typescript-eslint'],
   extends: [
-    "eslint:recommended",
-    // "plugin:@typescript-eslint",
-    "plugin:react/recommended",
-    "prettier",
-    "prettier/react",
-    "prettier/@typescript-eslint",
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'prettier',
+    'prettier/react',
+    'prettier/@typescript-eslint',
   ],
   rules: {
     "no-shadow": "error",
@@ -64,7 +64,8 @@ module.exports = {
       }
     ],
     //Typescript
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "@typescript-eslint/explicit-function-return-type": "off", 
+    "@typescript-eslint/no-use-before-define": "off"
   },
   "settings": {
     "react": {

@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
 import { createRootNavigator } from './router';
 import Login from './app/screens/login';
-import Profile from './app/screens/profile';
 
 import { AsyncStorage } from 'react-native';
 
@@ -11,18 +9,13 @@ interface State {
   userId: string;
 }
 
-interface LoginInfo {
+export interface LoginInfo {
   userId: string;
   token: string;
 }
 
-interface LogOutInfo {
-  userId: string;
-  token: string;
-}
-
-export default class App extends React.Component<{}, State> {
-  constructor(props) {
+export default class App extends Component<{}, State> {
+  public constructor(props) {
     super(props);
 
     this.state = {
@@ -30,7 +23,7 @@ export default class App extends React.Component<{}, State> {
       userId: null,
     };
   }
-  onLogIn = (loginInfo: LoginInfo) => {
+  private onLogIn = (loginInfo: LoginInfo) => {
     console.log('on login:', loginInfo.userId);
 
     this.setState({
@@ -47,9 +40,7 @@ export default class App extends React.Component<{}, State> {
     }
   };
 
-  onLogOut = () => {
-    console.log('inside log out in app');
-
+  private onLogOut = () => {
     this.setState({
       token: null,
       userId: null,
@@ -63,7 +54,7 @@ export default class App extends React.Component<{}, State> {
     }
   };
 
-  render() {
+  public render() {
     console.log('in render:', this.state.userId == null);
 
     if (this.state.userId == null) {

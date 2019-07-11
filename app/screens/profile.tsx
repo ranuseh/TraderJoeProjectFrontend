@@ -1,56 +1,34 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Text, AsyncStorage } from 'react-native';
-import * as Facebook from 'expo-facebook';
+import { Alert, View, Button, StyleSheet, Text } from 'react-native';
 
-export default class Login extends Component {
-  async componentDidMount() {
-    try {
-      const token = await AsyncStorage.getItem('userToken');
+interface Props {
+  onLogOutCallback: () => void;
+  userId: string;
+  token: string;
+}
 
-      this.getUserId(token);
-    } catch (error) {
-      console.log(error.message);
-    }
-  }
-
-  async logIn() {
-    const result = await Facebook.logInWithReadPermissionsAsync(
-      '457065005090623',
+export default class Profile extends Component<Props, {}> {
+  private logOut = () => {
+    fetch(
+      `https://graph.facebook.com/${this.props.userId}/permissions?access_token=${this.props.token}`,
       {
-        permissions: ['public_profile', 'email'],
+        method: 'DELETE',
       },
     );
 
-    const { token } = result;
+    Alert.alert('You have successfully logged out');
 
-    this.getUserId(token);
-  }
-
-  getUserId = async token => {
-    const response = await fetch(
-      `https://graph.facebook.com/me?access_token=${token}`,
-    );
-    const json = await response.json();
-
-    if (json.id) {
-      this.props.onLoginCallback({ userId: json.id, token });
-    } else {
-      this.props.onLoginCallback({ userId: null, token: null });
-    }
+    this.props.onLogOutCallback();
   };
 
-  render() {
+  public render() {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
           <Text>TJinder</Text>
         </View>
         <View style={styles.buttonContainer}>
-          <Button
-            style={styles.loginButton}
-            title={'Login'}
-            onPress={() => this.logIn()}
-          />
+          <Button title={'LogOut'} onPress={() => this.logOut()} />
         </View>
       </View>
     );
