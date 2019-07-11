@@ -4,6 +4,22 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { Card } from 'react-native-elements';
 
 export default class Home extends Component {
+  constructor(props) {
+    super();
+
+    this.state = {
+      isLoading: true,
+      dataSource: null,
+      likes: [],
+      dislikes: [],
+      neverTried: [],
+      email: '',
+      name: '',
+    };
+  }
+
+  componentDidMount() {}
+
   render() {
     return (
       <View style={styles.container}>
