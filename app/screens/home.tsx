@@ -3,8 +3,25 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 
 import { Card } from 'react-native-elements';
 
-export default class Home extends Component {
-  constructor(props) {
+interface State {
+  facebookId: string;
+  likes: Product[];
+  dislikes: Product[];
+  neverTried: Product[];
+  email: string;
+  name: string;
+  recommended: Product[];
+  userMatch: Product[];
+}
+
+interface Props {
+  userId: string;
+  email: string;
+  name: string;
+}
+
+export default class Home extends Component<Props, State> {
+  public constructor(props) {
     super(props);
 
     this.state = {
@@ -19,8 +36,7 @@ export default class Home extends Component {
     };
   }
 
-  componentDidMount() {
-    console.log('use id', this.props.userId);
+  public componentDidMount() {
     return fetch(
       `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/users/${this.props.userId}`,
     )
@@ -45,7 +61,7 @@ export default class Home extends Component {
       });
   }
 
-  addNewUser = async () => {
+  private addNewUser = async () => {
     const user = {
       email: this.props.email,
       facebookId: this.props.userId,
@@ -58,7 +74,7 @@ export default class Home extends Component {
         {
           method: 'POST',
           headers: {
-            Accept: 'application/json',
+            "Accept": 'application/json',
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(user),
@@ -74,12 +90,11 @@ export default class Home extends Component {
     return null;
   };
 
-  render() {
+  public render() {
     return (
       <View style={styles.container}>
         <Text style={[styles.welcome]}> Welcome {this.props.name}</Text>
         <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
           onPress={() => this.props.navigation.navigate('Product')}
         >
           <Card>
@@ -91,7 +106,6 @@ export default class Home extends Component {
         <Text> </Text>
 
         <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
           onPress={() => this.props.navigation.navigate('Matches')}
         >
           <Card>
@@ -103,7 +117,6 @@ export default class Home extends Component {
         <Text> </Text>
 
         <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
           onPress={() => this.props.navigation.navigate('Recommend')}
         >
           <Card>
@@ -114,7 +127,6 @@ export default class Home extends Component {
         <Text> </Text>
 
         <TouchableHighlight
-          style={[styles.buttonContainer, styles.loginButton]}
           onPress={() => this.props.navigation.navigate('Profile')}
         >
           <Card>
