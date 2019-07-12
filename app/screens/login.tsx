@@ -30,17 +30,41 @@ export default class Login extends Component<Props> {
 
     this.getUserId(token);
   }
-
+  // TODO: Ranuseh
+  // I want to refactor this code
   private getUserId = async (token: string) => {
-    const response = await fetch(
-      `https://graph.facebook.com/me?access_token=${token}`,
-    );
-    const json = await response.json();
-
-    if (json.id) {
-      this.props.onLoginCallback({ userId: json.id, token });
+    if (token == null) {
+      this.props.onLoginCallback({
+        userId: null,
+        token: null,
+        email: null,
+        name: null,
+      });
     } else {
-      this.props.onLoginCallback({ userId: null, token: null });
+      const response = await fetch(
+        `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${token}`,
+      );
+      const json = await response.json();
+
+      console.log('login getuser token', token);
+
+      console.log('login getuser', JSON.stringify(json));
+
+      if (json.id) {
+        this.props.onLoginCallback({
+          userId: json.id,
+          token,
+          email: json.email,
+          name: json.name,
+        });
+      } else {
+        this.props.onLoginCallback({
+          userId: null,
+          token: null,
+          email: null,
+          name: null,
+        });
+      }
     }
   };
 

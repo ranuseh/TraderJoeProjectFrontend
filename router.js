@@ -75,30 +75,30 @@ export const Tabs = createBottomTabNavigator({
   },
 });
 
-// export const ProductStack = createStackNavigator({
-//   Product: {
-//     screen: Product,
-//     navigationOptions: () => ({
-//       header: null,
-//     }),
-//   },
-//   EditBook: {
-//     screen: EditBook,
-//     navigationOptions: () => ({
-//       header: null,
-//       tabBarVisible: false,
-//       gesturesEnabled: false,
-//     }),
-//   },
-//   Matches: {
-//     screen: Matches,
-//     navigationOptions: () => ({
-//       header: null,
-//       tabBarVisible: false,
-//       gesturesEnabled: false,
-//     }),
-//   },
-// });
+export const ProductStack = createStackNavigator({
+  Product: {
+    screen: Product,
+    navigationOptions: () => ({
+      header: null,
+    }),
+  },
+  EditBook: {
+    screen: EditBook,
+    navigationOptions: () => ({
+      header: null,
+      tabBarVisible: false,
+      gesturesEnabled: false,
+    }),
+  },
+  Matches: {
+    screen: Matches,
+    navigationOptions: () => ({
+      header: null,
+      tabBarVisible: false,
+      gesturesEnabled: false,
+    }),
+  },
+});
 
 export const createRootNavigator = () => {
   const stackNavigator = createStackNavigator(
@@ -109,12 +109,12 @@ export const createRootNavigator = () => {
           gesturesEnabled: false,
         }),
       },
-      // ProductStack: {
-      //   screen: ProductStack,
-      //   navigationOptions: () => ({
-      //     gesturesEnabled: false,
-      //   }),
-      // },
+      ProductStack: {
+        screen: ProductStack,
+        navigationOptions: () => ({
+          gesturesEnabled: false,
+        }),
+      },
     },
     {
       headerMode: 'none',

@@ -54,7 +54,7 @@ export default class Product extends React.Component {
 
   componentDidMount() {
     fetch(
-      'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/items',
+      'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/products',
     )
       .then(response => response.json())
       .then(responseJson => {

@@ -8,7 +8,6 @@ export default class Home extends Component {
     super(props);
 
     this.state = {
-      isLoading: true,
       facebookId: '',
       likes: [],
       dislikes: [],
@@ -21,35 +20,64 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    console.log('use id', this.props.userId);
     return fetch(
-      'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/users/5d266c934c2ee5399d233911',
+      `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/users/${this.props.userId}`,
     )
       .then(response => response.json())
+      .then(user => {
+        if (user == null) {
+          return this.addNewUser();
+        }
 
-      .then(responseJson => {
+        return user;
+      })
+      .then(user => {
         this.setState({
           isLoading: false,
-          facebookId: responseJson[0]['facebookId'],
-          likes: responseJson[0]['likes'],
-          dislikes: responseJson[0]['dislikes'],
-          neverTried: responseJson[0]['neverTried'],
-          email: responseJson[0]['email'],
-          name: responseJson[0]['name'],
-          recommended: responseJson[0]['recommended'],
-          userMatch: responseJson[0]['userMatch'],
+          ...user,
         });
 
-        console.log('in component did mount', responseJson[0]['email']);
+        console.log('in component did mount', user.email);
       })
       .catch(error => {
         console.log(error);
       });
   }
 
+  addNewUser = async () => {
+    const user = {
+      email: this.props.email,
+      facebookId: this.props.userId,
+      name: this.props.name,
+    };
+
+    try {
+      const response = await fetch(
+        'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/users/add',
+        {
+          method: 'POST',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user),
+        },
+      );
+
+      if (response.status >= 200 && response.status < 300) {
+        return user;
+      }
+    } catch (errors) {
+      console.log(errors);
+    }
+    return null;
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text style={[styles.welcome]}> Welcome {this.state.name}</Text>
+        <Text style={[styles.welcome]}> Welcome {this.props.name}</Text>
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
           onPress={() => this.props.navigation.navigate('Product')}

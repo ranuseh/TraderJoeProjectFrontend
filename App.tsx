@@ -7,11 +7,15 @@ import { AsyncStorage } from 'react-native';
 interface State {
   token: string;
   userId: string;
+  email: string;
+  name: string;
 }
 
 export interface LoginInfo {
   userId: string;
   token: string;
+  email: string;
+  name: string;
 }
 
 export default class App extends Component<{}, State> {
@@ -21,6 +25,8 @@ export default class App extends Component<{}, State> {
     this.state = {
       token: null,
       userId: null,
+      email: null,
+      name: null,
     };
   }
   private onLogIn = (loginInfo: LoginInfo) => {
@@ -29,6 +35,8 @@ export default class App extends Component<{}, State> {
     this.setState({
       token: loginInfo.token,
       userId: loginInfo.userId,
+      email: loginInfo.email,
+      name: loginInfo.name,
     });
 
     if (loginInfo.token != null) {
@@ -44,6 +52,8 @@ export default class App extends Component<{}, State> {
     this.setState({
       token: null,
       userId: null,
+      email: null,
+      name: null,
     });
 
     try {
@@ -70,6 +80,8 @@ export default class App extends Component<{}, State> {
             onLogOutCallback: this.onLogOut,
             token: this.state.token,
             userId: this.state.userId,
+            email: this.state.email,
+            name: this.state.name,
           }}
         />
       );
