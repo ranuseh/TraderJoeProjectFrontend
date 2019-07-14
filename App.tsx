@@ -1,18 +1,16 @@
 import React, { Component } from 'react';
 import { createRootNavigator } from './router';
 import Login from './app/screens/login';
-
 import { AsyncStorage } from 'react-native';
+import { getOrCreateUser } from './app/api/user';
 
 interface State {
   token: string;
-  userId: string;
-  email: string;
-  name: string;
+  user: User;
 }
 
 export interface LoginInfo {
-  userId: string;
+  facebookId: string;
   token: string;
   email: string;
   name: string;
@@ -24,20 +22,11 @@ export default class App extends Component<{}, State> {
 
     this.state = {
       token: null,
-      userId: null,
-      email: null,
-      name: null,
+      user: null,
     };
   }
-  private onLogIn = (loginInfo: LoginInfo) => {
-    console.log('on login:', loginInfo.userId);
-
-    this.setState({
-      token: loginInfo.token,
-      userId: loginInfo.userId,
-      email: loginInfo.email,
-      name: loginInfo.name,
-    });
+  private onLogIn = async (loginInfo: LoginInfo) => {
+    console.log('on login:', loginInfo.facebookId);
 
     if (loginInfo.token != null) {
       try {
@@ -46,42 +35,40 @@ export default class App extends Component<{}, State> {
         console.log(error.message);
       }
     }
+
+    const user = await getOrCreateUser(
+      loginInfo.facebookId,
+      loginInfo.name,
+      loginInfo.email,
+    );
+
+    this.setState({ user, token: loginInfo.token });
   };
 
   private onLogOut = () => {
     this.setState({
       token: null,
-      userId: null,
-      email: null,
-      name: null,
+      user: null,
     });
 
     try {
       AsyncStorage.removeItem('userToken');
     } catch (error) {
-      // Error retrieving data
       console.log(error.message);
     }
   };
 
   public render() {
-    console.log('in render:', this.state.userId == null);
-
-    if (this.state.userId == null) {
-      console.log('in render if:', this.state.userId);
+    if (this.state.user == null) {
       return <Login onLoginCallback={this.onLogIn} />;
     } else {
-      console.log('in render else:', this.state.userId);
       const AppContainer = createRootNavigator();
 
       return (
         <AppContainer
           screenProps={{
             onLogOutCallback: this.onLogOut,
-            token: this.state.token,
-            userId: this.state.userId,
-            email: this.state.email,
-            name: this.state.name,
+            user: this.state.user,
           }}
         />
       );

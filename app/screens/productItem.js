@@ -3,7 +3,6 @@ import { StyleSheet, TouchableOpacity, Text, Image, View } from 'react-native';
 
 export default class ProductItem extends Component {
   _onEditBook = () => {
-    // const id = this.props.id;
   };
 
   render() {

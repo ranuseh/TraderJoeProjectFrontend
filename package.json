@@ -7,7 +7,6 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject"
-
   },
   "dependencies": {
     "expo": "^33.0.0",
@@ -24,6 +23,7 @@
   "devDependencies": {
     "@types/react": "^16.8.19",
     "@types/react-native": "^0.57.60",
+    "@types/react-navigation": "^3.0.7",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
     "@typescript-eslint/parser": "^1.11.0",
     "babel-eslint": "^10.0.2",

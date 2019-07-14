@@ -1,18 +1,25 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native';
+import { NavigationScreenProp } from 'react-navigation';
 
 import SwipeCards from 'react-native-swipe-cards';
 
-class Card extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+interface Props {
+  title: string;
+  inventory: string;
+  imageURL: string;
+  navigation: NavigationScreenProp<{}, {}>;
+}
 
-  render() {
+interface State {
+  loading: boolean; 
+  cards: Card[]
+}
+
+class Card extends React.Component<Props, State, NoMoreCards> {
+  public render() {
     return (
-      <View
-        style={[styles.card, { backgroundColor: this.props.backgroundColor }]}
-      >
+      <View style={styles.card}>
         <Text>{this.props.title}</Text>
         <Text>{this.props.inventory}</Text>
         <Image
@@ -26,11 +33,9 @@ class Card extends React.Component {
 }
 
 class NoMoreCards extends Component {
-  constructor(props) {
-    super(props);
-  }
 
-  render() {
+
+  public render() {
     return (
       <View>
         <Text style={styles.noMoreCardsText}>No more cards</Text>
@@ -43,8 +48,8 @@ class NoMoreCards extends Component {
   }
 }
 
-export default class Product extends React.Component {
-  constructor(props) {
+export default class Product extends React.Component<Props, State> {
+  public constructor(props) {
     super(props);
     this.state = {
       loading: true,
@@ -52,7 +57,7 @@ export default class Product extends React.Component {
     };
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     fetch(
       'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/products',
     )
@@ -64,28 +69,27 @@ export default class Product extends React.Component {
         });
         console.log({ responseJson });
       })
-      .catch(error => console.log(error)); //to catch the errors if any
+      .catch(error => console.log(error));
   }
 
-  handleYup(card) {
+  private handleYup(card) {
     console.log(`Yup for ${card.text}`);
   }
-  handleNope(card) {
+  private handleNope(card) {
     console.log(`Nope for ${card.text}`);
   }
-  handleMaybe(card) {
+  private handleMaybe(card) {
     console.log(`Maybe for ${card.text}`);
   }
-  render() {
+
+  public render() {
     if (this.state.loading) {
       return (
-        <View style={styles.loader}>
+        <View>
           <ActivityIndicator size="large" color="#0c9" />
         </View>
       );
     }
-    // If you want a stack of cards instead of one-per-one view, activate stack mode
-    // stack={true}
     return (
       <SwipeCards
         cards={this.state.cards}
@@ -116,5 +120,11 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 300,
     width: 300,
+  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 30,
+    backgroundColor: '#ecf0f1',
   },
 });

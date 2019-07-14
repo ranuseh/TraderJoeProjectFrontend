@@ -32,10 +32,11 @@ export default class Login extends Component<Props> {
   }
   // TODO: Ranuseh
   // I want to refactor this code
+
   private getUserId = async (token: string) => {
     if (token == null) {
       this.props.onLoginCallback({
-        userId: null,
+        facebookId: null,
         token: null,
         email: null,
         name: null,
@@ -52,14 +53,14 @@ export default class Login extends Component<Props> {
 
       if (json.id) {
         this.props.onLoginCallback({
-          userId: json.id,
+          facebookId: json.id,
           token,
           email: json.email,
           name: json.name,
         });
       } else {
         this.props.onLoginCallback({
-          userId: null,
+          facebookId: null,
           token: null,
           email: null,
           name: null,

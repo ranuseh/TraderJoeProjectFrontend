@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Dimensions, Platform } from 'react-native';
 import {
   createAppContainer,
   createStackNavigator,
@@ -12,14 +11,14 @@ import Home from './app/screens/home';
 import Matches from './app/screens/matches';
 import Recommend from './app/screens/recommend';
 import Profile from './app/screens/profile';
-import EditBook from './app/screens/editBook';
 
 export const Tabs = createBottomTabNavigator({
   // Defines a button that on click will render the screen component
   Home: {
     screen: props => {
+      console.log('home')
       console.log(JSON.stringify(props));
-      return <Home {...props.screenProps}></Home>;
+      return <Home {...props.screenProps} navigation={props.navigation}></Home>;
     },
     navigationOptions: {
       tabBarLabel: 'Home',
@@ -29,7 +28,10 @@ export const Tabs = createBottomTabNavigator({
     },
   },
   Product: {
-    screen: Product,
+    screen: props => {
+      console.log(JSON.stringify(props));
+      return <Product {...props.screenProps}></Product>;
+    },
     navigationOptions: {
       tabBarLabel: 'Play',
       tabBarIcon: ({ tintColor }) => (
@@ -60,7 +62,6 @@ export const Tabs = createBottomTabNavigator({
       ),
     },
   },
-
   Profile: {
     screen: props => {
       console.log(JSON.stringify(props));
@@ -75,42 +76,11 @@ export const Tabs = createBottomTabNavigator({
   },
 });
 
-export const ProductStack = createStackNavigator({
-  Product: {
-    screen: Product,
-    navigationOptions: () => ({
-      header: null,
-    }),
-  },
-  EditBook: {
-    screen: EditBook,
-    navigationOptions: () => ({
-      header: null,
-      tabBarVisible: false,
-      gesturesEnabled: false,
-    }),
-  },
-  Matches: {
-    screen: Matches,
-    navigationOptions: () => ({
-      header: null,
-      tabBarVisible: false,
-      gesturesEnabled: false,
-    }),
-  },
-});
-
 export const createRootNavigator = () => {
   const stackNavigator = createStackNavigator(
     {
       Tabs: {
         screen: Tabs,
-        navigationOptions: () => ({
-          gesturesEnabled: false,
-        }),
-      },
-      ProductStack: {
-        screen: ProductStack,
         navigationOptions: () => ({
           gesturesEnabled: false,
         }),

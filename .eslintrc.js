@@ -42,7 +42,7 @@ plugins: ['react', 'prettier', '@typescript-eslint'],
       }
     ],
     quotes: ["error", "single"],
-    "quote-props": ["error", "consistent-as-needed"],
+    // "quote-props": ["error", "consistent-as-needed"],
     //ECMAScript 6
     "no-duplicate-imports": "error",
     "no-useless-computed-key": "error",
@@ -55,6 +55,7 @@ plugins: ['react', 'prettier', '@typescript-eslint'],
     "prefer-template": "error",
     //React
     "react/prop-types": "off",
+    "react/display-name": "off",
     //Prettier
     "prettier/prettier": [
       "error",
