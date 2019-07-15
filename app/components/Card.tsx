@@ -11,7 +11,7 @@ export class Card extends React.Component<Props, {}> {
   public render() {
     return (
       <View style={styles.card}>
-        <Text>{this.props.product.name}</Text>
+        <Text>{this.props.product}</Text>
         <Image
           source={{ uri: this.props.product.imageURL }}
           style={styles.thumbnail}
