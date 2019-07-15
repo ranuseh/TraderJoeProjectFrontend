@@ -88,3 +88,20 @@ export const updateUser = (
     .then(response => response.json())
     .catch(error => console.log(error));
 };
+
+export const allUsers = async (): Promise<User[]> => {
+  try {
+    const response = await fetch(
+      'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/users/',
+    );
+
+    const json = await response.json();
+
+    if (json != null) {
+      return json;
+    }
+  } catch (errors) {
+    console.log(errors);
+  }
+  return null;
+};

@@ -47,10 +47,6 @@ export default class Login extends Component<Props> {
       );
       const json = await response.json();
 
-      console.log('login getuser token', token);
-
-      console.log('login getuser', JSON.stringify(json));
-
       if (json.id) {
         this.props.onLoginCallback({
           facebookId: json.id,

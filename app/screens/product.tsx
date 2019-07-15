@@ -2,11 +2,11 @@ import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import ProductModel from '../model/product.model';
+import { updateUser } from '../api/user.api';
 
 import SwipeCards from 'react-native-swipe-cards';
 import { Card } from '../components/Card';
 import { NoMoreCards } from '../components/NoMoreCards';
-import { updateUser } from '../api/user.api';
 import User from '../model/user.model';
 
 export interface Props {
@@ -42,18 +42,6 @@ export default class Product extends React.Component<Props, State> {
         const uniqueProducts = products.filter(
           product => !dontAdd.includes(product.productId),
         );
-
-        console.log('Just products', products);
-
-        console.log('unique products', uniqueProducts);
-
-        // const productId = products.map(product => {
-        //   return product.productId;
-        // });
-
-        // const uniqueProducts = productId.filter(
-        //   product => !dontAdd.includes(product),
-        // );
 
         this.setState({
           loading: false,
