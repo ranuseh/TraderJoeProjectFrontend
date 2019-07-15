@@ -35,26 +35,25 @@ export default class Product extends React.Component<Props, State> {
     )
       .then(response => response.json())
       .then(products => {
-        console.log('product array', products);
-        console.log('user likes', this.props.user.like);
-        console.log('user dislikes', this.props.user.dislike);
-
         const userLikes = this.props.user.like;
         const dislikes = this.props.user.dislike;
-
         const dontAdd = userLikes.concat(dislikes);
 
-        const productId = products.map(product => {
-          return product.productId;
-        });
-
-        console.log('PRODUCT ID', productId);
-
-        const uniqueProducts = productId.filter(
-          product => !dontAdd.includes(product),
+        const uniqueProducts = products.filter(
+          product => !dontAdd.includes(product.productId),
         );
 
-        console.log('uniqeProducts', uniqueProducts);
+        console.log('Just products', products);
+
+        console.log('unique products', uniqueProducts);
+
+        // const productId = products.map(product => {
+        //   return product.productId;
+        // });
+
+        // const uniqueProducts = productId.filter(
+        //   product => !dontAdd.includes(product),
+        // );
 
         this.setState({
           loading: false,
