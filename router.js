@@ -40,7 +40,10 @@ export const Tabs = createBottomTabNavigator({
     },
   },
   Matches: {
-    screen: Matches,
+    screen: props => {
+      console.log(JSON.stringify(props));
+      return <Matches {...props.screenProps}></Matches>;
+    },
     navigationOptions: {
       tabBarLabel: 'Matches',
       tabBarIcon: ({ tintColor }) => (

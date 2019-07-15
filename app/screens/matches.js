@@ -9,7 +9,6 @@ export default class Matches extends Component {
       <View style={styles.container}>
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          // onPress={() => this.props.navigation.navigate("Product")}
         >
           <Card>
             <Text style={styles.paragraph}>First Match</Text>
@@ -21,7 +20,6 @@ export default class Matches extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          // onPress={() => this.props.navigation.navigate("Matches")}
         >
           <Card>
             <Text style={styles.paragraph}>Second Match</Text>
@@ -33,7 +31,6 @@ export default class Matches extends Component {
 
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          // onPress={() => this.props.navigation.navigate("Recommend")}
         >
           <Card>
             <Text style={styles.paragraph}>Third Match</Text>
@@ -43,7 +40,6 @@ export default class Matches extends Component {
         <Text> </Text>
         <TouchableHighlight
           style={[styles.buttonContainer, styles.loginButton]}
-          // onPress={() => this.props.navigation.navigate("My Profile")}
         >
           <Card>
             <Text style={styles.paragraph}>Fourth Match</Text>
@@ -57,8 +53,6 @@ export default class Matches extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // alignItems: "center",
-    // justifyContent: "center",
     padding: 30,
     backgroundColor: '#ecf0f1',
   },
