@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Card } from 'react-native-elements';
+import User from '../model/user.model';
 
 interface Props {
   user: User;

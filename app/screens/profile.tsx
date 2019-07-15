@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Alert, View, Button, StyleSheet, Text } from 'react-native';
+import { Alert, View, Image, Button, StyleSheet, Text } from 'react-native';
+import User from '../model/user.model';
 
 interface Props {
   onLogOutCallback: () => void;
   userId: string;
+  user: User;
   token: string;
 }
 
@@ -25,8 +27,13 @@ export default class Profile extends Component<Props, {}> {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text>TJinder</Text>
+          <Text>{this.props.user.name} Profile Page</Text>
         </View>
+        <Image
+          source={{ uri: this.props.user.image }}
+          style={styles.thumbnail}
+          resizeMode="contain"
+        />
         <View style={styles.buttonContainer}>
           <Button title={'LogOut'} onPress={() => this.logOut()} />
         </View>
@@ -50,29 +57,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#DCDCDC',
   },
-  inputContainer: {
-    borderBottomColor: '#F5FCFF',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    width: 250,
-    height: 45,
-    marginBottom: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  inputs: {
-    height: 45,
-    marginLeft: 16,
-    borderBottomColor: '#FFFFFF',
-    flex: 1,
-  },
-  inputIcon: {
-    width: 30,
-    height: 30,
-    marginLeft: 15,
-    justifyContent: 'center',
-  },
   buttonContainer: {
     height: 45,
     flexDirection: 'row',
@@ -82,10 +66,15 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 30,
   },
-  loginButton: {
-    backgroundColor: '#00b5ec',
+  thumbnail: {
+    flex: 1,
+    height: 300,
+    width: 300,
   },
-  loginText: {
-    color: 'white',
+  card: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 300,
+    height: 300,
   },
 });

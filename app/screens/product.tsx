@@ -1,59 +1,31 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, View, Image, ActivityIndicator } from 'react-native';
+import React from 'react';
+import { View, ActivityIndicator } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
+import ProductModel from '../model/product.model';
 
 import SwipeCards from 'react-native-swipe-cards';
+import { Card } from '../components/Card';
+import { NoMoreCards } from '../components/NoMoreCards';
+import { updateUser } from '../api/user.api';
+import User from '../model/user.model';
 
-interface Props {
-  title: string;
-  inventory: string;
-  imageURL: string;
+export interface Props {
+  user: User;
   navigation: NavigationScreenProp<{}, {}>;
 }
 
-interface State {
-  loading: boolean; 
-  cards: Card[]
-}
-
-class Card extends React.Component<Props, State, NoMoreCards> {
-  public render() {
-    return (
-      <View style={styles.card}>
-        <Text>{this.props.title}</Text>
-        <Text>{this.props.inventory}</Text>
-        <Image
-          source={{ uri: this.props.imageURL }}
-          style={styles.thumbnail}
-          resizeMode="contain"
-        />
-      </View>
-    );
-  }
-}
-
-class NoMoreCards extends Component {
-
-
-  public render() {
-    return (
-      <View>
-        <Text style={styles.noMoreCardsText}>No more cards</Text>
-        <Text onPress={() => this.props.navigation.navigate('Matches')}>
-          {' '}
-          <Text> Go to my matches</Text>
-        </Text>
-      </View>
-    );
-  }
+export interface State {
+  loading: boolean;
+  products: ProductModel[];
 }
 
 export default class Product extends React.Component<Props, State> {
-  public constructor(props) {
+  public constructor(props: Props) {
     super(props);
+
     this.state = {
       loading: true,
-      cards: [],
+      products: [],
     };
   }
 
@@ -62,25 +34,26 @@ export default class Product extends React.Component<Props, State> {
       'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/products',
     )
       .then(response => response.json())
-      .then(responseJson => {
+      .then(products => {
         this.setState({
           loading: false,
-          cards: responseJson,
+          products,
         });
-        console.log({ responseJson });
+        console.log({ products });
       })
       .catch(error => console.log(error));
   }
 
-  private handleYup(card) {
-    console.log(`Yup for ${card.text}`);
-  }
-  private handleNope(card) {
-    console.log(`Nope for ${card.text}`);
-  }
-  private handleMaybe(card) {
-    console.log(`Maybe for ${card.text}`);
-  }
+  private handleYup = (product: ProductModel) => {
+    updateUser(this.props.user.facebookId, 'like', product.productId);
+  };
+
+  private handleNope = (product: ProductModel) => {
+    updateUser(this.props.user.facebookId, 'dislike', product.productId);
+  };
+  private handleMaybe = (product: ProductModel) => {
+    updateUser(this.props.user.facebookId, 'neverTried', product.productId);
+  };
 
   public render() {
     if (this.state.loading) {
@@ -92,8 +65,10 @@ export default class Product extends React.Component<Props, State> {
     }
     return (
       <SwipeCards
-        cards={this.state.cards}
-        renderCard={cardData => <Card {...cardData} />}
+        cards={this.state.products}
+        renderCard={(productData: ProductModel) => (
+          <Card product={productData} />
+        )}
         renderNoMoreCards={() => (
           <NoMoreCards navigation={this.props.navigation} />
         )}
@@ -105,26 +80,3 @@ export default class Product extends React.Component<Props, State> {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  card: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 300,
-    height: 300,
-  },
-  noMoreCardsText: {
-    fontSize: 22,
-  },
-  thumbnail: {
-    flex: 1,
-    height: 300,
-    width: 300,
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 30,
-    backgroundColor: '#ecf0f1',
-  },
-});

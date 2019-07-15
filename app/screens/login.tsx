@@ -12,6 +12,7 @@ export default class Login extends Component<Props> {
     try {
       const token = await AsyncStorage.getItem('userToken');
 
+      console.log('token', token);
       this.getUserId(token);
     } catch (error) {
       console.log(error.message);
@@ -30,8 +31,6 @@ export default class Login extends Component<Props> {
 
     this.getUserId(token);
   }
-  // TODO: Ranuseh
-  // I want to refactor this code
 
   private getUserId = async (token: string) => {
     if (token == null) {
@@ -40,6 +39,7 @@ export default class Login extends Component<Props> {
         token: null,
         email: null,
         name: null,
+        image: null,
       });
     } else {
       const response = await fetch(
@@ -57,6 +57,7 @@ export default class Login extends Component<Props> {
           token,
           email: json.email,
           name: json.name,
+          image: json.picture.data.url,
         });
       } else {
         this.props.onLoginCallback({
@@ -64,6 +65,7 @@ export default class Login extends Component<Props> {
           token: null,
           email: null,
           name: null,
+          image: null,
         });
       }
     }

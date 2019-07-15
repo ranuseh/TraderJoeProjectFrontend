@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { createRootNavigator } from './router';
 import Login from './app/screens/login';
 import { AsyncStorage } from 'react-native';
-import { getOrCreateUser } from './app/api/user';
+import { getOrCreateUser } from './app/api/user.api';
+import User from './app/model/user.model';
 
 interface State {
   token: string;
@@ -14,10 +15,11 @@ export interface LoginInfo {
   token: string;
   email: string;
   name: string;
+  image: string;
 }
 
 export default class App extends Component<{}, State> {
-  public constructor(props) {
+  public constructor(props: {}) {
     super(props);
 
     this.state = {
@@ -34,31 +36,34 @@ export default class App extends Component<{}, State> {
       } catch (error) {
         console.log(error.message);
       }
+      const user = await getOrCreateUser(
+        loginInfo.facebookId,
+        loginInfo.email,
+        loginInfo.name,
+        loginInfo.image,
+      );
+
+      this.setState({ user, token: loginInfo.token });
     }
-
-    const user = await getOrCreateUser(
-      loginInfo.facebookId,
-      loginInfo.name,
-      loginInfo.email,
-    );
-
-    this.setState({ user, token: loginInfo.token });
   };
 
-  private onLogOut = () => {
+  private onLogOut = async () => {
+    console.log('on logout:');
+
+    try {
+      await AsyncStorage.removeItem('userToken');
+    } catch (error) {
+      console.log(error.message);
+    }
+
     this.setState({
       token: null,
       user: null,
     });
-
-    try {
-      AsyncStorage.removeItem('userToken');
-    } catch (error) {
-      console.log(error.message);
-    }
   };
 
   public render() {
+    console.log('user in render', this.state.user);
     if (this.state.user == null) {
       return <Login onLoginCallback={this.onLogIn} />;
     } else {
