@@ -24,12 +24,6 @@ export default class Matches extends Component<Props, State> {
     };
   }
 
-  // private seeUserItems = async (user: User) => {
-  //   const recommeded: string[] = this.props.user.like.filter(
-  //     items => !user.like.includes(items),
-  //   );
-  // };
-
   public async componentDidMount() {
     try {
       const allAppUsers: [User, number][] = await getRecommendedUsers(

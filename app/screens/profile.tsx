@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, View, Image, Button, StyleSheet, Text } from 'react-native';
+import { Alert, StyleSheet, Text, View, Image, Button } from 'react-native';
 import User from '../model/user.model';
 
 interface Props {
@@ -27,15 +27,17 @@ export default class Profile extends Component<Props, {}> {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text>{this.props.user.name} Profile Page</Text>
-        </View>
-        <Image
-          source={{ uri: this.props.user.image }}
-          style={styles.thumbnail}
-          resizeMode="contain"
-        />
-        <View style={styles.buttonContainer}>
-          <Button title={'LogOut'} onPress={() => this.logOut()} />
+          <View style={styles.headerContent}>
+            <Image
+              style={styles.avatar}
+              source={{
+                uri: this.props.user.image,
+              }}
+            />
+            <Text style={styles.name}>{this.props.user.name}</Text>
+            <Text style={styles.userInfo}>{this.props.user.name} </Text>
+            <Button title={'LogOut'} onPress={() => this.logOut()} />
+          </View>
         </View>
       </View>
     );
@@ -44,37 +46,28 @@ export default class Profile extends Component<Props, {}> {
 
 const styles = StyleSheet.create({
   header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DCDCDC',
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#DCDCDC',
   },
-  buttonContainer: {
-    height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
+  headerContent: {
+    padding: 30,
     alignItems: 'center',
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 30,
   },
-  thumbnail: {
-    flex: 1,
-    height: 100,
-    width: 100,
+  avatar: {
+    width: 130,
+    height: 130,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: 'white',
+    marginBottom: 10,
   },
-  card: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 300,
-    height: 300,
+  name: {
+    fontSize: 22,
+    color: '#000000',
+    fontWeight: '600',
+  },
+  userInfo: {
+    fontSize: 16,
+    color: '#778899',
+    fontWeight: '600',
   },
 });
