@@ -9,5 +9,5 @@ export default interface User {
   dislike: Product[];
   neverTried: Product[];
   recommended: Product[];
-  // userMatch: User[];
+  userMatch: User[];
 }

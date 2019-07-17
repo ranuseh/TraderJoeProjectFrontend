@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Image } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import User from '../model/user.model';
 import Product from '../model/product.model';
@@ -10,7 +10,7 @@ interface OwnProps {
 }
 
 interface State {
-  recommended: Promise<Product>[];
+  recommended: Product[];
 }
 
 interface NavigationProps {
@@ -41,7 +41,9 @@ export default class UserProduct extends Component<Props, State> {
         productid => getProduct(productid),
       );
 
-      this.setState({ recommended: actualProduct });
+      const allProducts: Product[] = await Promise.all(actualProduct);
+
+      this.setState({ recommended: allProducts });
     } catch (error) {
       console.log(error.message);
     }
@@ -49,18 +51,16 @@ export default class UserProduct extends Component<Props, State> {
 
   public render() {
     console.log('RECOMMENDED', this.state.recommended);
+    const singleProduct = this.state.recommended.map(product => product.name);
+
     const { navigation } = this.props;
     const user = navigation.getParam('user', null);
 
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Username #{JSON.stringify(user.name)}</Text>
-        <Text style={styles.title}>
-          Recommendations #{JSON.stringify(this.state.recommended)}
-        </Text>
-        <Text style={styles.title}>
-          User Dislikes #{JSON.stringify(user.dislike)}
-        </Text>
+        <Text style={styles.title}>Username #{user.name}</Text>
+        <Text style={styles.title}>Recommendations #{singleProduct}</Text>
+        <Text style={styles.title}>User Dislikes #{user.dislike}</Text>
 
         <Button
           title="Back To Matches"
