@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     flex: 1,
-    height: 300,
-    width: 300,
+    height: 100,
+    width: 100,
   },
   card: {
     justifyContent: 'center',

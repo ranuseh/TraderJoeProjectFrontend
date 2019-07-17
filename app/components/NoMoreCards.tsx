@@ -12,7 +12,6 @@ export class NoMoreCards extends Component<Props> {
       <View>
         <Text style={styles.noMoreCardsText}>No more cards</Text>
         <Text onPress={() => this.props.navigation.navigate('Matches')}>
-          {' '}
           <Text> Go to my matches</Text>
         </Text>
       </View>

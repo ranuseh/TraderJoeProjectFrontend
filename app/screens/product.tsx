@@ -19,7 +19,7 @@ export interface State {
   products: ProductModel[];
 }
 
-export default class Product extends React.Component<Props, State> {
+export default class ProductScreen extends React.Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 
@@ -34,7 +34,7 @@ export default class Product extends React.Component<Props, State> {
       'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/products',
     )
       .then(response => response.json())
-      .then(products => {
+      .then((products: ProductModel[]) => {
         const userLikes = this.props.user.like;
         const dislikes = this.props.user.dislike;
         const dontAdd = userLikes.concat(dislikes);
@@ -76,9 +76,11 @@ export default class Product extends React.Component<Props, State> {
         renderCard={(productData: ProductModel) => (
           <Card product={productData} />
         )}
-        renderNoMoreCards={() => (
-          <NoMoreCards navigation={this.props.navigation} />
-        )}
+        renderNoMoreCards={() => {
+          console.log('NOMORECARDS', this.props.navigation);
+
+          return <NoMoreCards navigation={this.props.navigation} />;
+        }}
         handleYup={this.handleYup}
         handleNope={this.handleNope}
         handleMaybe={this.handleMaybe}

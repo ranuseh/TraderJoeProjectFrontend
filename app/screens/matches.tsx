@@ -4,9 +4,11 @@ import { Card } from 'react-native-elements';
 
 import User from '../model/user.model';
 import { getRecommendedUsers } from '../api/user.api';
+import { NavigationScreenProp } from 'react-navigation';
 
 export interface Props {
   user: User;
+  navigation: NavigationScreenProp<{}, {}>;
 }
 
 interface State {
@@ -22,9 +24,11 @@ export default class Matches extends Component<Props, State> {
     };
   }
 
-  private userItems = () => {
-    console.log('You clicked');
-  };
+  // private seeUserItems = async (user: User) => {
+  //   const recommeded: string[] = this.props.user.like.filter(
+  //     items => !user.like.includes(items),
+  //   );
+  // };
 
   public async componentDidMount() {
     try {
@@ -44,8 +48,17 @@ export default class Matches extends Component<Props, State> {
       const score = singleUserDate[1];
 
       return (
-        <Text key={user.name} style={styles.paragraph}>
-          <Text>{user.name} </Text>
+        <Text
+          key={user.name}
+          style={styles.paragraph}
+          onPress={() =>
+            this.props.navigation.navigate('UserProduct', { user })
+          }
+        >
+          <Text>
+            {user.name}
+            {user.email}
+          </Text>
           <Text>TJ Match: {score} </Text>
         </Text>
       );
@@ -53,7 +66,9 @@ export default class Matches extends Component<Props, State> {
 
     return (
       <View style={styles.container}>
-        <Card>{items}</Card>
+        <TouchableHighlight>
+          <Card>{items}</Card>
+        </TouchableHighlight>
       </View>
     );
   }
