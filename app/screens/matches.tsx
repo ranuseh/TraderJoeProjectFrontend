@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { Card } from 'react-native-elements';
 
 import User from '../model/user.model';
-import { allUsers } from '../api/user.api';
+import { getRecommendedUsers } from '../api/user.api';
 
 export interface Props {
   user: User;
 }
 
 interface State {
-  allUsers: User[];
+  allUsers: [User, number][];
 }
 
 export default class Matches extends Component<Props, State> {
@@ -22,9 +22,15 @@ export default class Matches extends Component<Props, State> {
     };
   }
 
+  private userItems = () => {
+    console.log('You clicked');
+  };
+
   public async componentDidMount() {
     try {
-      const allAppUsers: User[] = await allUsers();
+      const allAppUsers: [User, number][] = await getRecommendedUsers(
+        this.props.user.facebookId,
+      );
 
       this.setState({ allUsers: allAppUsers });
     } catch (error) {
@@ -33,20 +39,21 @@ export default class Matches extends Component<Props, State> {
   }
 
   public render() {
-    const items = this.state.allUsers.map((item, key) => (
-      <Text style={styles.text} key={item.name}>
-        Name: {item.name}
-        Email: {item.email}
-      </Text>
-    ));
+    const items = this.state.allUsers.map((singleUserDate: [User, number]) => {
+      const user = singleUserDate[0];
+      const score = singleUserDate[1];
 
-    console.log('ITEMS', items);
+      return (
+        <Text key={user.name} style={styles.paragraph}>
+          <Text>{user.name} </Text>
+          <Text>TJ Match: {score} </Text>
+        </Text>
+      );
+    });
+
     return (
       <View style={styles.container}>
-        <Text style={styles.paragraph}></Text>
-        <TouchableHighlight>
-          <Card>{items}</Card>
-        </TouchableHighlight>
+        <Card>{items}</Card>
       </View>
     );
   }

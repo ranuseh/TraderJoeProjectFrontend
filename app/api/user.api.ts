@@ -89,10 +89,12 @@ export const updateUser = (
     .catch(error => console.log(error));
 };
 
-export const allUsers = async (): Promise<User[]> => {
+export const getRecommendedUsers = async (
+  facebookId: string,
+): Promise<[User, number][]> => {
   try {
     const response = await fetch(
-      'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/users/',
+      `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/recommendations/${facebookId}`,
     );
 
     const json = await response.json();
