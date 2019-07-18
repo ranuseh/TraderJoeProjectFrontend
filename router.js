@@ -64,7 +64,15 @@ export const Tabs = createBottomTabNavigator({
     },
   },
   'Shopping List': {
-    screen: ShoppingList,
+    screen: props => {
+      console.log(JSON.stringify(props));
+      return (
+        <ShoppingList
+          {...props.screenProps}
+          navigation={props.navigation}
+        ></ShoppingList>
+      );
+    },
     navigationOptions: {
       tabBarLabel: 'List',
       tabBarIcon: ({ tintColor }) => (

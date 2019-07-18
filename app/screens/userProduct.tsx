@@ -84,6 +84,7 @@ export default class UserProduct extends Component<Props, State> {
       </View>
     </TouchableOpacity>
   );
+
   private goBack = (product: Product[]) => {
     const productId = product.map(item => item.productId);
 
@@ -110,6 +111,10 @@ export default class UserProduct extends Component<Props, State> {
         <Button
           title="Back To Matches"
           onPress={() => this.goBack(this.state.cart)}
+        />
+        <Button
+          title="Go to Shopping List"
+          onPress={() => this.props.navigation.navigate('Shopping List')}
         />
       </View>
     );

@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
+import { NavigationScreenProp } from 'react-navigation';
+
 import { StyleSheet, TouchableOpacity, Text, Image, View } from 'react-native';
+import User from '../model/user.model';
 
-export default class ProductItem extends Component {
-  _onEditBook = () => {
-  };
+interface Props {
+  user: User;
+  navigation: NavigationScreenProp<{}, {}>;
+}
 
-  render() {
+export default class ProductItem extends Component<Props, {}> {
+  _onEditBook = () => {};
+
+  public render() {
     return (
       <TouchableOpacity
-        onPress={() =>
-          this.props.navigation.navigate('EditBook', { id: this.props.id })
+        // onPress={() =>
+        //   this.props.navigation.navigate('EditBook', { id: this.props.id })
         }
       >
         <View style={styles.rowContainer}>

@@ -37,7 +37,7 @@ export default class Home extends Component<Props, {}> {
         <Text> </Text>
 
         <TouchableHighlight
-          onPress={() => this.props.navigation.navigate('Recommend')}
+          onPress={() => this.props.navigation.navigate('Shopping List')}
         >
           <Card>
             <Text style={styles.paragraph}>SHOPPING LIST</Text>
