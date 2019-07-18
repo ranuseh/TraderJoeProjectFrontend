@@ -25,7 +25,7 @@ export default class Profile extends Component<Props, {}> {
 
   public render() {
     return (
-      <View style={styles.container}>
+      <View>
         <View style={styles.header}>
           <View style={styles.headerContent}>
             <Image

@@ -9,7 +9,7 @@ import { Icon } from 'react-native-elements';
 import ProductScreen from './app/screens/product';
 import Home from './app/screens/home';
 import Matches from './app/screens/matches';
-import Recommend from './app/screens/recommend';
+import ShoppingList from './app/screens/shoppingList';
 import Profile from './app/screens/profile';
 import UserProduct from './app/screens/userProduct';
 
@@ -63,10 +63,10 @@ export const Tabs = createBottomTabNavigator({
       ),
     },
   },
-  Recommend: {
-    screen: Recommend,
+  'Shopping List': {
+    screen: ShoppingList,
     navigationOptions: {
-      tabBarLabel: 'To Try',
+      tabBarLabel: 'List',
       tabBarIcon: ({ tintColor }) => (
         <Icon name="list" type="entypo" size={28} color={tintColor} />
       ),

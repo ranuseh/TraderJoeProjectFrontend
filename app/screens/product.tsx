@@ -29,6 +29,7 @@ export default class ProductScreen extends React.Component<Props, State> {
     };
   }
 
+  // TO DO : Move to API
   public componentDidMount() {
     fetch(
       'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/products',
@@ -77,7 +78,6 @@ export default class ProductScreen extends React.Component<Props, State> {
           <Card product={productData} />
         )}
         renderNoMoreCards={() => {
-          console.log('NOMORECARDS', this.props.navigation);
 
           return <NoMoreCards navigation={this.props.navigation} />;
         }}

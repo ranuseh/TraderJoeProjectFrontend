@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { createRootNavigator } from './router';
 import Login from './app/screens/login';
-import { AsyncStorage, Alert } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { getOrCreateUser } from './app/api/user.api';
 import User from './app/model/user.model';
-import Product from './app/model/product.model';
+import ProductModel from './app/model/product.model';
 
 interface State {
   token: string;
   user: User;
-  shoppingList: Product[];
 }
 
 export interface LoginInfo {
@@ -27,7 +26,6 @@ export default class App extends Component<{}, State> {
     this.state = {
       token: null,
       user: null,
-      shoppingList: [],
     };
   }
   private onLogIn = async (loginInfo: LoginInfo) => {
@@ -65,14 +63,6 @@ export default class App extends Component<{}, State> {
     });
   };
 
-  private onAddToCart = (product: Product) => {
-    const newShoppingList = [product, ...this.state.shoppingList];
-
-    this.setState({ shoppingList: newShoppingList });
-
-    Alert.alert(`You added ${product.name} to the shopping list`);
-  };
-
   public render() {
     console.log('user in render', this.state.user);
     if (this.state.user == null) {
@@ -84,7 +74,6 @@ export default class App extends Component<{}, State> {
         <AppContainer
           screenProps={{
             onLogOutCallback: this.onLogOut,
-            addToCartCallback: this.onAddToCart,
             user: this.state.user,
           }}
         />

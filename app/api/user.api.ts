@@ -41,7 +41,8 @@ export const addNewUser = async (
     like: [],
     dislike: [],
     neverTried: [],
-    recommended: [],
+    shoppingList: [],
+    userMatch: [],
   };
 
   try {
@@ -68,8 +69,8 @@ export const addNewUser = async (
 
 export const updateUser = (
   facebookId: string,
-  vote: 'like' | 'dislike' | 'neverTried',
-  productId: string,
+  vote: 'like' | 'dislike' | 'neverTried' | 'shoppingList' | 'userMatch',
+  productId: string[] | string,
 ) => {
   fetch(
     `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/users/${facebookId}`,
@@ -87,6 +88,7 @@ export const updateUser = (
   )
     .then(response => response.json())
     .catch(error => console.log(error));
+  console.log('IN UPDATE USER');
 };
 
 export const getRecommendedUsers = async (
@@ -107,5 +109,3 @@ export const getRecommendedUsers = async (
   }
   return null;
 };
-
-

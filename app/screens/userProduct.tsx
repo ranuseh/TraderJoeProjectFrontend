@@ -1,18 +1,28 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  FlatList,
+  ListRenderItemInfo,
+  TouchableOpacity,
+  Alert,
+} from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import User from '../model/user.model';
 import Product from '../model/product.model';
 import { getProduct } from '../api/product.api';
-import { Card } from 'react-native-elements';
+import { updateUser } from '../api/user.api';
 
 interface OwnProps {
   user: User;
-  onAddToCartCallback: (product: Product) => void;
+  onaddToCartCallback: (product: Product[]) => void;
 }
 
 interface State {
   recommended: Product[];
+  cart: Product[];
 }
 
 interface NavigationProps {
@@ -27,6 +37,7 @@ export default class UserProduct extends Component<Props, State> {
 
     this.state = {
       recommended: [],
+      cart: [],
     };
   }
 
@@ -52,41 +63,54 @@ export default class UserProduct extends Component<Props, State> {
     }
   }
 
-  public render() {
-    const listOfProducts = this.state.recommended.map((product: Product) => {
-      return (
-        <Text key={product.name} style={styles.title}>
-          {product.name}
-        </Text>
-      );
-    });
+  private addtoShoppingList = (product: Product) => {
+    const newShoppingList = [product, ...this.state.cart];
 
+    this.setState({ cart: newShoppingList });
+
+    Alert.alert(`You added ${product.name} to the shopping list`);
+  };
+
+  private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
+    <TouchableOpacity>
+      <View style={styles.rowContainer}>
+        <View style={styles.rowText}>
+          <Text style={styles.title}>{listRenderItemInfo.item.name}</Text>
+          <Button
+            title="Add to Shopping List"
+            onPress={() => this.addtoShoppingList(listRenderItemInfo.item)}
+          />
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
+  private goBack = (product: Product[]) => {
+    const productId = product.map(item => item.productId);
+
+    updateUser(this.props.user.facebookId, 'shoppingList', productId);
+
+    this.props.navigation.navigate('Tabs');
+  };
+
+  private _keyExtractor = (product: Product) => product.productId.toString();
+
+  public render() {
     const { navigation } = this.props;
     const compareUser = navigation.getParam('user', null);
 
     return (
-      <View style={styles.rowContainer}>
-        <View style={styles.rowText}>
-          <Text
-            style={styles.title}
-            numberOfLines={2}
-            ellipsizeMode={'tail'}
-          ></Text>
-          <Text style={styles.author} numberOfLines={1} ellipsizeMode={'tail'}>
-            Name: {compareUser.name}
-            Products User Recommends:{listOfProducts}
-          </Text>
-          <Button
-            title="Add to Shopping List"
-            onPress={() => this.props.navigation.navigate('Tabs')}
+      <View>
+        <Text>{compareUser.name}</Text>
+        <FlatList
+          data={this.state.recommended}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
 
-            // onPress={() => this.props.onAddToCartCallback({ listOfProducts })}
-          />
-          <Button
-            title="Back To Matches"
-            onPress={() => this.props.navigation.navigate('Tabs')}
-          />
-        </View>
+        <Button
+          title="Back To Matches"
+          onPress={() => this.goBack(this.state.cart)}
+        />
       </View>
     );
   }

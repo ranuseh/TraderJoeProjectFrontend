@@ -3,7 +3,7 @@ import { StatusBar, StyleSheet, FlatList, View } from 'react-native';
 
 import ProductItem from './productItem';
 
-export default class Recommend extends Component {
+export default class ShoppingList extends Component {
   constructor(props) {
     super(props);
     this.state = {
