@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Card } from 'react-native-elements';
 import User from '../model/user.model';
@@ -14,45 +14,45 @@ export default class Home extends Component<Props, {}> {
     return (
       <View style={styles.container}>
         <Text style={[styles.welcome]}> Welcome {this.props.user.name}</Text>
-        <TouchableOpacity
+        <TouchableHighlight
           onPress={() => this.props.navigation.navigate('Product')}
         >
           <Card>
             <Text style={styles.paragraph}>PLAY TJINDER MATCH</Text>
           </Card>
-        </TouchableOpacity>
+        </TouchableHighlight>
 
         <Text> </Text>
         <Text> </Text>
 
-        <TouchableOpacity
+        <TouchableHighlight
           onPress={() => this.props.navigation.navigate('Matches')}
         >
           <Card>
             <Text style={styles.paragraph}>SEE TJINDER MATCHES</Text>
           </Card>
-        </TouchableOpacity>
+        </TouchableHighlight>
 
         <Text> </Text>
         <Text> </Text>
 
-        <TouchableOpacity
+        <TouchableHighlight
           onPress={() => this.props.navigation.navigate('Recommend')}
         >
           <Card>
-            <Text style={styles.paragraph}>MY LIKES </Text>
+            <Text style={styles.paragraph}>SHOPPING LIST</Text>
           </Card>
-        </TouchableOpacity>
+        </TouchableHighlight>
         <Text> </Text>
         <Text> </Text>
 
-        <TouchableOpacity
+        <TouchableHighlight
           onPress={() => this.props.navigation.navigate('Profile')}
         >
           <Card>
             <Text style={styles.paragraph}>MY PROFILE </Text>
           </Card>
-        </TouchableOpacity>
+        </TouchableHighlight>
       </View>
     );
   }
