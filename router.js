@@ -22,8 +22,8 @@ export const Tabs = createBottomTabNavigator({
     },
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-map" type="ionicon" size={28} color={tintColor} />
+      tabBarIcon: () => (
+        <Icon name="ios-home" type="ionicon" size={28} color="#1E52BD" />
       ),
     },
   },
@@ -39,8 +39,8 @@ export const Tabs = createBottomTabNavigator({
     },
     navigationOptions: {
       tabBarLabel: 'Play',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="open-book" type="entypo" size={28} color={tintColor} />
+      tabBarIcon: () => (
+        <Icon name="sound" type="entypo" size={28} color="#1E52BD" />
       ),
     },
   },
@@ -53,13 +53,8 @@ export const Tabs = createBottomTabNavigator({
     },
     navigationOptions: {
       tabBarLabel: 'Matches',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon
-          name="ios-add-circle-outline"
-          type="ionicon"
-          size={28}
-          color={tintColor}
-        />
+      tabBarIcon: () => (
+        <Icon name="heart" type="entypo" size={28} color="#1E52BD" />
       ),
     },
   },
@@ -75,8 +70,8 @@ export const Tabs = createBottomTabNavigator({
     },
     navigationOptions: {
       tabBarLabel: 'List',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="list" type="entypo" size={28} color={tintColor} />
+      tabBarIcon: () => (
+        <Icon name="ios-basket" type="ionicon" size={28} color="#1E52BD" />
       ),
     },
   },
@@ -89,8 +84,8 @@ export const Tabs = createBottomTabNavigator({
     },
     navigationOptions: {
       tabBarLabel: 'Profile',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="cake" type="entypo" size={28} color={tintColor} />
+      tabBarIcon: () => (
+        <Icon name="ios-person" type="ionicon" size={28} color="#1E52BD" />
       ),
     },
   },

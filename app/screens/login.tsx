@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Text, AsyncStorage } from 'react-native';
+import {
+  View,
+  Button,
+  StyleSheet,
+  Text,
+  AsyncStorage,
+  Image,
+} from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { LoginInfo } from '../../App';
 
@@ -71,10 +78,10 @@ export default class Login extends Component<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Text>TJinder</Text>
+          <Image source={require('../config/images/logo.png')} />
         </View>
         <View style={styles.buttonContainer}>
-          <Button title={'Login'} onPress={() => this.logIn()} />
+          <Button color="#00000" title={'Login'} onPress={() => this.logIn()} />
         </View>
       </View>
     );
@@ -86,7 +93,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#fffff',
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -94,44 +101,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
-  },
-  inputContainer: {
-    borderBottomColor: '#F5FCFF',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    width: 250,
-    height: 45,
-    marginBottom: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  inputs: {
-    height: 45,
-    marginLeft: 16,
-    borderBottomColor: '#FFFFFF',
-    flex: 1,
-  },
-  inputIcon: {
-    width: 30,
-    height: 30,
-    marginLeft: 15,
-    justifyContent: 'center',
+    backgroundColor: '#fffff',
   },
   buttonContainer: {
     height: 45,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 50,
     width: 250,
-    borderRadius: 30,
-  },
-  loginButton: {
-    backgroundColor: '#00b5ec',
-  },
-  loginText: {
-    color: 'white',
+    borderRadius: 80,
   },
 });

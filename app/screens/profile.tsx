@@ -35,10 +35,9 @@ export default class Profile extends Component<Props, {}> {
               }}
             />
             <Text style={styles.name}>{this.props.user.name}</Text>
-            <Text style={styles.userInfo}>{this.props.user.name} </Text>
-            <Button title={'LogOut'} onPress={() => this.logOut()} />
           </View>
         </View>
+        <Button title={'LogOut'} onPress={() => this.logOut()} />
       </View>
     );
   }
@@ -46,7 +45,7 @@ export default class Profile extends Component<Props, {}> {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#778899',
   },
   headerContent: {
     padding: 30,

@@ -4,11 +4,11 @@ import { NavigationScreenProp } from 'react-navigation';
 import {
   StyleSheet,
   View,
-  TouchableHighlight,
   ListRenderItemInfo,
   TouchableOpacity,
   FlatList,
   Text,
+  Alert,
 } from 'react-native';
 
 import User from '../model/user.model';
@@ -53,10 +53,25 @@ export default class ShoppingList extends Component<Props, State> {
     }
   }
 
+  public manageShoppingList = (action: string) => {
+    Alert.alert(`You clicked on ${action}`);
+  };
+
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
     <TouchableOpacity>
       <Text style={styles.rowContainer}>
-        <Text style={styles.rowText}>{listRenderItemInfo.item.name}</Text>
+        <Text style={styles.rowText}>
+          {listRenderItemInfo.item.name}
+          <Text onPress={() => this.manageShoppingList('Like')}>
+            <Text>Like</Text>
+          </Text>
+          <Text onPress={() => this.manageShoppingList('Dislike')}>
+            <Text>Dislike</Text>
+          </Text>
+          <Text onPress={() => this.manageShoppingList('Delete')}>
+            <Text>Delete</Text>
+          </Text>
+        </Text>
       </Text>
     </TouchableOpacity>
   );

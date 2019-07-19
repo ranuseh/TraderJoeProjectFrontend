@@ -49,11 +49,8 @@ export default class Matches extends Component<Props, State> {
             this.props.navigation.navigate('UserProduct', { user })
           }
         >
-          <Text>
-            {user.name}
-            {user.email}
-          </Text>
-          <Text>TJ Match: {score} </Text>
+          <Text>{user.name}</Text>
+          <Text>Score: {score} </Text>
         </Text>
       );
     });
@@ -61,7 +58,7 @@ export default class Matches extends Component<Props, State> {
     return (
       <View style={styles.container}>
         <TouchableHighlight>
-          <Card>{items}</Card>
+          <Text>{items}</Text>
         </TouchableHighlight>
       </View>
     );
@@ -72,21 +69,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 30,
-    backgroundColor: '#ecf0f1',
+    padding: 40,
+    backgroundColor: '#fffff',
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#34495e',
-  },
-  text: {
-    margin: 10,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
+    color: '#00000',
+    fontFamily: 'bebas_neueregular',
   },
 });
