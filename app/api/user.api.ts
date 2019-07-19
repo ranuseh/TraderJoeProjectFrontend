@@ -73,7 +73,7 @@ export const updateUser = (
   productId: string[] | string,
 ) => {
   fetch(
-    `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/users/${facebookId}`,
+    `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/${facebookId}`,
     {
       method: 'PUT',
       headers: {
@@ -88,7 +88,7 @@ export const updateUser = (
   )
     .then(response => response.json())
     .catch(error => console.log(error));
-  console.log('IN UPDATE USER');
+  console.log('IN UPDATE FROM SHOPPING LIST');
 };
 
 export const getRecommendedUsers = async (

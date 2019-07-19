@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
   FlatList,
   Text,
-  Alert,
 } from 'react-native';
 
 import User from '../model/user.model';
 import Product from '../model/product.model';
-import { getProduct } from '../api/product.api';
+import { getProduct, deleteProductFromUser } from '../api/product.api';
+import { updateUser } from '../api/user.api';
 
 interface Props {
   user: User;
@@ -53,8 +53,21 @@ export default class ShoppingList extends Component<Props, State> {
     }
   }
 
-  public manageShoppingList = (action: string) => {
-    Alert.alert(`You clicked on ${action}`);
+  public manageShoppingList = (product: Product, action: string) => {
+    if (action === 'Like') {
+      updateUser(this.props.user.facebookId, 'like', product.productId);
+      this.props.navigation.navigate('Tabs');
+    } else if (action === 'Dislike') {
+      updateUser(this.props.user.facebookId, 'dislike', product.productId);
+      this.props.navigation.navigate('Tabs');
+    } else if (action === 'Delete') {
+      deleteProductFromUser(
+        this.props.user.facebookId,
+        'shoppingList',
+        product.productId,
+      );
+      this.props.navigation.navigate('Tabs');
+    }
   };
 
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
@@ -62,13 +75,28 @@ export default class ShoppingList extends Component<Props, State> {
       <Text style={styles.rowContainer}>
         <Text style={styles.rowText}>
           {listRenderItemInfo.item.name}
-          <Text onPress={() => this.manageShoppingList('Like')}>
+          <Text
+            style={styles.like}
+            onPress={() =>
+              this.manageShoppingList(listRenderItemInfo.item, 'Like')
+            }
+          >
             <Text>Like</Text>
           </Text>
-          <Text onPress={() => this.manageShoppingList('Dislike')}>
+          <Text
+            style={styles.dislike}
+            onPress={() =>
+              this.manageShoppingList(listRenderItemInfo.item, 'Dislike')
+            }
+          >
             <Text>Dislike</Text>
           </Text>
-          <Text onPress={() => this.manageShoppingList('Delete')}>
+          <Text
+            style={styles.delete}
+            onPress={() =>
+              this.manageShoppingList(listRenderItemInfo.item, 'Delete')
+            }
+          >
             <Text>Delete</Text>
           </Text>
         </Text>
@@ -120,5 +148,24 @@ const styles = StyleSheet.create({
   rowText: {
     flex: 4,
     flexDirection: 'column',
+    fontSize: 20,
+  },
+  like: {
+    flex: 4,
+    flexDirection: 'column',
+    fontSize: 20,
+    color: 'green',
+  },
+  dislike: {
+    flex: 4,
+    flexDirection: 'column',
+    fontSize: 20,
+    color: 'blue',
+  },
+  delete: {
+    flex: 4,
+    flexDirection: 'column',
+    fontSize: 20,
+    color: 'red',
   },
 });

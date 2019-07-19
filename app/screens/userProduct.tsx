@@ -14,6 +14,7 @@ import User from '../model/user.model';
 import Product from '../model/product.model';
 import { getProduct } from '../api/product.api';
 import { updateUser } from '../api/user.api';
+import ShoppingList from './shoppingList';
 
 interface OwnProps {
   user: User;
@@ -85,12 +86,21 @@ export default class UserProduct extends Component<Props, State> {
     </TouchableOpacity>
   );
 
-  private goBack = (product: Product[]) => {
-    const productId = product.map(item => item.productId);
+  private goBack = (product: Product[], action: string) => {
+    if (this.state.cart != null) {
+      if (action === 'Tabs') {
+        const productId = product.map(item => item.productId);
 
-    updateUser(this.props.user.facebookId, 'shoppingList', productId);
+        updateUser(this.props.user.facebookId, 'shoppingList', productId);
+        this.props.navigation.navigate('Tabs');
+      } else if (action === 'Shopping List') {
+        const productId = product.map(item => item.productId);
 
-    this.props.navigation.navigate('Tabs');
+        updateUser(this.props.user.facebookId, 'shoppingList', productId);
+
+        this.props.navigation.navigate('Shopping List');
+      }
+    }
   };
 
   private _keyExtractor = (product: Product) => product.productId.toString();
@@ -110,11 +120,11 @@ export default class UserProduct extends Component<Props, State> {
 
         <Button
           title="Back To Matches"
-          onPress={() => this.goBack(this.state.cart)}
+          onPress={() => this.goBack(this.state.cart, 'Tabs')}
         />
         <Button
           title="Go to Shopping List"
-          onPress={() => this.props.navigation.navigate('Shopping List')}
+          onPress={() => this.goBack(this.state.cart, 'Shopping List')}
         />
       </View>
     );
