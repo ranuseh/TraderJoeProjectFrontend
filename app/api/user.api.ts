@@ -1,4 +1,5 @@
 import User from '../model/user.model';
+import { Vote } from './product.api';
 
 export const getUser = (facebookId: string): Promise<User> => {
   return fetch(
@@ -69,7 +70,7 @@ export const addNewUser = async (
 
 export const updateUser = (
   facebookId: string,
-  vote: 'like' | 'dislike' | 'neverTried' | 'shoppingList' | 'userMatch',
+  vote: Vote,
   productId: string[] | string,
 ) => {
   fetch(
@@ -88,7 +89,6 @@ export const updateUser = (
   )
     .then(response => response.json())
     .catch(error => console.log(error));
-  console.log('IN UPDATE FROM SHOPPING LIST');
 };
 
 export const getRecommendedUsers = async (

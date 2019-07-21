@@ -6,6 +6,7 @@ import { getOrCreateUser, updateUser } from './app/api/user.api';
 import User from './app/model/user.model';
 import ProductModel from './app/model/product.model';
 import { NavigationState } from 'react-navigation';
+import { Vote, deleteProductFromUser } from './app/api/product.api';
 
 interface State {
   token: string;
@@ -65,18 +66,44 @@ export default class App extends Component<{}, State> {
     });
   };
 
-  private updateShoppingList = (product: ProductModel) => {
-    updateUser(this.state.user.facebookId, 'shoppingList', product.productId);
+  private updateShoppingList = async (
+    product: ProductModel,
+    action: Vote | 'delete',
+  ) => {
     const previousState = this.state.user;
 
-    this.setState({
-      user: {
-        ...previousState,
-        shoppingList: [...previousState.shoppingList, product.productId],
-      },
-    });
+    await deleteProductFromUser(
+      this.state.user.facebookId,
+      'shoppingList',
+      product.productId,
+    );
 
-    Alert.alert(`You added ${product.name} to the shopping list`);
+    if (action === 'delete') {
+      const newShoppingList = this.state.user.shoppingList.filter(
+        pid => pid !== product.productId,
+      );
+
+      const newUser: User = {
+        ...previousState,
+        shoppingList: [...newShoppingList],
+      };
+
+      this.setState({ user: newUser });
+    } else {
+      await updateUser(this.state.user.facebookId, action, product.productId);
+
+      const newShoppingList = this.state.user.shoppingList.filter(
+        pid => pid !== product.productId,
+      );
+
+      const newUser: User = {
+        ...previousState,
+        shoppingList: [...newShoppingList],
+        [action]: [...previousState[action], product.productId],
+      };
+
+      this.setState({ user: newUser });
+    }
   };
 
   private navigationScreenKey = 'navigationScreen';

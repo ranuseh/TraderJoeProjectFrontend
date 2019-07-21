@@ -38,7 +38,8 @@ export default class ProductScreen extends React.Component<Props, State> {
       .then((products: ProductModel[]) => {
         const userLikes = this.props.user.like;
         const dislikes = this.props.user.dislike;
-        const dontAdd = userLikes.concat(dislikes);
+        const shoppingList = this.props.user.shoppingList;
+        const dontAdd = [...userLikes, ...dislikes, ...shoppingList];
 
         const uniqueProducts = products.filter(
           product => !dontAdd.includes(product.productId),
@@ -59,9 +60,9 @@ export default class ProductScreen extends React.Component<Props, State> {
   private handleNope = (product: ProductModel) => {
     updateUser(this.props.user.facebookId, 'dislike', product.productId);
   };
-  private handleMaybe = (product: ProductModel) => {
-    updateUser(this.props.user.facebookId, 'neverTried', product.productId);
-  };
+  // private handleMaybe = (product: ProductModel) => {
+  //   updateUser(this.props.user.facebookId, 'neverTried', product.productId);
+  // };
 
   public render() {
     if (this.state.loading) {
@@ -78,12 +79,11 @@ export default class ProductScreen extends React.Component<Props, State> {
           <Card product={productData} />
         )}
         renderNoMoreCards={() => {
-
           return <NoMoreCards navigation={this.props.navigation} />;
         }}
         handleYup={this.handleYup}
         handleNope={this.handleNope}
-        handleMaybe={this.handleMaybe}
+        // handleMaybe={this.handleMaybe}
         hasMaybeAction
       />
     );

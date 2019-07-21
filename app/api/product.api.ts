@@ -10,9 +10,17 @@ export const getProduct = (productId: string): Promise<Product> => {
     });
 };
 
+export type Vote =
+  | 'like'
+  | 'dislike'
+  | 'neverTried'
+  | 'shoppingList'
+  | 'userMatch'
+  | 'delete';
+
 export const deleteProductFromUser = (
   facebookId: string,
-  vote: 'like' | 'dislike' | 'neverTried' | 'shoppingList' | 'userMatch',
+  vote: Vote,
   productId: string[] | string,
 ) => {
   fetch(
@@ -31,5 +39,4 @@ export const deleteProductFromUser = (
   )
     .then(response => response.json())
     .catch(error => console.log(error));
-  console.log('IN DELETE PRODUCT FROM USER');
 };

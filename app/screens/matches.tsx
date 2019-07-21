@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
-import { Card } from 'react-native-elements';
 
 import User from '../model/user.model';
 import { getRecommendedUsers } from '../api/user.api';
-import { NavigationScreenProp } from 'react-navigation';
+import { NavigationScreenProp, NavigationEvents } from 'react-navigation';
 
 export interface Props {
   user: User;
@@ -24,7 +23,7 @@ export default class Matches extends Component<Props, State> {
     };
   }
 
-  public async componentDidMount() {
+  private async loadScores() {
     try {
       const allAppUsers: [User, number][] = await getRecommendedUsers(
         this.props.user.facebookId,
@@ -57,9 +56,9 @@ export default class Matches extends Component<Props, State> {
 
     return (
       <View style={styles.container}>
-        <TouchableHighlight>
-          <Text>{items}</Text>
-        </TouchableHighlight>
+        <NavigationEvents onWillFocus={() => this.loadScores()} />
+
+        <Text>{items}</Text>
       </View>
     );
   }

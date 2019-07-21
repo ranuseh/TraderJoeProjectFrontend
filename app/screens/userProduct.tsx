@@ -7,22 +7,20 @@ import {
   FlatList,
   ListRenderItemInfo,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import User from '../model/user.model';
 import Product from '../model/product.model';
-import { getProduct } from '../api/product.api';
+import { getProduct, Vote } from '../api/product.api';
 
 interface OwnProps {
   user: User;
   onaddToCartCallback: (product: Product[]) => void;
-  updateShoppingListCallback: (product: Product) => void;
+  updateShoppingListCallback: (product: Product, action: Vote) => void;
 }
 
 interface State {
   recommended: Product[];
-  // cart: Product[];
 }
 
 interface NavigationProps {
@@ -37,11 +35,11 @@ export default class UserProduct extends Component<Props, State> {
 
     this.state = {
       recommended: [],
-      // cart: [],
     };
   }
 
   public async componentDidMount() {
+    console.log('IN USER PRODUCTS')
     try {
       const { navigation } = this.props;
       const compareUser = navigation.getParam('user', null);
@@ -71,7 +69,10 @@ export default class UserProduct extends Component<Props, State> {
           <Button
             title="Add to Shopping List"
             onPress={() =>
-              this.props.updateShoppingListCallback(listRenderItemInfo.item)
+              this.props.updateShoppingListCallback(
+                listRenderItemInfo.item,
+                'shoppingList',
+              )
             }
           />
         </View>

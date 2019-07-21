@@ -8,16 +8,17 @@ import {
   TouchableOpacity,
   FlatList,
   Text,
+  Image,
 } from 'react-native';
 
 import User from '../model/user.model';
 import Product from '../model/product.model';
-import { getProduct, deleteProductFromUser } from '../api/product.api';
-import { updateUser } from '../api/user.api';
+import { getProduct, deleteProductFromUser, Vote } from '../api/product.api';
 
 interface Props {
   user: User;
   navigation: NavigationScreenProp<{}, {}>;
+  updateShoppingListCallback: (product: Product, action: Vote) => void;
 }
 
 interface State {
@@ -34,8 +35,6 @@ export default class ShoppingList extends Component<Props, State> {
   }
 
   public async componentDidMount() {
-    console.log('shoppingList on Mount', this.props.user.shoppingList);
-
     try {
       const actualProduct: Promise<
         Product
@@ -43,11 +42,7 @@ export default class ShoppingList extends Component<Props, State> {
         getProduct(productid),
       );
 
-      console.log('after fetch', actualProduct);
-
       const allProducts: Product[] = await Promise.all(actualProduct);
-
-      console.log('after fetch', allProducts);
 
       this.setState({ cart: allProducts });
     } catch (error) {
@@ -55,54 +50,52 @@ export default class ShoppingList extends Component<Props, State> {
     }
   }
 
-  public manageShoppingList = (product: Product, action: string) => {
-    if (action === 'Like') {
-      updateUser(this.props.user.facebookId, 'like', product.productId);
-      this.props.navigation.navigate('Tabs');
-    } else if (action === 'Dislike') {
-      updateUser(this.props.user.facebookId, 'dislike', product.productId);
-      this.props.navigation.navigate('Tabs');
-    } else if (action === 'Delete') {
-      deleteProductFromUser(
-        this.props.user.facebookId,
-        'shoppingList',
-        product.productId,
-      );
-      this.props.navigation.navigate('Tabs');
-    }
-  };
-
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
-    <TouchableOpacity>
-      <Text style={styles.rowContainer}>
-        <Text style={styles.rowText}>
-          {listRenderItemInfo.item.name}
-          <Text
-            style={styles.like}
-            onPress={() =>
-              this.manageShoppingList(listRenderItemInfo.item, 'Like')
-            }
-          >
-            <Text>Like</Text>
-          </Text>
-          <Text
-            style={styles.dislike}
-            onPress={() =>
-              this.manageShoppingList(listRenderItemInfo.item, 'Dislike')
-            }
-          >
-            <Text>Dislike</Text>
-          </Text>
-          <Text
-            style={styles.delete}
-            onPress={() =>
-              this.manageShoppingList(listRenderItemInfo.item, 'Delete')
-            }
-          >
-            <Text>Delete</Text>
-          </Text>
+    <TouchableOpacity style={styles.container}>
+      <View style={styles.mainRow}>
+        <Image
+          source={{ uri: listRenderItemInfo.item.imageURL }}
+          style={styles.thumbnail}
+          resizeMode="contain"
+        />
+        <Text>{listRenderItemInfo.item.name} </Text>
+      </View>
+
+      <View style={styles.ratingRow}>
+        <Text
+          style={styles.like}
+          onPress={() =>
+            this.props.updateShoppingListCallback(
+              listRenderItemInfo.item,
+              'like',
+            )
+          }
+        >
+          Like
         </Text>
-      </Text>
+        <Text
+          style={styles.dislike}
+          onPress={() =>
+            this.props.updateShoppingListCallback(
+              listRenderItemInfo.item,
+              'dislike',
+            )
+          }
+        >
+          Dislike
+        </Text>
+        <Text
+          style={styles.delete}
+          onPress={() =>
+            this.props.updateShoppingListCallback(
+              listRenderItemInfo.item,
+              'delete',
+            )
+          }
+        >
+          Delete
+        </Text>
+      </View>
     </TouchableOpacity>
   );
 
@@ -124,14 +117,14 @@ export default class ShoppingList extends Component<Props, State> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'pink',
   },
   title: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
   },
-  rowContainer: {
+  mainRow: {
     flexDirection: 'row',
     backgroundColor: '#FFF',
     height: 100,
@@ -144,6 +137,15 @@ const styles = StyleSheet.create({
     shadowColor: '#CCC',
     shadowOpacity: 1.0,
     shadowRadius: 1,
+  },
+  ratingRow: {
+    flexDirection: 'row',
+    backgroundColor: '#FFF',
+    height: 50,
+    padding: 10,
+    marginRight: 10,
+    marginLeft: 10,
+    marginTop: 10,
   },
   rowText: {
     flex: 4,
@@ -167,5 +169,11 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     fontSize: 20,
     color: 'red',
+  },
+  thumbnail: {
+    flex: 1,
+    height: 50,
+    width: 50,
+    padding: 0,
   },
 });
