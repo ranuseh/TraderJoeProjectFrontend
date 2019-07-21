@@ -4,7 +4,6 @@ import User from '../model/user.model';
 
 interface Props {
   onLogOutCallback: () => void;
-  userId: string;
   user: User;
   token: string;
 }
@@ -12,7 +11,7 @@ interface Props {
 export default class Profile extends Component<Props, {}> {
   private logOut = () => {
     fetch(
-      `https://graph.facebook.com/${this.props.userId}/permissions?access_token=${this.props.token}`,
+      `https://graph.facebook.com/${this.props.user.facebookId}/permissions?access_token=${this.props.token}`,
       {
         method: 'DELETE',
       },

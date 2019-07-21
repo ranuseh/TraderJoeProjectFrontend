@@ -3,12 +3,13 @@ import {
   View,
   Button,
   StyleSheet,
-  Text,
   AsyncStorage,
   Image,
+  Text,
 } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { LoginInfo } from '../../App';
+import { CustomText } from '../components/CustomText';
 
 interface Props {
   onLoginCallback: (loginInfo: LoginInfo) => void;
@@ -80,9 +81,9 @@ export default class Login extends Component<Props> {
         <View style={styles.header}>
           <Image source={require('../config/images/logo.png')} />
         </View>
-        <View style={styles.buttonContainer}>
-          <Button color="#00000" title={'Login'} onPress={() => this.logIn()} />
-        </View>
+        <Text style={styles.container} onPress={() => this.logIn()}>
+          <CustomText>Login</CustomText>
+        </Text>
       </View>
     );
   }
@@ -111,5 +112,6 @@ const styles = StyleSheet.create({
     marginBottom: 50,
     width: 250,
     borderRadius: 80,
+    fontSize: 18,
   },
 });

@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   createAppContainer,
   createStackNavigator,
   createBottomTabNavigator,
+  NavigationScreenProp,
 } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
@@ -12,21 +13,37 @@ import Matches from './app/screens/matches';
 import ShoppingList from './app/screens/shoppingList';
 import Profile from './app/screens/profile';
 import UserProduct from './app/screens/userProduct';
+import User from './app/model/user.model';
+
+interface ScreenProps {
+  onLogOutCallback: () => Promise<void>;
+  updateShoppingListCallback: () => Promise<void>;
+  user: User;
+  token: string;
+}
+interface NavigationProps {
+  user: User;
+}
+interface Props {
+  screenProps: ScreenProps;
+  navigation: NavigationScreenProp<{}, NavigationProps>;
+}
 
 export const Tabs = createBottomTabNavigator({
   Home: {
-    screen: props => {
+    screen: (props: Props) => {
       return <Home {...props.screenProps} navigation={props.navigation}></Home>;
     },
     navigationOptions: {
       tabBarLabel: 'Home',
       tabBarIcon: () => (
-        <Icon name="ios-home" type="ionicon" size={28} color="#1E52BD" />
+        <Icon name="ios-home" type="ionicon" size={28
+        } color="#1E52BD" />
       ),
     },
   },
   Product: {
-    screen: props => {
+    screen: (props: Props) => {
       return (
         <ProductScreen
           {...props.screenProps}
@@ -42,7 +59,7 @@ export const Tabs = createBottomTabNavigator({
     },
   },
   Matches: {
-    screen: props => {
+    screen: (props: Props) => {
       return (
         <Matches {...props.screenProps} navigation={props.navigation}></Matches>
       );
@@ -55,7 +72,7 @@ export const Tabs = createBottomTabNavigator({
     },
   },
   'Shopping List': {
-    screen: props => {
+    screen: (props: Props) => {
       return (
         <ShoppingList
           {...props.screenProps}
@@ -71,10 +88,8 @@ export const Tabs = createBottomTabNavigator({
     },
   },
   Profile: {
-    screen: props => {
-      return (
-        <Profile {...props.screenProps} navigation={props.navigation}></Profile>
-      );
+    screen: (props: Props) => {
+      return <Profile {...props.screenProps}></Profile>;
     },
     navigationOptions: {
       tabBarLabel: 'Profile',
@@ -87,17 +102,14 @@ export const Tabs = createBottomTabNavigator({
 
 export const ProductStack = createStackNavigator({
   Matches: {
-    screen: props => {
+    screen: (props: Props) => {
       return (
         <Matches {...props.screenProps} navigation={props.navigation}></Matches>
       );
     },
-    navigationOptions: () => ({
-      header: null,
-    }),
   },
   UserProduct: {
-    screen: props => {
+    screen: (props: Props) => {
       return (
         <UserProduct
           {...props.screenProps}
@@ -106,7 +118,6 @@ export const ProductStack = createStackNavigator({
       );
     },
     navigationOptions: () => ({
-      header: null,
       tabBarVisible: false,
       gesturesEnabled: false,
     }),

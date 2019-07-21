@@ -137,6 +137,7 @@ export default class App extends Component<{}, State> {
           persistNavigationState={this.persistNavigationState}
           loadNavigationState={this.loadNavigationState}
           screenProps={{
+            token: this.state.token,
             onLogOutCallback: this.onLogOut,
             updateShoppingListCallback: this.updateShoppingList,
             user: this.state.user,
