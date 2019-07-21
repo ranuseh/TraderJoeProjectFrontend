@@ -34,7 +34,7 @@ export default class ShoppingList extends Component<Props, State> {
   }
 
   public async componentDidMount() {
-    console.log('state on mount', this.state.cart);
+    console.log('shoppingList on Mount', this.props.user.shoppingList);
 
     try {
       const actualProduct: Promise<
@@ -43,11 +43,13 @@ export default class ShoppingList extends Component<Props, State> {
         getProduct(productid),
       );
 
+      console.log('after fetch', actualProduct);
+
       const allProducts: Product[] = await Promise.all(actualProduct);
 
-      this.setState({ cart: allProducts });
+      console.log('after fetch', allProducts);
 
-      console.log('state after set', this.state.cart);
+      this.setState({ cart: allProducts });
     } catch (error) {
       console.log(error.message);
     }
@@ -107,8 +109,6 @@ export default class ShoppingList extends Component<Props, State> {
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
-    console.log('MY ITEMS', this.state.cart);
-
     return (
       <View>
         <FlatList

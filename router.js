@@ -16,8 +16,6 @@ import UserProduct from './app/screens/userProduct';
 export const Tabs = createBottomTabNavigator({
   Home: {
     screen: props => {
-      console.log('home');
-      console.log(JSON.stringify(props));
       return <Home {...props.screenProps} navigation={props.navigation}></Home>;
     },
     navigationOptions: {
@@ -29,7 +27,6 @@ export const Tabs = createBottomTabNavigator({
   },
   Product: {
     screen: props => {
-      console.log(JSON.stringify(props));
       return (
         <ProductScreen
           {...props.screenProps}
@@ -46,7 +43,6 @@ export const Tabs = createBottomTabNavigator({
   },
   Matches: {
     screen: props => {
-      console.log(JSON.stringify(props));
       return (
         <Matches {...props.screenProps} navigation={props.navigation}></Matches>
       );
@@ -60,7 +56,6 @@ export const Tabs = createBottomTabNavigator({
   },
   'Shopping List': {
     screen: props => {
-      console.log(JSON.stringify(props));
       return (
         <ShoppingList
           {...props.screenProps}
@@ -77,7 +72,6 @@ export const Tabs = createBottomTabNavigator({
   },
   Profile: {
     screen: props => {
-      console.log(JSON.stringify(props));
       return (
         <Profile {...props.screenProps} navigation={props.navigation}></Profile>
       );
@@ -94,7 +88,6 @@ export const Tabs = createBottomTabNavigator({
 export const ProductStack = createStackNavigator({
   Matches: {
     screen: props => {
-      console.log(JSON.stringify(props));
       return (
         <Matches {...props.screenProps} navigation={props.navigation}></Matches>
       );
@@ -105,7 +98,6 @@ export const ProductStack = createStackNavigator({
   },
   UserProduct: {
     screen: props => {
-      console.log(JSON.stringify(props));
       return (
         <UserProduct
           {...props.screenProps}

@@ -13,17 +13,16 @@ import { NavigationScreenProp } from 'react-navigation';
 import User from '../model/user.model';
 import Product from '../model/product.model';
 import { getProduct } from '../api/product.api';
-import { updateUser } from '../api/user.api';
-import ShoppingList from './shoppingList';
 
 interface OwnProps {
   user: User;
   onaddToCartCallback: (product: Product[]) => void;
+  updateShoppingListCallback: (product: Product) => void;
 }
 
 interface State {
   recommended: Product[];
-  cart: Product[];
+  // cart: Product[];
 }
 
 interface NavigationProps {
@@ -38,7 +37,7 @@ export default class UserProduct extends Component<Props, State> {
 
     this.state = {
       recommended: [],
-      cart: [],
+      // cart: [],
     };
   }
 
@@ -64,14 +63,6 @@ export default class UserProduct extends Component<Props, State> {
     }
   }
 
-  private addtoShoppingList = (product: Product) => {
-    const newShoppingList = [product, ...this.state.cart];
-
-    this.setState({ cart: newShoppingList });
-
-    Alert.alert(`You added ${product.name} to the shopping list`);
-  };
-
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
     <TouchableOpacity>
       <View style={styles.rowContainer}>
@@ -79,29 +70,14 @@ export default class UserProduct extends Component<Props, State> {
           <Text style={styles.title}>{listRenderItemInfo.item.name}</Text>
           <Button
             title="Add to Shopping List"
-            onPress={() => this.addtoShoppingList(listRenderItemInfo.item)}
+            onPress={() =>
+              this.props.updateShoppingListCallback(listRenderItemInfo.item)
+            }
           />
         </View>
       </View>
     </TouchableOpacity>
   );
-
-  private goBack = (product: Product[], action: string) => {
-    if (this.state.cart != null) {
-      if (action === 'Tabs') {
-        const productId = product.map(item => item.productId);
-
-        updateUser(this.props.user.facebookId, 'shoppingList', productId);
-        this.props.navigation.navigate('Tabs');
-      } else if (action === 'Shopping List') {
-        const productId = product.map(item => item.productId);
-
-        updateUser(this.props.user.facebookId, 'shoppingList', productId);
-
-        this.props.navigation.navigate('Shopping List');
-      }
-    }
-  };
 
   private _keyExtractor = (product: Product) => product.productId.toString();
 
@@ -120,11 +96,11 @@ export default class UserProduct extends Component<Props, State> {
 
         <Button
           title="Back To Matches"
-          onPress={() => this.goBack(this.state.cart, 'Tabs')}
+          onPress={() => this.props.navigation.navigate('Tabs')}
         />
         <Button
           title="Go to Shopping List"
-          onPress={() => this.goBack(this.state.cart, 'Shopping List')}
+          onPress={() => this.props.navigation.navigate('Shopping List')}
         />
       </View>
     );
