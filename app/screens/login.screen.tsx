@@ -15,7 +15,7 @@ interface Props {
   onLoginCallback: (loginInfo: LoginInfo) => void;
 }
 
-export default class Login extends Component<Props> {
+export default class LoginScreen extends Component<Props> {
   public async componentDidMount() {
     try {
       const token = await AsyncStorage.getItem('userToken');

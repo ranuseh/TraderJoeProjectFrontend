@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import User from '../model/user.model';
 import { getRecommendedUsers } from '../api/user.api';
@@ -14,7 +14,7 @@ interface State {
   allUsers: [User, number][];
 }
 
-export default class Matches extends Component<Props, State> {
+export default class UserMatchesScreen extends Component<Props, State> {
   public constructor(props: Props) {
     super(props);
 

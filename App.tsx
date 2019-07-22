@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { createRootNavigator } from './router';
-import Login from './app/screens/login';
+import AppContainer from './router';
+import LoginScreen from './app/screens/login.screen';
 import { AsyncStorage, Alert } from 'react-native';
 import { getOrCreateUser, updateUser } from './app/api/user.api';
 import User from './app/model/user.model';
@@ -88,6 +88,7 @@ export default class App extends Component<{}, State> {
         shoppingList: [...newShoppingList],
       };
 
+      console.log('app/updateShoppingList/delete', newUser.shoppingList);
       this.setState({ user: newUser });
     } else {
       await updateUser(this.state.user.facebookId, action, product.productId);
@@ -126,12 +127,10 @@ export default class App extends Component<{}, State> {
   };
 
   public render() {
-    console.log('user in render', this.state.user);
     if (this.state.user == null) {
-      return <Login onLoginCallback={this.onLogIn} />;
+      return <LoginScreen onLoginCallback={this.onLogIn} />;
     } else {
-      const AppContainer = createRootNavigator();
-
+      console.log('app/render');
       return (
         <AppContainer
           persistNavigationState={this.persistNavigationState}

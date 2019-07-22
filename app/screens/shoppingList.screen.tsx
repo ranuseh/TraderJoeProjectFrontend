@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { NavigationScreenProp } from 'react-navigation';
+import { NavigationScreenProp, NavigationEvents } from 'react-navigation';
 
 import {
   StyleSheet,
@@ -13,7 +13,7 @@ import {
 
 import User from '../model/user.model';
 import Product from '../model/product.model';
-import { getProduct, deleteProductFromUser, Vote } from '../api/product.api';
+import { getProduct, Vote } from '../api/product.api';
 
 interface Props {
   user: User;
@@ -25,7 +25,7 @@ interface State {
   cart: Product[];
 }
 
-export default class ShoppingList extends Component<Props, State> {
+export default class ShoppingListScreen extends Component<Props, State> {
   private constructor(props: Props) {
     super(props);
 
@@ -34,7 +34,7 @@ export default class ShoppingList extends Component<Props, State> {
     };
   }
 
-  public async componentDidMount() {
+  public async loadShoppingList() {
     try {
       const actualProduct: Promise<
         Product
@@ -45,10 +45,24 @@ export default class ShoppingList extends Component<Props, State> {
       const allProducts: Product[] = await Promise.all(actualProduct);
 
       this.setState({ cart: allProducts });
+      console.log('shoppingList/loadShoppingList');
     } catch (error) {
       console.log(error.message);
     }
   }
+
+  public componentDidUpdate(prevProps: Props) {
+    if (this.props.user.shoppingList !== prevProps.user.shoppingList) {
+      this.loadShoppingList();
+    }
+  }
+
+  // componentDidUpdate(prevProps) {
+  //   // Typical usage (don't forget to compare props):
+  //   if (this.props.userID !== prevProps.userID) {
+  //     this.fetchData(this.props.userID);
+  //   }
+  // }
 
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
     <TouchableOpacity style={styles.container}>
@@ -102,8 +116,12 @@ export default class ShoppingList extends Component<Props, State> {
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
+    console.log('shoppinglist/render/props', this.props.user.shoppingList);
+    console.log('shoppinglist/render/state', this.state.cart);
     return (
       <View>
+        <NavigationEvents onWillFocus={() => this.loadShoppingList()} />
+
         <FlatList
           data={this.state.cart}
           keyExtractor={this._keyExtractor}

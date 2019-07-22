@@ -26,7 +26,7 @@ interface Props {
   updateShoppingListCallback: (product: Product, action: Vote) => void;
 }
 
-export default class UserProduct extends Component<Props, State> {
+export default class ProductMatchesScreen extends Component<Props, State> {
   private constructor(props: Props) {
     super(props);
 
@@ -36,7 +36,6 @@ export default class UserProduct extends Component<Props, State> {
   }
 
   public async componentDidMount() {
-    console.log('IN USER PRODUCTS');
     try {
       const { navigation } = this.props;
       const compareUser = navigation.getParam('user', null);
@@ -90,11 +89,6 @@ export default class UserProduct extends Component<Props, State> {
           data={this.state.recommended}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
-        />
-
-        <Button
-          title="Back To Matches"
-          onPress={() => this.props.navigation.navigate('Tabs')}
         />
         <Button
           title="Go to Shopping List"

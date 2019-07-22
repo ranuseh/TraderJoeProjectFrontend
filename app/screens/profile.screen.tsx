@@ -8,7 +8,7 @@ interface Props {
   token: string;
 }
 
-export default class Profile extends Component<Props, {}> {
+export default class ProfileScreen extends Component<Props, {}> {
   private logOut = () => {
     fetch(
       `https://graph.facebook.com/${this.props.user.facebookId}/permissions?access_token=${this.props.token}`,

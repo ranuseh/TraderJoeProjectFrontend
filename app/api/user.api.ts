@@ -89,6 +89,7 @@ export const updateUser = (
   )
     .then(response => response.json())
     .catch(error => console.log(error));
+  console.log('In user update');
 };
 
 export const getRecommendedUsers = async (

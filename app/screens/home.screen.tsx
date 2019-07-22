@@ -10,7 +10,7 @@ interface Props {
   navigation: NavigationScreenProp<{}, {}>;
 }
 
-export default class Home extends Component<Props, {}> {
+export default class HomeScreen extends Component<Props, {}> {
   public render() {
     return (
       <View style={styles.container}>

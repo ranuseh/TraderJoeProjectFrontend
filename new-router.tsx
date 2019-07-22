@@ -8,7 +8,7 @@ import {
 import { Icon } from 'react-native-elements';
 
 import ProductScreen from './app/screens/product.screen';
-import HomeScreen from './app/screens/home.screen';
+import Home from './app/screens/home';
 import UserMatchesScreen from './app/screens/userMatches.screen';
 import ShoppingListScreen from './app/screens/shoppingList.screen';
 import ProfileScreen from './app/screens/profile.screen';
@@ -33,10 +33,7 @@ const ProductStack = createStackNavigator({
   UserMatches: {
     screen: (props: Props) => {
       return (
-        <UserMatchesScreen
-          {...props.screenProps}
-          navigation={props.navigation}
-        ></UserMatchesScreen>
+        <UserMatchesScreen {...props.screenProps} navigation={props.navigation}></UserMatchesScreen>
       );
     },
   },
@@ -55,16 +52,11 @@ const ProductStack = createStackNavigator({
 const Tabs = createBottomTabNavigator({
   Home: {
     screen: (props: Props) => {
-      return (
-        <HomeScreen
-          {...props.screenProps}
-          navigation={props.navigation}
-        ></HomeScreen>
-      );
+      return <Home {...props.screenProps} navigation={props.navigation}></Home>;
     },
     navigationOptions: {
       tabBarLabel: 'Home',
-      tabBarIcon: () => (
+      tabBarIcon: (
         <Icon name="ios-home" type="ionicon" size={28} color="#1E52BD" />
       ),
     },
@@ -80,18 +72,14 @@ const Tabs = createBottomTabNavigator({
     },
     navigationOptions: {
       tabBarLabel: 'Play',
-      tabBarIcon: () => (
-        <Icon name="sound" type="entypo" size={28} color="#1E52BD" />
-      ),
+      tabBarIcon: <Icon name="sound" type="entypo" size={28} color="#1E52BD" />,
     },
   },
   Matches: {
     screen: ProductStack,
     navigationOptions: {
       tabBarLabel: 'Matches',
-      tabBarIcon: () => (
-        <Icon name="heart" type="entypo" size={28} color="#1E52BD" />
-      ),
+      tabBarIcon: <Icon name="heart" type="entypo" size={28} color="#1E52BD" />,
     },
   },
   'Shopping List': {
@@ -105,7 +93,7 @@ const Tabs = createBottomTabNavigator({
     },
     navigationOptions: {
       tabBarLabel: 'List',
-      tabBarIcon: () => (
+      tabBarIcon: (
         <Icon name="ios-basket" type="ionicon" size={28} color="#1E52BD" />
       ),
     },
@@ -116,7 +104,7 @@ const Tabs = createBottomTabNavigator({
     },
     navigationOptions: {
       tabBarLabel: 'Profile',
-      tabBarIcon: () => (
+      tabBarIcon: (
         <Icon name="ios-person" type="ionicon" size={28} color="#1E52BD" />
       ),
     },
