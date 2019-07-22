@@ -24,14 +24,19 @@ export default class UserMatchesScreen extends Component<Props, State> {
   }
 
   private async loadScores() {
-    try {
-      const allAppUsers: [User, number][] = await getRecommendedUsers(
-        this.props.user.facebookId,
-      );
+    if (
+      this.props.user.like.length !== 0 ||
+      this.props.user.dislike.length !== 0
+    ) {
+      try {
+        const allAppUsers: [User, number][] = await getRecommendedUsers(
+          this.props.user.facebookId,
+        );
 
-      this.setState({ allUsers: allAppUsers });
-    } catch (error) {
-      console.log(error.message);
+        this.setState({ allUsers: allAppUsers });
+      } catch (error) {
+        console.log(error.message);
+      }
     }
   }
 
@@ -54,13 +59,23 @@ export default class UserMatchesScreen extends Component<Props, State> {
       );
     });
 
-    return (
-      <View style={styles.container}>
-        <NavigationEvents onWillFocus={() => this.loadScores()} />
+    if (this.state.allUsers.length === 0) {
+      return (
+        <View style={styles.container}>
+          <NavigationEvents onWillFocus={() => this.loadScores()} />
 
-        <Text>{items}</Text>
-      </View>
-    );
+          <Text>Play to get your matches</Text>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <NavigationEvents onWillFocus={() => this.loadScores()} />
+
+          <Text>{items}</Text>
+        </View>
+      );
+    }
   }
 }
 

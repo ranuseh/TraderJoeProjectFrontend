@@ -41,15 +41,34 @@ export default class ProductMatchesScreen extends Component<Props, State> {
       const compareUser = navigation.getParam('user', null);
       const loggedInUser = this.props.user;
 
-      const recommededList: string[] = loggedInUser.like.filter(
-        items => !compareUser.like.includes(items),
+      console.log(
+        'productMatches/componenetdidmuont/what is user',
+        compareUser.like,
+      );
+
+      console.log('productMatches/componenetdidmuont/like', loggedInUser.like);
+
+      const recommededList: string[] = compareUser.like.filter(
+        items => !loggedInUser.like.includes(items),
+      );
+
+      console.log(
+        'productMatches/componenetdidmuont/recommended',
+        recommededList,
       );
 
       const actualProduct: Promise<Product>[] = recommededList.map(productid =>
         getProduct(productid),
       );
 
+      console.log(
+        'productMatches/componenetdidmuont/actualprod',
+        actualProduct,
+      );
+
       const allProducts: Product[] = await Promise.all(actualProduct);
+
+      console.log('productMatches/componenetdidmuont/', allProducts);
 
       this.setState({ recommended: allProducts });
     } catch (error) {

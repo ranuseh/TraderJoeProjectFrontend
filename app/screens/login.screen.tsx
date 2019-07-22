@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Button,
-  StyleSheet,
-  AsyncStorage,
-  Image,
-  Text,
-} from 'react-native';
+import { View, StyleSheet, AsyncStorage, Image, Text } from 'react-native';
 import * as Facebook from 'expo-facebook';
 import { LoginInfo } from '../../App';
 import { CustomText } from '../components/CustomText';
@@ -81,7 +74,7 @@ export default class LoginScreen extends Component<Props> {
         <View style={styles.header}>
           <Image source={require('../config/images/logo.png')} />
         </View>
-        <Text style={styles.container} onPress={() => this.logIn()}>
+        <Text style={styles.buttonContainer} onPress={() => this.logIn()}>
           <CustomText>Login</CustomText>
         </Text>
       </View>
@@ -92,9 +85,10 @@ export default class LoginScreen extends Component<Props> {
 const styles = StyleSheet.create({
   header: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: 200,
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#fffff',
+    backgroundColor: 'white',
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -102,16 +96,15 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fffff',
+    backgroundColor: 'white',
   },
   buttonContainer: {
-    height: 45,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 50,
-    width: 250,
-    borderRadius: 80,
+    marginBottom: 20,
+    paddingBottom: 40,
+    backgroundColor: 'white',
     fontSize: 18,
   },
 });

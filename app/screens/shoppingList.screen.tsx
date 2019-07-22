@@ -57,13 +57,6 @@ export default class ShoppingListScreen extends Component<Props, State> {
     }
   }
 
-  // componentDidUpdate(prevProps) {
-  //   // Typical usage (don't forget to compare props):
-  //   if (this.props.userID !== prevProps.userID) {
-  //     this.fetchData(this.props.userID);
-  //   }
-  // }
-
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
     <TouchableOpacity style={styles.container}>
       <View style={styles.mainRow}>

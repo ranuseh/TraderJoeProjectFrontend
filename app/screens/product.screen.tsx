@@ -2,16 +2,17 @@ import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import ProductModel from '../model/product.model';
-import { updateUser } from '../api/user.api';
 
 import SwipeCards from 'react-native-swipe-cards';
 import { Card } from '../components/Card';
 import { NoMoreCards } from '../components/NoMoreCards';
 import User from '../model/user.model';
+import { Vote } from '../api/product.api';
 
 export interface Props {
   user: User;
   navigation: NavigationScreenProp<{}, {}>;
+  updateShoppingListCallback: (product: ProductModel, action: Vote) => void;
 }
 
 export interface State {
@@ -54,15 +55,12 @@ export default class ProductScreen extends React.Component<Props, State> {
   }
 
   private handleYup = (product: ProductModel) => {
-    updateUser(this.props.user.facebookId, 'like', product.productId);
+    this.props.updateShoppingListCallback(product, 'like');
   };
 
   private handleNope = (product: ProductModel) => {
-    updateUser(this.props.user.facebookId, 'dislike', product.productId);
+    this.props.updateShoppingListCallback(product, 'dislike');
   };
-  // private handleMaybe = (product: ProductModel) => {
-  //   updateUser(this.props.user.facebookId, 'neverTried', product.productId);
-  // };
 
   public render() {
     if (this.state.loading) {

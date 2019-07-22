@@ -1,6 +1,5 @@
 import React from 'react';
-import { Text, View, Image, StyleSheet } from 'react-native';
-import { NoMoreCards } from './NoMoreCards';
+import { View, Image, StyleSheet } from 'react-native';
 import Product from '../model/product.model';
 
 interface Props {

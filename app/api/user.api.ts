@@ -100,6 +100,8 @@ export const getRecommendedUsers = async (
       `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/recommendations/${facebookId}`,
     );
 
+    console.log('userapi/getrecommeded/');
+
     const json = await response.json();
 
     if (json != null) {
@@ -108,5 +110,6 @@ export const getRecommendedUsers = async (
   } catch (errors) {
     console.log(errors);
   }
+
   return null;
 };
