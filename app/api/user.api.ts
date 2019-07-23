@@ -104,6 +104,8 @@ export const getRecommendedUsers = async (
 
     const json = await response.json();
 
+    console.log('userapi/getrecommeded/', json);
+
     if (json != null) {
       return json;
     }

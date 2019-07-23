@@ -60,20 +60,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: '#fffff',
+    backgroundColor: '#d1c0ad',
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#00000',
+    color: '#B31100',
   },
   welcome: {
     margin: 5,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#B31100',
+    color: '#000',
   },
 });

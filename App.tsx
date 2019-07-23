@@ -116,7 +116,6 @@ export default class App extends Component<{}, State> {
         JSON.stringify(state),
       );
     } catch (err) {
-      // handle the error according to your needs
     }
   };
 

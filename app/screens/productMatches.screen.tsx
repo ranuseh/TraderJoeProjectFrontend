@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
+  Image,
   FlatList,
   ListRenderItemInfo,
   TouchableOpacity,
@@ -12,6 +12,7 @@ import { NavigationScreenProp } from 'react-navigation';
 import User from '../model/user.model';
 import Product from '../model/product.model';
 import { getProduct, Vote } from '../api/product.api';
+import { CustomText } from '../components/CustomText';
 
 interface State {
   recommended: Product[];
@@ -41,34 +42,15 @@ export default class ProductMatchesScreen extends Component<Props, State> {
       const compareUser = navigation.getParam('user', null);
       const loggedInUser = this.props.user;
 
-      console.log(
-        'productMatches/componenetdidmuont/what is user',
-        compareUser.like,
-      );
-
-      console.log('productMatches/componenetdidmuont/like', loggedInUser.like);
-
       const recommededList: string[] = compareUser.like.filter(
         items => !loggedInUser.like.includes(items),
-      );
-
-      console.log(
-        'productMatches/componenetdidmuont/recommended',
-        recommededList,
       );
 
       const actualProduct: Promise<Product>[] = recommededList.map(productid =>
         getProduct(productid),
       );
 
-      console.log(
-        'productMatches/componenetdidmuont/actualprod',
-        actualProduct,
-      );
-
       const allProducts: Product[] = await Promise.all(actualProduct);
-
-      console.log('productMatches/componenetdidmuont/', allProducts);
 
       this.setState({ recommended: allProducts });
     } catch (error) {
@@ -80,16 +62,23 @@ export default class ProductMatchesScreen extends Component<Props, State> {
     <TouchableOpacity>
       <View style={styles.rowContainer}>
         <View style={styles.rowText}>
-          <Text style={styles.title}>{listRenderItemInfo.item.name}</Text>
-          <Button
-            title="Add to Shopping List"
+          <CustomText style={styles.title}>
+            <Image
+              source={{ uri: listRenderItemInfo.item.imageURL }}
+              style={styles.thumbnail}
+              resizeMode="contain"
+            />
+          </CustomText>
+          <CustomText
             onPress={() =>
               this.props.updateShoppingListCallback(
                 listRenderItemInfo.item,
                 'shoppingList',
               )
             }
-          />
+          >
+            <Text> Add to My Shopping List</Text>
+          </CustomText>
         </View>
       </View>
     </TouchableOpacity>
@@ -103,16 +92,18 @@ export default class ProductMatchesScreen extends Component<Props, State> {
 
     return (
       <View>
-        <Text>{compareUser.name}</Text>
+        <CustomText>{compareUser.name} recommedations for you.</CustomText>
+
         <FlatList
           data={this.state.recommended}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />
-        <Button
-          title="Go to Shopping List"
+        <CustomText
           onPress={() => this.props.navigation.navigate('Shopping List')}
-        />
+        >
+          <Text> Go to Shopping List</Text>
+        </CustomText>
       </View>
     );
   }
@@ -123,7 +114,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
   },
   title: {
     fontSize: 20,
@@ -132,7 +123,7 @@ const styles = StyleSheet.create({
   },
   rowContainer: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
+    backgroundColor: 'white',
     height: 100,
     padding: 10,
     marginRight: 10,
@@ -152,8 +143,10 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     flex: 1,
-    height: undefined,
-    width: undefined,
+    height: 100,
+    width: 100,
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
   rowText: {
     flex: 4,

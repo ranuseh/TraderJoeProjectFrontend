@@ -72,6 +72,7 @@ export default class LoginScreen extends Component<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
+          <Image source={require('../config/images/flower.png')} />
           <Image source={require('../config/images/logo.png')} />
         </View>
         <Text style={styles.buttonContainer} onPress={() => this.logIn()}>
@@ -85,26 +86,24 @@ export default class LoginScreen extends Component<Props> {
 const styles = StyleSheet.create({
   header: {
     flex: 1,
-    marginTop: 200,
+    marginTop: 100,
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
+    backgroundColor: '#fffff',
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: '#fffff',
   },
   buttonContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
-    paddingBottom: 40,
-    backgroundColor: 'white',
+    paddingBottom: 60,
+    backgroundColor: '#fffff',
     fontSize: 18,
   },
 });

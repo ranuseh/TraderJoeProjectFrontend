@@ -30,7 +30,6 @@ export default class ProductScreen extends React.Component<Props, State> {
     };
   }
 
-  // TO DO : Move to API
   public componentDidMount() {
     fetch(
       'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/products',
@@ -81,9 +80,9 @@ export default class ProductScreen extends React.Component<Props, State> {
         }}
         handleYup={this.handleYup}
         handleNope={this.handleNope}
-        // handleMaybe={this.handleMaybe}
         hasMaybeAction
       />
     );
   }
 }
+
