@@ -44,7 +44,7 @@ export default class ProfileScreen extends Component<Props, {}> {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#778899',
+    backgroundColor: '#1E52BD',
   },
   headerContent: {
     padding: 30,

@@ -14,6 +14,7 @@ import {
 import User from '../model/user.model';
 import Product from '../model/product.model';
 import { getProduct, Vote } from '../api/product.api';
+import { CustomText } from '../components/CustomText';
 
 interface Props {
   user: User;
@@ -45,7 +46,6 @@ export default class ShoppingListScreen extends Component<Props, State> {
       const allProducts: Product[] = await Promise.all(actualProduct);
 
       this.setState({ cart: allProducts });
-      console.log('shoppingList/loadShoppingList');
     } catch (error) {
       console.log(error.message);
     }
@@ -61,11 +61,10 @@ export default class ShoppingListScreen extends Component<Props, State> {
     <TouchableOpacity style={styles.container}>
       <View style={styles.mainRow}>
         <Image
-          source={{ uri: listRenderItemInfo.item.imageURL }}
+          source={{ uri: listRenderItemInfo.item.imageUrl }}
           style={styles.thumbnail}
           resizeMode="contain"
         />
-        <Text>{listRenderItemInfo.item.name} </Text>
       </View>
 
       <View style={styles.ratingRow}>
@@ -109,27 +108,46 @@ export default class ShoppingListScreen extends Component<Props, State> {
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
-    console.log('shoppinglist/render/props', this.props.user.shoppingList);
-    console.log('shoppinglist/render/state', this.state.cart);
-    return (
-      <View>
-        <NavigationEvents onWillFocus={() => this.loadShoppingList()} />
+    if (this.state.cart.length === 0) {
+      return (
+        <View style={styles.container}>
+          <NavigationEvents onWillFocus={() => this.loadShoppingList()} />
+          <CustomText style={styles.paragraph}>
+            You have no items in your Shopping List
+          </CustomText>
 
-        <FlatList
-          data={this.state.cart}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderItem}
-        />
-      </View>
-    );
+          <CustomText style={styles.paragraph}>
+            Play to start adding items!
+          </CustomText>
+        </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <NavigationEvents onWillFocus={() => this.loadShoppingList()} />
+          <FlatList
+            data={this.state.cart}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderItem}
+          />
+        </View>
+      );
+    }
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // paddingTop: 30,
-    backgroundColor: 'pink',
+    justifyContent: 'center',
+    padding: 10,
+    backgroundColor: 'white',
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#00000',
   },
   title: {
     fontSize: 20,

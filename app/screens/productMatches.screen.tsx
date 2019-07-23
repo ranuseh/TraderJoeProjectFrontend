@@ -37,6 +37,7 @@ export default class ProductMatchesScreen extends Component<Props, State> {
   }
 
   public async componentDidMount() {
+    console.log('in product matches');
     try {
       const { navigation } = this.props;
       const compareUser = navigation.getParam('user', null);
@@ -64,21 +65,27 @@ export default class ProductMatchesScreen extends Component<Props, State> {
         <View style={styles.rowText}>
           <CustomText style={styles.title}>
             <Image
-              source={{ uri: listRenderItemInfo.item.imageURL }}
+              source={{ uri: listRenderItemInfo.item.imageUrl }}
               style={styles.thumbnail}
               resizeMode="contain"
             />
+            <Text
+              onPress={() =>
+                this.props.updateShoppingListCallback(
+                  listRenderItemInfo.item,
+                  'shoppingList',
+                )
+              }
+            >
+              Add to My Shopping List
+            </Text>
           </CustomText>
-          <CustomText
-            onPress={() =>
-              this.props.updateShoppingListCallback(
-                listRenderItemInfo.item,
-                'shoppingList',
-              )
-            }
-          >
-            <Text> Add to My Shopping List</Text>
-          </CustomText>
+
+          <Image
+            source={{ uri: listRenderItemInfo.item.imageUrl }}
+            style={styles.thumbnail}
+            resizeMode="contain"
+          />
         </View>
       </View>
     </TouchableOpacity>
@@ -113,8 +120,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    padding: 10,
     backgroundColor: 'white',
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#00000',
   },
   title: {
     fontSize: 20,

@@ -60,14 +60,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 10,
-    backgroundColor: '#d1c0ad',
+    backgroundColor: 'white',
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#B31100',
+    color: '#D21242',
   },
   welcome: {
     margin: 5,

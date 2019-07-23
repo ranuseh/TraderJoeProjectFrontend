@@ -40,7 +40,7 @@ const ProductStack = createStackNavigator({
       );
     },
   },
-  UserProduct: {
+  ProductMatches: {
     screen: (props: Props) => {
       return (
         <ProductMatchesScreen

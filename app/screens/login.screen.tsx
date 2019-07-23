@@ -24,7 +24,7 @@ export default class LoginScreen extends Component<Props> {
     const result = await Facebook.logInWithReadPermissionsAsync(
       '457065005090623',
       {
-        permissions: ['public_profile', 'email'],
+        permissions: ['public_profile'],
       },
     );
 
@@ -38,13 +38,12 @@ export default class LoginScreen extends Component<Props> {
       this.props.onLoginCallback({
         facebookId: null,
         token: null,
-        email: null,
         name: null,
         image: null,
       });
     } else {
       const response = await fetch(
-        `https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${token}`,
+        `https://graph.facebook.com/me?fields=id,name,picture&access_token=${token}`,
       );
       const json = await response.json();
 
@@ -52,7 +51,6 @@ export default class LoginScreen extends Component<Props> {
         this.props.onLoginCallback({
           facebookId: json.id,
           token,
-          email: json.email,
           name: json.name,
           image: json.picture.data.url,
         });
@@ -60,7 +58,6 @@ export default class LoginScreen extends Component<Props> {
         this.props.onLoginCallback({
           facebookId: null,
           token: null,
-          email: null,
           name: null,
           image: null,
         });

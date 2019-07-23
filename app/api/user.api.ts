@@ -13,7 +13,6 @@ export const getUser = (facebookId: string): Promise<User> => {
 
 export const getOrCreateUser = async (
   facebookId: string,
-  email: string,
   name: string,
   image: string,
 ): Promise<User> => {
@@ -22,7 +21,7 @@ export const getOrCreateUser = async (
   if (user) {
     return user;
   } else {
-    const newUser = addNewUser(facebookId, email, name, image);
+    const newUser = addNewUser(facebookId, name, image);
 
     return newUser;
   }
@@ -30,12 +29,10 @@ export const getOrCreateUser = async (
 
 export const addNewUser = async (
   facebookId: string,
-  email: string,
   name: string,
   image: string,
 ): Promise<User> => {
   const user: User = {
-    email,
     facebookId,
     name,
     image,
@@ -43,7 +40,6 @@ export const addNewUser = async (
     dislike: [],
     neverTried: [],
     shoppingList: [],
-    userMatch: [],
   };
 
   try {

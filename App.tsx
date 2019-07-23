@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AppContainer from './router';
 import LoginScreen from './app/screens/login.screen';
-import { AsyncStorage, Alert } from 'react-native';
+import { AsyncStorage } from 'react-native';
 import { getOrCreateUser, updateUser } from './app/api/user.api';
 import User from './app/model/user.model';
 import ProductModel from './app/model/product.model';
@@ -16,7 +16,6 @@ interface State {
 export interface LoginInfo {
   facebookId: string;
   token: string;
-  email: string;
   name: string;
   image: string;
 }
@@ -41,7 +40,6 @@ export default class App extends Component<{}, State> {
       }
       const user = await getOrCreateUser(
         loginInfo.facebookId,
-        loginInfo.email,
         loginInfo.name,
         loginInfo.image,
       );
@@ -72,11 +70,7 @@ export default class App extends Component<{}, State> {
   ) => {
     const previousState = this.state.user;
 
-    await deleteProductFromUser(
-      this.state.user.facebookId,
-      'shoppingList',
-      product.productId,
-    );
+    await deleteProductFromUser(this.state.user.facebookId, product.productId);
 
     if (action === 'delete') {
       const newShoppingList = this.state.user.shoppingList.filter(
@@ -88,7 +82,6 @@ export default class App extends Component<{}, State> {
         shoppingList: [...newShoppingList],
       };
 
-      console.log('app/updateShoppingList/delete', newUser.shoppingList);
       this.setState({ user: newUser });
     } else {
       await updateUser(this.state.user.facebookId, action, product.productId);
@@ -116,6 +109,7 @@ export default class App extends Component<{}, State> {
         JSON.stringify(state),
       );
     } catch (err) {
+      console.log(err);
     }
   };
 

@@ -31,6 +31,7 @@ export default class ProductScreen extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
+    console.log('in products');
     fetch(
       'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/products',
     )
@@ -61,6 +62,10 @@ export default class ProductScreen extends React.Component<Props, State> {
     this.props.updateShoppingListCallback(product, 'dislike');
   };
 
+  private handleMaybe = (product: ProductModel) => {
+    this.props.updateShoppingListCallback(product, 'neverTried');
+  };
+
   public render() {
     if (this.state.loading) {
       return (
@@ -80,9 +85,9 @@ export default class ProductScreen extends React.Component<Props, State> {
         }}
         handleYup={this.handleYup}
         handleNope={this.handleNope}
+        handleMaybe={this.handleMaybe}
         hasMaybeAction
       />
     );
   }
 }
-

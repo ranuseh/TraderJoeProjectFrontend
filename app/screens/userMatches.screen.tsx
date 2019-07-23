@@ -54,7 +54,13 @@ export default class UserMatchesScreen extends Component<Props, State> {
   private _renderItem = (
     listRenderItemInfo: ListRenderItemInfo<UserWithScore>,
   ) => (
-    <TouchableOpacity>
+    <TouchableOpacity
+      onPress={() =>
+        this.props.navigation.navigate('ProductMatches', {
+          user: listRenderItemInfo.item[0],
+        })
+      }
+    >
       <View style={styles.rowContainer}>
         <View style={styles.rowText}>
           <CustomText style={styles.title}>
@@ -75,31 +81,15 @@ export default class UserMatchesScreen extends Component<Props, State> {
     UserWithScore[0].facebookId.toString();
 
   public render() {
-    // const items = this.state.allUsers.map((singleUserDate: [User, number]) => {
-    //   const user = singleUserDate[0];
-    //   const score = singleUserDate[1];
-
-    //   return (
-    //     <Text
-    //       key={user.name}
-    //       style={styles.paragraph}
-    //       onPress={() =>
-    //         this.props.navigation.navigate('UserProduct', { user })
-    //       }
-    //     >
-    //       <CustomText style={styles.score}>{score.toFixed(0)}%</CustomText>
-
-    //       <CustomText>{user.name}</CustomText>
-    //     </Text>
-    //   );
-    // });
-
     if (this.state.allUsers.length === 0) {
       return (
         <View style={styles.container}>
           <NavigationEvents onWillFocus={() => this.loadScores()} />
+          <CustomText style={styles.paragraph}>No Matches yet</CustomText>
 
-          <Text>Play to get your matches</Text>
+          <CustomText style={styles.paragraph}>
+            Play to get your matches!
+          </CustomText>
         </View>
       );
     } else {
@@ -121,22 +111,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 40,
-    backgroundColor: '#fffff',
+    // padding: 10,
+    backgroundColor: 'white',
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#00000',
+    color: 'white',
   },
   score: {
     color: '#B31100',
   },
   rowContainer: {
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#FFF',
     height: 100,
     padding: 10,
     marginRight: 10,
@@ -151,6 +141,7 @@ const styles = StyleSheet.create({
   rowText: {
     flex: 4,
     flexDirection: 'column',
+    fontSize: 20,
   },
   title: {
     fontSize: 20,
@@ -159,9 +150,8 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     flex: 1,
-    height: 75,
-    width: 75,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    height: 50,
+    width: 50,
+    padding: 0,
   },
 });

@@ -15,12 +15,10 @@ export type Vote =
   | 'dislike'
   | 'neverTried'
   | 'shoppingList'
-  | 'userMatch'
   | 'delete';
 
 export const deleteProductFromUser = (
   facebookId: string,
-  vote: Vote,
   productId: string[] | string,
 ) => {
   fetch(
@@ -33,7 +31,7 @@ export const deleteProductFromUser = (
       },
 
       body: JSON.stringify({
-        [vote]: productId,
+        productId,
       }),
     },
   )
