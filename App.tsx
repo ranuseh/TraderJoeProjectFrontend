@@ -68,35 +68,46 @@ export default class App extends Component<{}, State> {
     product: ProductModel,
     action: Vote | 'delete',
   ) => {
-    const previousState = this.state.user;
+    // const previousState = this.state.user;
 
-    await deleteProductFromUser(this.state.user.facebookId, product.productId);
+    const returnedUserAfterDelete: User = await deleteProductFromUser(
+      this.state.user.facebookId,
+      product.productId,
+    );
+
+    // Return a user from the backend
 
     if (action === 'delete') {
-      const newShoppingList = this.state.user.shoppingList.filter(
-        pid => pid !== product.productId,
-      );
+      // const newShoppingList = this.state.user.shoppingList.filter(
+      //   pid => pid !== product.productId,
+      // );
 
-      const newUser: User = {
-        ...previousState,
-        shoppingList: [...newShoppingList],
-      };
+      // const newUser: User = {
+      //   ...previousState,
+      //   shoppingList: [...newShoppingList],
+      // };
 
-      this.setState({ user: newUser });
+      this.setState({ user: returnedUserAfterDelete });
     } else {
-      await updateUser(this.state.user.facebookId, action, product.productId);
-
-      const newShoppingList = this.state.user.shoppingList.filter(
-        pid => pid !== product.productId,
+      const returnUserAfterUpdate = await updateUser(
+        this.state.user.facebookId,
+        action,
+        product.productId,
       );
+      // Return user from backend
 
-      const newUser: User = {
-        ...previousState,
-        shoppingList: [...newShoppingList],
-        [action]: [...previousState[action], product.productId],
-      };
+      // const newShoppingList = this.state.user.shoppingList.filter(
+      //   pid => pid !== product.productId,
+      // );
 
-      this.setState({ user: newUser });
+      // const newUser: User = {
+      //   ...previousState,
+      //   shoppingList: [...newShoppingList],
+      //   [action]: [...previousState[action], product.productId],
+      // };
+
+      // Use user to update state
+      this.setState({ user: returnUserAfterUpdate });
     }
   };
 

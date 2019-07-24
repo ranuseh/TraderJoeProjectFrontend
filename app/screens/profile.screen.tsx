@@ -49,8 +49,11 @@ export default class ProfileScreen extends Component<Props, {}> {
             <TouchableOpacity style={styles.buttonContainer}>
               <CustomText>SHOPPING LIST</CustomText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.logoutbuttonContainer}>
-              <CustomText onPress={() => this.logOut()}>LOG OUT</CustomText>
+            <TouchableOpacity
+              style={styles.logoutbuttonContainer}
+              onPress={() => this.logOut()}
+            >
+              <CustomText>LOG OUT</CustomText>
             </TouchableOpacity>
           </View>
         </View>
@@ -85,6 +88,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: '600',
     textAlign: 'center',
+    padding: 10,
   },
   bodyContent: {
     flex: 1,

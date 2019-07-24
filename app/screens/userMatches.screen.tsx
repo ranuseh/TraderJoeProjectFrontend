@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     borderColor: '#DCDCDC',
     backgroundColor: '#fff',
     borderBottomWidth: 1,
-    padding: 30,
+    padding: 20,
   },
   pic: {
     borderRadius: 30,

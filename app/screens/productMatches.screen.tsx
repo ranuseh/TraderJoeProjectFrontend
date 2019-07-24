@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'white',
+    color: 'black',
   },
   row: {
     flexDirection: 'row',
@@ -122,12 +122,12 @@ const styles = StyleSheet.create({
     borderColor: '#DCDCDC',
     backgroundColor: '#fff',
     borderBottomWidth: 1,
-    padding: 30,
+    padding: 5,
   },
   pic: {
     borderRadius: 30,
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
   },
   nameContainer: {
     flexDirection: 'row',

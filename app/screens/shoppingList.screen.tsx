@@ -133,6 +133,7 @@ export default class ShoppingListScreen extends Component<Props, State> {
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
+    console.log('CART', this.state.cart);
     if (this.state.cart.length === 0) {
       return (
         <View style={styles.container}>
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'white',
+    color: 'black',
   },
   row: {
     flexDirection: 'row',

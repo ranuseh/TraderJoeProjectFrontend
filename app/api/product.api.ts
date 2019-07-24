@@ -21,7 +21,7 @@ export const deleteProductFromUser = (
   facebookId: string,
   productId: string[] | string,
 ) => {
-  fetch(
+  return fetch(
     `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/${facebookId}`,
     {
       method: 'DELETE',
