@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   ListRenderItemInfo,
   TouchableOpacity,
@@ -61,17 +60,24 @@ export default class UserMatchesScreen extends Component<Props, State> {
         })
       }
     >
-      <View style={styles.rowContainer}>
-        <View style={styles.rowText}>
-          <CustomText style={styles.title}>
-            <Image
-              source={{ uri: listRenderItemInfo.item[0].image }}
-              style={styles.thumbnail}
-              resizeMode="contain"
-            />
-            {listRenderItemInfo.item[0].name}
-            {listRenderItemInfo.item[1].toFixed(0)}%
-          </CustomText>
+      <View style={styles.row}>
+        <Image
+          source={{ uri: listRenderItemInfo.item[0].image }}
+          style={styles.pic}
+        />
+        <View>
+          <View style={styles.nameContainer}>
+            <CustomText
+              style={styles.nameTxt}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {listRenderItemInfo.item[0].name}
+            </CustomText>
+            <CustomText style={styles.mblTxt}>
+              {listRenderItemInfo.item[1].toFixed(0)}%
+            </CustomText>
+          </View>
         </View>
       </View>
     </TouchableOpacity>
@@ -94,7 +100,7 @@ export default class UserMatchesScreen extends Component<Props, State> {
       );
     } else {
       return (
-        <View style={styles.container}>
+        <View>
           <NavigationEvents onWillFocus={() => this.loadScores()} />
           <FlatList
             data={this.state.allUsers}
@@ -111,7 +117,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    // padding: 10,
     backgroundColor: 'white',
   },
   paragraph: {
@@ -121,37 +126,44 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: 'white',
   },
-  score: {
-    color: '#B31100',
-  },
-  rowContainer: {
+  row: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    height: 100,
-    padding: 10,
-    marginRight: 10,
-    marginLeft: 10,
-    marginTop: 10,
-    borderRadius: 4,
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#CCC',
-    shadowOpacity: 1.0,
-    shadowRadius: 1,
+    alignItems: 'center',
+    borderColor: '#DCDCDC',
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    padding: 30,
   },
-  rowText: {
-    flex: 4,
-    flexDirection: 'column',
+  pic: {
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+  },
+  nameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 280,
+  },
+  nameTxt: {
+    marginLeft: 15,
+    fontWeight: '600',
+    color: '#222',
+    fontSize: 16,
+    width: 170,
+  },
+  mblTxt: {
+    fontWeight: '200',
+    color: '#777',
     fontSize: 20,
   },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  msgContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  thumbnail: {
-    flex: 1,
-    height: 50,
-    width: 50,
-    padding: 0,
+  msgTxt: {
+    fontWeight: '400',
+    color: '#008B8B',
+    fontSize: 12,
+    marginLeft: 15,
   },
 });

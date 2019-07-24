@@ -63,17 +63,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
+    margin: 15,
+    fontSize: 16,
     textAlign: 'center',
-    color: '#D21242',
+    color: 'black',
   },
   welcome: {
-    margin: 5,
-    fontSize: 18,
-    fontWeight: 'bold',
+    fontSize: 16,
     textAlign: 'center',
-    color: '#000',
+    color: '#D21242',
   },
 });

@@ -58,49 +58,74 @@ export default class ShoppingListScreen extends Component<Props, State> {
   }
 
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
-    <TouchableOpacity style={styles.container}>
-      <View style={styles.mainRow}>
+    <TouchableOpacity>
+      <View style={styles.row}>
         <Image
           source={{ uri: listRenderItemInfo.item.imageUrl }}
-          style={styles.thumbnail}
-          resizeMode="contain"
+          style={styles.pic}
         />
-      </View>
+        <View>
+          <View style={styles.nameContainer}>
+            <Text
+              style={styles.nameTxt}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              onPress={() =>
+                this.props.updateShoppingListCallback(
+                  listRenderItemInfo.item,
+                  'like',
+                )
+              }
+            >
+              <Image
+                source={{
+                  uri:
+                    'https://i38.photobucket.com/albums/e124/ranuseh/heart_zpsmhbnee4n.png',
+                }}
+                style={styles.pic}
+              />
+            </Text>
 
-      <View style={styles.ratingRow}>
-        <Text
-          style={styles.like}
-          onPress={() =>
-            this.props.updateShoppingListCallback(
-              listRenderItemInfo.item,
-              'like',
-            )
-          }
-        >
-          Like
-        </Text>
-        <Text
-          style={styles.dislike}
-          onPress={() =>
-            this.props.updateShoppingListCallback(
-              listRenderItemInfo.item,
-              'dislike',
-            )
-          }
-        >
-          Dislike
-        </Text>
-        <Text
-          style={styles.delete}
-          onPress={() =>
-            this.props.updateShoppingListCallback(
-              listRenderItemInfo.item,
-              'delete',
-            )
-          }
-        >
-          Delete
-        </Text>
+            <Text
+              style={styles.msgTxt}
+              onPress={() =>
+                this.props.updateShoppingListCallback(
+                  listRenderItemInfo.item,
+                  'delete',
+                )
+              }
+            >
+              <Image
+                source={{
+                  uri:
+                    'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png',
+                }}
+                style={styles.pic}
+              />
+            </Text>
+          </View>
+          <View style={styles.msgContainer}>
+            <Text
+              style={styles.nameTxt}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              onPress={() =>
+                this.props.updateShoppingListCallback(
+                  listRenderItemInfo.item,
+                  'dislike',
+                )
+              }
+            >
+              <Image
+                source={{
+                  uri:
+                    'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png',
+                }}
+                style={styles.pic}
+              />
+            </Text>
+          </View>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -139,7 +164,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 10,
     backgroundColor: 'white',
   },
   paragraph: {
@@ -147,63 +171,46 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#00000',
+    color: 'white',
   },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  mainRow: {
+  row: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    height: 100,
-    padding: 10,
-    marginRight: 10,
-    marginLeft: 10,
-    marginTop: 10,
-    borderRadius: 4,
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#CCC',
-    shadowOpacity: 1.0,
-    shadowRadius: 1,
+    alignItems: 'center',
+    borderColor: '#DCDCDC',
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    padding: 30,
   },
-  ratingRow: {
+  pic: {
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+  },
+  nameContainer: {
     flexDirection: 'row',
-    backgroundColor: '#FFF',
-    height: 50,
-    padding: 10,
-    marginRight: 10,
-    marginLeft: 10,
-    marginTop: 10,
+    justifyContent: 'space-between',
+    width: 280,
   },
-  rowText: {
-    flex: 4,
-    flexDirection: 'column',
+  nameTxt: {
+    marginLeft: 15,
+    fontWeight: '600',
+    color: '#222',
+    fontSize: 16,
+    width: 170,
+  },
+  mblTxt: {
+    fontWeight: '200',
+    color: '#777',
     fontSize: 20,
   },
-  like: {
-    flex: 4,
-    flexDirection: 'column',
-    fontSize: 20,
-    color: 'green',
+  msgContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  dislike: {
-    flex: 4,
-    flexDirection: 'column',
-    fontSize: 20,
-    color: 'blue',
-  },
-  delete: {
-    flex: 4,
-    flexDirection: 'column',
-    fontSize: 20,
-    color: 'red',
-  },
-  thumbnail: {
-    flex: 1,
-    height: 50,
-    width: 50,
-    padding: 0,
+  msgTxt: {
+    fontWeight: '400',
+    color: '#008B8B',
+    fontSize: 12,
+    marginLeft: 15,
   },
 });

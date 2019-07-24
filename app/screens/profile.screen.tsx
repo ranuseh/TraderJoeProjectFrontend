@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Alert, StyleSheet, Text, View, Image, Button } from 'react-native';
+import { Alert, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import User from '../model/user.model';
+import { CustomText } from '../components/CustomText';
 
 interface Props {
   onLogOutCallback: () => void;
@@ -24,19 +25,35 @@ export default class ProfileScreen extends Component<Props, {}> {
 
   public render() {
     return (
-      <View>
-        <View style={styles.header}>
-          <View style={styles.headerContent}>
-            <Image
-              style={styles.avatar}
-              source={{
-                uri: this.props.user.image,
-              }}
-            />
-            <Text style={styles.name}>{this.props.user.name}</Text>
+      <View style={styles.container}>
+        <View style={styles.header}></View>
+        <CustomText style={styles.name}>{this.props.user.name}</CustomText>
+
+        <Image
+          style={styles.avatar}
+          source={{
+            uri: this.props.user.image,
+          }}
+        />
+        <View>
+          <View style={styles.bodyContent}>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <CustomText>LIKES</CustomText>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <CustomText>DISLIKES</CustomText>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <CustomText>NEVERTRIED</CustomText>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonContainer}>
+              <CustomText>SHOPPING LIST</CustomText>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.logoutbuttonContainer}>
+              <CustomText onPress={() => this.logOut()}>LOG OUT</CustomText>
+            </TouchableOpacity>
           </View>
         </View>
-        <Button title={'LogOut'} onPress={() => this.logOut()} />
       </View>
     );
   }
@@ -44,11 +61,13 @@ export default class ProfileScreen extends Component<Props, {}> {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#1E52BD',
+    backgroundColor: '#00BFFF',
+    height: 200,
   },
-  headerContent: {
-    padding: 30,
-    alignItems: 'center',
+  container: {
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    padding: 20,
   },
   avatar: {
     width: 130,
@@ -57,15 +76,41 @@ const styles = StyleSheet.create({
     borderWidth: 4,
     borderColor: 'white',
     marginBottom: 10,
+    alignSelf: 'center',
+    position: 'absolute',
+    marginTop: 130,
   },
   name: {
     fontSize: 22,
-    color: '#000000',
+    color: 'black',
     fontWeight: '600',
+    textAlign: 'center',
   },
-  userInfo: {
-    fontSize: 16,
-    color: '#778899',
-    fontWeight: '600',
+  bodyContent: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 10,
+  },
+  buttonContainer: {
+    marginTop: 5,
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    width: 250,
+    borderRadius: 30,
+    backgroundColor: '#00BFFF',
+  },
+  logoutbuttonContainer: {
+    marginTop: 5,
+    height: 45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 20,
+    width: 250,
+    borderRadius: 30,
+    backgroundColor: 'gray',
   },
 });

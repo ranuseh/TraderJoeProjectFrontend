@@ -60,32 +60,21 @@ export default class ProductMatchesScreen extends Component<Props, State> {
   }
 
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
-    <TouchableOpacity>
-      <View style={styles.rowContainer}>
-        <View style={styles.rowText}>
-          <CustomText style={styles.title}>
-            <Image
-              source={{ uri: listRenderItemInfo.item.imageUrl }}
-              style={styles.thumbnail}
-              resizeMode="contain"
-            />
-            <Text
-              onPress={() =>
-                this.props.updateShoppingListCallback(
-                  listRenderItemInfo.item,
-                  'shoppingList',
-                )
-              }
-            >
-              Add to My Shopping List
-            </Text>
-          </CustomText>
-
-          <Image
-            source={{ uri: listRenderItemInfo.item.imageUrl }}
-            style={styles.thumbnail}
-            resizeMode="contain"
-          />
+    <TouchableOpacity
+      onPress={() =>
+        this.props.updateShoppingListCallback(
+          listRenderItemInfo.item,
+          'shoppingList',
+        )
+      }
+    >
+      <View style={styles.row}>
+        <Image
+          source={{ uri: listRenderItemInfo.item.imageUrl }}
+          style={styles.pic}
+        />
+        <View>
+          <CustomText style={styles.mblTxt}>Add to Shopping List</CustomText>
         </View>
       </View>
     </TouchableOpacity>
@@ -94,23 +83,21 @@ export default class ProductMatchesScreen extends Component<Props, State> {
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
-    const { navigation } = this.props;
-    const compareUser = navigation.getParam('user', null);
+    // const { navigation } = this.props;
+    // const compareUser = navigation.getParam('user', null);
 
     return (
       <View>
-        <CustomText>{compareUser.name} recommedations for you.</CustomText>
-
+        <Text onPress={() => this.props.navigation.navigate('Shopping List')}>
+          <CustomText style={styles.mblTxtbutton}>
+            Go To Shopping List
+          </CustomText>
+        </Text>
         <FlatList
           data={this.state.recommended}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderItem}
         />
-        <CustomText
-          onPress={() => this.props.navigation.navigate('Shopping List')}
-        >
-          <Text> Go to Shopping List</Text>
-        </CustomText>
       </View>
     );
   }
@@ -120,7 +107,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 10,
     backgroundColor: 'white',
   },
   paragraph: {
@@ -128,42 +114,54 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: '#00000',
+    color: 'white',
   },
-  title: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  rowContainer: {
+  row: {
     flexDirection: 'row',
-    backgroundColor: 'white',
-    height: 100,
-    padding: 10,
-    marginRight: 10,
-    marginLeft: 10,
-    marginTop: 10,
-    borderRadius: 4,
-    shadowOffset: { width: 1, height: 1 },
-    shadowColor: '#CCC',
-    shadowOpacity: 1.0,
-    shadowRadius: 1,
+    alignItems: 'center',
+    borderColor: '#DCDCDC',
+    backgroundColor: '#fff',
+    borderBottomWidth: 1,
+    padding: 30,
   },
-  author: {
-    paddingLeft: 10,
-    marginTop: 5,
-    fontSize: 14,
+  pic: {
+    borderRadius: 30,
+    width: 60,
+    height: 60,
+  },
+  nameContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 280,
+  },
+  nameTxt: {
+    marginLeft: 15,
+    fontWeight: '600',
+    color: '#222',
+    fontSize: 16,
+    width: 300,
+  },
+  mblTxt: {
+    fontWeight: '200',
     color: '#777',
+    fontSize: 16,
+    paddingLeft: 40,
   },
-  thumbnail: {
-    flex: 1,
-    height: 100,
-    width: 100,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+  msgContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  rowText: {
-    flex: 4,
-    flexDirection: 'column',
+  msgTxt: {
+    fontWeight: '400',
+    color: '#008B8B',
+    fontSize: 12,
+    marginLeft: 15,
+  },
+  mblTxtbutton: {
+    color: '#008B8B',
+    fontSize: 16,
+    textAlign: 'center',
+    margin: 20,
+    padding: 100,
   },
 });
