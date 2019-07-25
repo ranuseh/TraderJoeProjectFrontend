@@ -111,11 +111,6 @@ export default class ProductMatchesScreen extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   justifyContent: 'center',
-  //   backgroundColor: 'red',
-  // },
   paragraph: {
     margin: 24,
     fontSize: 18,
@@ -131,10 +126,8 @@ const styles = StyleSheet.create({
     borderColor: '#DCDCDC',
     backgroundColor: 'white',
     borderBottomWidth: 1,
-    // padding: 5,
   },
   pic: {
-    // borderRadius: 30,
     width: 70,
     height: 70,
   },
@@ -142,49 +135,18 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  // nameContainer: {
-  //   flexDirection: 'row',
-  //   justifyContent: 'space-evenly',
-  //   width: 200,
-  // },
-  // nameTxt: {
-  //   marginLeft: 15,
-  //   fontWeight: '600',
-  //   color: '#222',
-  //   fontSize: 16,
-  //   width: 300,
-  // },
-  // mblTxt: {
-  //   fontWeight: '200',
-  //   color: '#777',
-  //   fontSize: 16,
-  //   paddingLeft: 40,
-  // },
-  // msgContainer: {
-  //   flexDirection: 'row',
-  //   alignItems: 'center',
-  // },
-  // msgTxt: {
-  //   fontWeight: '400',
-  //   color: '#008B8B',
-  //   fontSize: 12,
-  //   marginLeft: 15,
-  // },
   mblTxtbutton: {
     color: '#D21242',
     fontSize: 16,
     textAlign: 'center',
     margin: 20,
     backgroundColor: 'white',
-    // padding: 100,
   },
   picturerow: {
     backgroundColor: 'white',
     padding: 20,
   },
   checkoutrow: {
-    // flex: 1,
-    // flexDirection: 'row',
     backgroundColor: 'white',
     width: 100,
     height: 100,

@@ -58,67 +58,128 @@ export default class ShoppingListScreen extends Component<Props, State> {
   }
 
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
-    <TouchableOpacity>
-      <View style={styles.row}>
+    <View style={styles.row}>
+      <View style={styles.picturerow}>
         <Image
           source={{ uri: listRenderItemInfo.item.imageUrl }}
           style={styles.pic}
         />
-        <View style={styles.nameContainer}>
-          <Text
-            onPress={() =>
-              this.props.updateShoppingListCallback(
-                listRenderItemInfo.item,
-                'like',
-              )
-            }
-          >
-            <Image
-              source={{
-                uri:
-                  'https://i38.photobucket.com/albums/e124/ranuseh/heart_zpsmhbnee4n.png',
-              }}
-              style={styles.emojipic}
-            />
-          </Text>
-
-          <Text
-            style={styles.nameTxt}
-            onPress={() =>
-              this.props.updateShoppingListCallback(
-                listRenderItemInfo.item,
-                'delete',
-              )
-            }
-          >
-            <Image
-              source={{
-                uri:
-                  'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png',
-              }}
-              style={styles.emojipic}
-            />
-          </Text>
-
-          <Text
-            onPress={() =>
-              this.props.updateShoppingListCallback(
-                listRenderItemInfo.item,
-                'dislike',
-              )
-            }
-          >
-            <Image
-              source={{
-                uri:
-                  'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png',
-              }}
-              style={styles.emojipic}
-            />
-          </Text>
-        </View>
       </View>
-    </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.updateShoppingListCallback(listRenderItemInfo.item, 'like')
+        }
+      >
+        <View style={styles.checkoutrow}>
+          <Image
+            source={{
+              uri:
+                'https://i38.photobucket.com/albums/e124/ranuseh/heart_zpsmhbnee4n.png',
+            }}
+            style={styles.piccart}
+          />
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.updateShoppingListCallback(
+            listRenderItemInfo.item,
+            'delete',
+          )
+        }
+      >
+        <View style={styles.checkoutrow}>
+          <Image
+            source={{
+              uri:
+                'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png',
+            }}
+            style={styles.piccart}
+          />
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.updateShoppingListCallback(
+            listRenderItemInfo.item,
+            'dislike',
+          )
+        }
+      >
+        <View style={styles.checkoutrow}>
+          <Image
+            source={{
+              uri:
+                'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png',
+            }}
+            style={styles.piccart}
+          />
+        </View>
+      </TouchableOpacity>
+    </View>
+
+    // <View style={styles.row}>
+    //   <View>
+    //     <Image
+    //       source={{ uri: listRenderItemInfo.item.imageUrl }}
+    //       style={styles.pic}
+    //     />
+    //   </View>
+
+    //   <View style={styles.nameContainer}>
+    //     <Text
+    //       onPress={() =>
+    //         this.props.updateShoppingListCallback(
+    //           listRenderItemInfo.item,
+    //           'like',
+    //         )
+    //       }
+    //     >
+    //       <Image
+    //         source={{
+    //           uri:
+    //             'https://i38.photobucket.com/albums/e124/ranuseh/heart_zpsmhbnee4n.png',
+    //         }}
+    //         style={styles.emojipic}
+    //       />
+    //     </Text>
+
+    //     <Text
+    //       style={styles.nameTxt}
+    //       onPress={() =>
+    //         this.props.updateShoppingListCallback(
+    //           listRenderItemInfo.item,
+    //           'delete',
+    //         )
+    //       }
+    //     >
+    //       <Image
+    //         source={{
+    //           uri:
+    //             'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png',
+    //         }}
+    //         style={styles.emojipic}
+    //       />
+    //     </Text>
+
+    //     <Text
+    //       onPress={() =>
+    //         this.props.updateShoppingListCallback(
+    //           listRenderItemInfo.item,
+    //           'dislike',
+    //         )
+    //       }
+    //     >
+    //       <Image
+    //         source={{
+    //           uri:
+    //             'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png',
+    //         }}
+    //         style={styles.emojipic}
+    //       />
+    //     </Text>
+    //   </View>
+    // </View>
   );
 
   private _keyExtractor = (product: Product) => product.productId.toString();
@@ -127,7 +188,7 @@ export default class ShoppingListScreen extends Component<Props, State> {
     console.log('IN CART', this.state.cart);
     if (this.state.cart.length === 0) {
       return (
-        <View style={styles.container}>
+        <View>
           <NavigationEvents onWillFocus={() => this.loadShoppingList()} />
           <CustomText style={styles.paragraph}>Nothing here</CustomText>
 
@@ -138,7 +199,7 @@ export default class ShoppingListScreen extends Component<Props, State> {
       );
     } else {
       return (
-        <View style={styles.container}>
+        <View>
           <NavigationEvents onWillFocus={() => this.loadShoppingList()} />
           <FlatList
             data={this.state.cart}
@@ -150,12 +211,69 @@ export default class ShoppingListScreen extends Component<Props, State> {
     }
   }
 }
+// const styles = StyleSheet.create({
+//   // container: {
+//   //   flex: 1,
+//   //   justifyContent: 'center',
+//   //   backgroundColor: 'white',
+//   // },
+//   // paragraph: {
+//   //   margin: 24,
+//   //   fontSize: 18,
+//   //   fontWeight: 'bold',
+//   //   textAlign: 'center',
+//   //   color: 'black',
+//   // },
+//   row: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//     borderColor: '#DCDCDC',
+//     backgroundColor: 'pink',
+//     borderBottomWidth: 1,
+//     padding: 30,
+//   },
+//   pic: {
+//     borderRadius: 30,
+//     width: 60,
+//     height: 60,
+//   },
+//   emojipic: {
+//     width: 30,
+//     height: 30,
+//   },
+//   nameContainer: {
+//     flexDirection: 'row',
+//     justifyContent: 'center',
+//     alignItems: 'flex-end',
+//     backgroundColor: 'blue',
+//     // width: 300,
+//     // height: 20,
+//   },
+//   nameTxt: {
+//     marginLeft: 15,
+//     fontWeight: '600',
+//     color: '#222',
+//     fontSize: 16,
+//     width: 170,
+//   },
+//   mblTxt: {
+//     fontWeight: '200',
+//     color: '#777',
+//     fontSize: 20,
+//   },
+//   msgContainer: {
+//     flexDirection: 'row',
+//     alignItems: 'center',
+//   },
+//   msgTxt: {
+//     fontWeight: '400',
+//     color: '#008B8B',
+//     fontSize: 12,
+//     marginLeft: 15,
+//   },
+// });
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
   paragraph: {
     margin: 24,
     fontSize: 18,
@@ -164,50 +282,39 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   row: {
+    flex: 2,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: '#DCDCDC',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderBottomWidth: 1,
-    padding: 30,
   },
   pic: {
-    borderRadius: 30,
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
   },
-  emojipic: {
+  piccart: {
     width: 30,
     height: 30,
   },
-  nameContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-    backgroundColor: 'pink',
-    // width: 300,
-    // height: 20,
-  },
-  nameTxt: {
-    marginLeft: 15,
-    fontWeight: '600',
-    color: '#222',
+  mblTxtbutton: {
+    color: '#D21242',
     fontSize: 16,
-    width: 170,
+    textAlign: 'center',
+    margin: 20,
+    backgroundColor: 'white',
   },
-  mblTxt: {
-    fontWeight: '200',
-    color: '#777',
-    fontSize: 20,
+  picturerow: {
+    backgroundColor: 'white',
+    padding: 20,
   },
-  msgContainer: {
-    flexDirection: 'row',
+  checkoutrow: {
+    backgroundColor: 'white',
+    width: 100,
+    height: 100,
     alignItems: 'center',
-  },
-  msgTxt: {
-    fontWeight: '400',
-    color: '#008B8B',
-    fontSize: 12,
-    marginLeft: 15,
+    justifyContent: 'center',
+    marginRight: 15,
   },
 });
