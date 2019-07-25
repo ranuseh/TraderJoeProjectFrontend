@@ -53,25 +53,22 @@ export default class UserMatchesScreen extends Component<Props, State> {
   private _renderItem = (
     listRenderItemInfo: ListRenderItemInfo<UserWithScore>,
   ) => (
-    <TouchableOpacity
-      onPress={() =>
-        this.props.navigation.navigate('ProductMatches', {
-          user: listRenderItemInfo.item[0],
-        })
-      }
-    >
-      <View style={styles.row}>
+    <View style={styles.row}>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.navigation.navigate('ProductMatches', {
+            user: listRenderItemInfo.item[0],
+          })
+        }
+        style={styles.container}
+      >
         <Image
           source={{ uri: listRenderItemInfo.item[0].image }}
           style={styles.pic}
         />
         <View>
           <View style={styles.nameContainer}>
-            <CustomText
-              style={styles.nameTxt}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
+            <CustomText style={styles.nameTxt}>
               {listRenderItemInfo.item[0].name}
             </CustomText>
             <CustomText style={styles.mblTxt}>
@@ -79,8 +76,8 @@ export default class UserMatchesScreen extends Component<Props, State> {
             </CustomText>
           </View>
         </View>
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
+    </View>
   );
 
   private _keyExtractor = (UserWithScore: UserWithScore) =>
@@ -101,6 +98,8 @@ export default class UserMatchesScreen extends Component<Props, State> {
     } else {
       return (
         <View>
+          <CustomText style={styles.welcome}>Here are your matches!</CustomText>
+
           <NavigationEvents onWillFocus={() => this.loadScores()} />
           <FlatList
             data={this.state.allUsers}
@@ -115,24 +114,29 @@ export default class UserMatchesScreen extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
+    flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
+    padding: 10,
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'white',
+    color: 'black ',
   },
   row: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: '#DCDCDC',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderBottomWidth: 1,
-    padding: 20,
+    paddingTop: 15,
+    paddingBottom: 15,
   },
   pic: {
     borderRadius: 30,
@@ -153,7 +157,7 @@ const styles = StyleSheet.create({
   },
   mblTxt: {
     fontWeight: '200',
-    color: '#777',
+    color: '#D21242',
     fontSize: 20,
   },
   msgContainer: {
@@ -165,5 +169,11 @@ const styles = StyleSheet.create({
     color: '#008B8B',
     fontSize: 12,
     marginLeft: 15,
+  },
+  welcome: {
+    color: 'black',
+    textAlign: 'center',
+    paddingTop: 10,
+    fontSize: 16,
   },
 });

@@ -68,25 +68,12 @@ export default class App extends Component<{}, State> {
     product: ProductModel,
     action: Vote | 'delete',
   ) => {
-    // const previousState = this.state.user;
-
     const returnedUserAfterDelete: User = await deleteProductFromUser(
       this.state.user.facebookId,
       product.productId,
     );
 
-    // Return a user from the backend
-
     if (action === 'delete') {
-      // const newShoppingList = this.state.user.shoppingList.filter(
-      //   pid => pid !== product.productId,
-      // );
-
-      // const newUser: User = {
-      //   ...previousState,
-      //   shoppingList: [...newShoppingList],
-      // };
-
       this.setState({ user: returnedUserAfterDelete });
     } else {
       const returnUserAfterUpdate = await updateUser(
@@ -94,22 +81,11 @@ export default class App extends Component<{}, State> {
         action,
         product.productId,
       );
-      // Return user from backend
 
-      // const newShoppingList = this.state.user.shoppingList.filter(
-      //   pid => pid !== product.productId,
-      // );
-
-      // const newUser: User = {
-      //   ...previousState,
-      //   shoppingList: [...newShoppingList],
-      //   [action]: [...previousState[action], product.productId],
-      // };
-
-      // Use user to update state
       this.setState({ user: returnUserAfterUpdate });
     }
   };
+
 
   private navigationScreenKey = 'navigationScreen';
 
@@ -134,11 +110,10 @@ export default class App extends Component<{}, State> {
     if (this.state.user == null) {
       return <LoginScreen onLoginCallback={this.onLogIn} />;
     } else {
-      console.log('app/render');
       return (
         <AppContainer
           persistNavigationState={this.persistNavigationState}
-          loadNavigationState={this.loadNavigationState}
+          // loadNavigationState={this.loadNavigationState}
           screenProps={{
             token: this.state.token,
             onLogOutCallback: this.onLogOut,

@@ -64,67 +64,58 @@ export default class ShoppingListScreen extends Component<Props, State> {
           source={{ uri: listRenderItemInfo.item.imageUrl }}
           style={styles.pic}
         />
-        <View>
-          <View style={styles.nameContainer}>
-            <Text
-              style={styles.nameTxt}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              onPress={() =>
-                this.props.updateShoppingListCallback(
-                  listRenderItemInfo.item,
-                  'like',
-                )
-              }
-            >
-              <Image
-                source={{
-                  uri:
-                    'https://i38.photobucket.com/albums/e124/ranuseh/heart_zpsmhbnee4n.png',
-                }}
-                style={styles.pic}
-              />
-            </Text>
+        <View style={styles.nameContainer}>
+          <Text
+            onPress={() =>
+              this.props.updateShoppingListCallback(
+                listRenderItemInfo.item,
+                'like',
+              )
+            }
+          >
+            <Image
+              source={{
+                uri:
+                  'https://i38.photobucket.com/albums/e124/ranuseh/heart_zpsmhbnee4n.png',
+              }}
+              style={styles.emojipic}
+            />
+          </Text>
 
-            <Text
-              style={styles.msgTxt}
-              onPress={() =>
-                this.props.updateShoppingListCallback(
-                  listRenderItemInfo.item,
-                  'delete',
-                )
-              }
-            >
-              <Image
-                source={{
-                  uri:
-                    'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png',
-                }}
-                style={styles.pic}
-              />
-            </Text>
-          </View>
-          <View style={styles.msgContainer}>
-            <Text
-              style={styles.nameTxt}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              onPress={() =>
-                this.props.updateShoppingListCallback(
-                  listRenderItemInfo.item,
-                  'dislike',
-                )
-              }
-            >
-              <Image
-                source={{
-                  uri:
-                    'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png',
-                }}
-                style={styles.pic}
-              />
-            </Text>
-          </View>
+          <Text
+            style={styles.nameTxt}
+            onPress={() =>
+              this.props.updateShoppingListCallback(
+                listRenderItemInfo.item,
+                'delete',
+              )
+            }
+          >
+            <Image
+              source={{
+                uri:
+                  'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png',
+              }}
+              style={styles.emojipic}
+            />
+          </Text>
+
+          <Text
+            onPress={() =>
+              this.props.updateShoppingListCallback(
+                listRenderItemInfo.item,
+                'dislike',
+              )
+            }
+          >
+            <Image
+              source={{
+                uri:
+                  'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png',
+              }}
+              style={styles.emojipic}
+            />
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
@@ -133,14 +124,12 @@ export default class ShoppingListScreen extends Component<Props, State> {
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
-    console.log('CART', this.state.cart);
+    console.log('IN CART', this.state.cart);
     if (this.state.cart.length === 0) {
       return (
         <View style={styles.container}>
           <NavigationEvents onWillFocus={() => this.loadShoppingList()} />
-          <CustomText style={styles.paragraph}>
-            You have no items in your Shopping List
-          </CustomText>
+          <CustomText style={styles.paragraph}>Nothing here</CustomText>
 
           <CustomText style={styles.paragraph}>
             Play to start adding items!
@@ -187,10 +176,17 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
   },
+  emojipic: {
+    width: 30,
+    height: 30,
+  },
   nameContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 280,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    backgroundColor: 'pink',
+    // width: 300,
+    // height: 20,
   },
   nameTxt: {
     marginLeft: 15,

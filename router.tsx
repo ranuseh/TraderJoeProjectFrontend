@@ -52,6 +52,29 @@ const ProductStack = createStackNavigator({
   },
 });
 
+const ProfileStack = createStackNavigator({
+  UserProfile: {
+    screen: (props: Props) => {
+      return (
+        <ProfileScreen
+          {...props.screenProps}
+          navigation={props.navigation}
+        ></ProfileScreen>
+      );
+    },
+  },
+  UserShoppingList: {
+    screen: (props: Props) => {
+      return (
+        <ShoppingListScreen
+          {...props.screenProps}
+          navigation={props.navigation}
+        ></ShoppingListScreen>
+      );
+    },
+  },
+});
+
 const Tabs = createBottomTabNavigator({
   Home: {
     screen: (props: Props) => {
@@ -111,9 +134,7 @@ const Tabs = createBottomTabNavigator({
     },
   },
   Profile: {
-    screen: (props: Props) => {
-      return <ProfileScreen {...props.screenProps}></ProfileScreen>;
-    },
+    screen: ProfileStack,
     navigationOptions: {
       tabBarLabel: 'Profile',
       tabBarIcon: () => (

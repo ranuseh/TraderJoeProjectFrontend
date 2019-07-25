@@ -32,7 +32,6 @@ export default class ProductScreen extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
-    console.log('in products');
     fetch(
       'http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/products',
     )

@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { Alert, StyleSheet, View, Image, TouchableOpacity } from 'react-native';
 import User from '../model/user.model';
 import { CustomText } from '../components/CustomText';
+import { NavigationScreenProp } from 'react-navigation';
 
 interface Props {
   onLogOutCallback: () => void;
   user: User;
   token: string;
+  navigation: NavigationScreenProp<{}, {}>;
 }
 
 export default class ProfileScreen extends Component<Props, {}> {
@@ -37,17 +39,23 @@ export default class ProfileScreen extends Component<Props, {}> {
         />
         <View>
           <View style={styles.bodyContent}>
-            <TouchableOpacity style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={() => this.props.navigation.navigate('Shopping List')}
+            >
               <CustomText>LIKES</CustomText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={() => this.props.navigation.navigate('Shopping List')}
+            >
               <CustomText>DISLIKES</CustomText>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={() => this.props.navigation.navigate('Shopping List')}
+            >
               <CustomText>NEVERTRIED</CustomText>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonContainer}>
-              <CustomText>SHOPPING LIST</CustomText>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.logoutbuttonContainer}
@@ -64,7 +72,7 @@ export default class ProfileScreen extends Component<Props, {}> {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#00BFFF',
+    backgroundColor: '#D21242',
     height: 200,
   },
   container: {
@@ -93,7 +101,7 @@ const styles = StyleSheet.create({
   bodyContent: {
     flex: 1,
     alignItems: 'center',
-    padding: 10,
+    padding: 20,
   },
   buttonContainer: {
     marginTop: 5,
@@ -104,7 +112,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 250,
     borderRadius: 30,
-    backgroundColor: '#00BFFF',
+    backgroundColor: '#DCDCDC',
+    borderColor: 'black',
   },
   logoutbuttonContainer: {
     marginTop: 5,
@@ -115,6 +124,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: 250,
     borderRadius: 30,
-    backgroundColor: 'gray',
+    backgroundColor: '#808080',
   },
 });

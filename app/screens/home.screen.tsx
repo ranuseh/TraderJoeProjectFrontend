@@ -15,7 +15,7 @@ export default class HomeScreen extends Component<Props, {}> {
     return (
       <View style={styles.container}>
         <CustomText style={styles.welcome}>
-          WELCOME {this.props.user.name.toUpperCase()}
+          WELCOME {this.props.user.name.toUpperCase()}!
         </CustomText>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Product')}
@@ -59,18 +59,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 10,
+    padding: 20,
     backgroundColor: 'white',
   },
   paragraph: {
-    margin: 15,
+    margin: 20,
     fontSize: 16,
     textAlign: 'center',
-    color: 'black',
+    color: '#D21242',
   },
   welcome: {
     fontSize: 16,
     textAlign: 'center',
-    color: '#D21242',
+    color: 'black',
   },
 });

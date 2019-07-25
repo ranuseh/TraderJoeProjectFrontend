@@ -60,39 +60,46 @@ export default class ProductMatchesScreen extends Component<Props, State> {
   }
 
   private _renderItem = (listRenderItemInfo: ListRenderItemInfo<Product>) => (
-    <TouchableOpacity
-      onPress={() =>
-        this.props.updateShoppingListCallback(
-          listRenderItemInfo.item,
-          'shoppingList',
-        )
-      }
-    >
-      <View style={styles.row}>
+    <View style={styles.row}>
+      <View style={styles.picturerow}>
         <Image
           source={{ uri: listRenderItemInfo.item.imageUrl }}
           style={styles.pic}
         />
-        <View>
-          <CustomText style={styles.mblTxt}>Add to Shopping List</CustomText>
-        </View>
       </View>
-    </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.updateShoppingListCallback(
+            listRenderItemInfo.item,
+            'shoppingList',
+          )
+        }
+      >
+        <View style={styles.checkoutrow}>
+          <Image
+            source={{
+              uri:
+                'https://i38.photobucket.com/albums/e124/ranuseh/Pngtreemz%20%20shopping%20cart%20hover_253051_zpsxd2buyna.png',
+            }}
+            style={styles.piccart}
+          />
+          <CustomText> Add to List</CustomText>
+        </View>
+      </TouchableOpacity>
+    </View>
   );
 
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
-    // const { navigation } = this.props;
-    // const compareUser = navigation.getParam('user', null);
-
     return (
       <View>
-        <Text onPress={() => this.props.navigation.navigate('Shopping List')}>
-          <CustomText style={styles.mblTxtbutton}>
-            Go To Shopping List
-          </CustomText>
-        </Text>
+        <CustomText
+          style={styles.mblTxtbutton}
+          onPress={() => this.props.navigation.navigate('Shopping List')}
+        >
+          Go To Shopping List
+        </CustomText>
         <FlatList
           data={this.state.recommended}
           keyExtractor={this._keyExtractor}
@@ -104,11 +111,11 @@ export default class ProductMatchesScreen extends Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: 'white',
-  },
+  // container: {
+  //   flex: 1,
+  //   justifyContent: 'center',
+  //   backgroundColor: 'red',
+  // },
   paragraph: {
     margin: 24,
     fontSize: 18,
@@ -117,51 +124,72 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   row: {
+    flex: 2,
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: '#DCDCDC',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     borderBottomWidth: 1,
-    padding: 5,
+    // padding: 5,
   },
   pic: {
-    borderRadius: 30,
+    // borderRadius: 30,
     width: 70,
     height: 70,
   },
-  nameContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: 280,
+  piccart: {
+    width: 30,
+    height: 30,
   },
-  nameTxt: {
-    marginLeft: 15,
-    fontWeight: '600',
-    color: '#222',
-    fontSize: 16,
-    width: 300,
-  },
-  mblTxt: {
-    fontWeight: '200',
-    color: '#777',
-    fontSize: 16,
-    paddingLeft: 40,
-  },
-  msgContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  msgTxt: {
-    fontWeight: '400',
-    color: '#008B8B',
-    fontSize: 12,
-    marginLeft: 15,
-  },
+  // nameContainer: {
+  //   flexDirection: 'row',
+  //   justifyContent: 'space-evenly',
+  //   width: 200,
+  // },
+  // nameTxt: {
+  //   marginLeft: 15,
+  //   fontWeight: '600',
+  //   color: '#222',
+  //   fontSize: 16,
+  //   width: 300,
+  // },
+  // mblTxt: {
+  //   fontWeight: '200',
+  //   color: '#777',
+  //   fontSize: 16,
+  //   paddingLeft: 40,
+  // },
+  // msgContainer: {
+  //   flexDirection: 'row',
+  //   alignItems: 'center',
+  // },
+  // msgTxt: {
+  //   fontWeight: '400',
+  //   color: '#008B8B',
+  //   fontSize: 12,
+  //   marginLeft: 15,
+  // },
   mblTxtbutton: {
-    color: '#008B8B',
+    color: '#D21242',
     fontSize: 16,
     textAlign: 'center',
     margin: 20,
-    padding: 100,
+    backgroundColor: 'white',
+    // padding: 100,
+  },
+  picturerow: {
+    backgroundColor: 'white',
+    padding: 20,
+  },
+  checkoutrow: {
+    // flex: 1,
+    // flexDirection: 'row',
+    backgroundColor: 'white',
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 15,
   },
 });
