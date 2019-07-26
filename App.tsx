@@ -86,7 +86,6 @@ export default class App extends Component<{}, State> {
     }
   };
 
-
   private navigationScreenKey = 'navigationScreen';
 
   private persistNavigationState = async (state: NavigationState) => {

@@ -21,26 +21,26 @@ export class Card extends React.Component<Props, {}> {
             resizeMode="contain"
           />
         </View>
-
+        {/* https://i38.photobucket.com/albums/e124/ranuseh/31802-fresh-apricots_zpsp5xu3dtb.jpg?width=200&height=200&crop=1:1,smart */}
         <View style={styles.vote}>
           <Image
             source={{
               uri:
-                'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png',
+                'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png?width=50&height=50&crop=1:1,smart',
             }}
             style={styles.emojipic}
           />
           <Image
             source={{
               uri:
-                'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png',
+                'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png?width=50&height=50&crop=1:1,smart',
             }}
             style={styles.emojipic}
           />
           <Image
             source={{
               uri:
-                'https://i38.photobucket.com/albums/e124/ranuseh/kisspng-youtube-facebook-f8-like-button-emoticon-smiley-hieroglyphs-5b4232d2717767.8674841515310650424648_zpsetqotwfc.png',
+                'https://i38.photobucket.com/albums/e124/ranuseh/kisspng-youtube-facebook-f8-like-button-emoticon-smiley-hieroglyphs-5b4232d2717767.8674841515310650424648_zpsetqotwfc.png?width=50&height=50&crop=1:1,smart',
             }}
             style={styles.emojipic}
           />

@@ -10,12 +10,8 @@ export const getProduct = (productId: string): Promise<Product> => {
     });
 };
 
-export type Vote =
-  | 'like'
-  | 'dislike'
-  | 'neverTried'
-  | 'shoppingList'
-  | 'delete';
+export type UserList = 'like' | 'dislike' | 'neverTried' | 'shoppingList';
+export type Vote = UserList | 'delete';
 
 export const deleteProductFromUser = (
   facebookId: string,

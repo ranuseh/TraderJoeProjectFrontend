@@ -88,7 +88,7 @@ export default class UserMatchesScreen extends Component<Props, State> {
       return (
         <View style={styles.container}>
           <NavigationEvents onWillFocus={() => this.loadScores()} />
-          <CustomText style={styles.paragraph}>No Matches yet</CustomText>
+          <CustomText style={styles.paragraph}>No Matches yet. </CustomText>
 
           <CustomText style={styles.paragraph}>
             Play to get your matches!
@@ -119,9 +119,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
-    padding: 10,
+    padding: 5,
   },
   paragraph: {
+    flex: 1,
+    flexDirection: 'column',
     margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
@@ -173,7 +175,7 @@ const styles = StyleSheet.create({
   welcome: {
     color: 'black',
     textAlign: 'center',
-    paddingTop: 10,
+    paddingTop: 5,
     fontSize: 16,
   },
 });

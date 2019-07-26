@@ -8,7 +8,6 @@ import { Card } from '../components/Card';
 import { NoMoreCards } from '../components/NoMoreCards';
 import User from '../model/user.model';
 import { Vote } from '../api/product.api';
-import { CustomText } from '../components/CustomText';
 
 export interface Props {
   user: User;

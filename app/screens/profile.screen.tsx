@@ -41,19 +41,29 @@ export default class ProfileScreen extends Component<Props, {}> {
           <View style={styles.bodyContent}>
             <TouchableOpacity
               style={styles.buttonContainer}
-              onPress={() => this.props.navigation.navigate('Shopping List')}
+              onPress={() =>
+                this.props.navigation.navigate('ManageList', { action: 'like' })
+              }
             >
               <CustomText>LIKES</CustomText>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.buttonContainer}
-              onPress={() => this.props.navigation.navigate('Shopping List')}
+              onPress={() =>
+                this.props.navigation.navigate('ManageList', {
+                  action: 'dislike',
+                })
+              }
             >
               <CustomText>DISLIKES</CustomText>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.buttonContainer}
-              onPress={() => this.props.navigation.navigate('Shopping List')}
+              onPress={() =>
+                this.props.navigation.navigate('ManageList', {
+                  action: 'neverTried',
+                })
+              }
             >
               <CustomText>NEVERTRIED</CustomText>
             </TouchableOpacity>

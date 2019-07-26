@@ -10,7 +10,7 @@ import { Icon } from 'react-native-elements';
 import ProductScreen from './app/screens/product.screen';
 import HomeScreen from './app/screens/home.screen';
 import UserMatchesScreen from './app/screens/userMatches.screen';
-import ShoppingListScreen from './app/screens/shoppingList.screen';
+import ManageListScreen from './app/screens/manageList.screen';
 import ProfileScreen from './app/screens/profile.screen';
 import ProductMatchesScreen from './app/screens/productMatches.screen';
 import User from './app/model/user.model';
@@ -63,13 +63,13 @@ const ProfileStack = createStackNavigator({
       );
     },
   },
-  UserShoppingList: {
+  ManageList: {
     screen: (props: Props) => {
       return (
-        <ShoppingListScreen
+        <ManageListScreen
           {...props.screenProps}
           navigation={props.navigation}
-        ></ShoppingListScreen>
+        ></ManageListScreen>
       );
     },
   },
@@ -120,10 +120,10 @@ const Tabs = createBottomTabNavigator({
   'Shopping List': {
     screen: (props: Props) => {
       return (
-        <ShoppingListScreen
+        <ManageListScreen
           {...props.screenProps}
           navigation={props.navigation}
-        ></ShoppingListScreen>
+        ></ManageListScreen>
       );
     },
     navigationOptions: {

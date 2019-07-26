@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, TextProps } from 'react-native';
 
 interface Props extends TextProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: any;
 }
 

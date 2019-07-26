@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   FlatList,
@@ -37,15 +36,37 @@ export default class ProductMatchesScreen extends Component<Props, State> {
   }
 
   public async componentDidMount() {
-    console.log('in product matches');
     try {
       const { navigation } = this.props;
       const compareUser = navigation.getParam('user', null);
       const loggedInUser = this.props.user;
 
-      const recommededList: string[] = compareUser.like.filter(
-        items => !loggedInUser.like.includes(items),
-      );
+      console.log('COMPARE USER LIKE', compareUser.like);
+      console.log('LOGGED IN USER like', loggedInUser.like);
+
+      console.log('LOGGED IN USER DISIKE', loggedInUser.dislike);
+
+      const recommededList: string[] = compareUser.like.filter(item => {
+        console.log(
+          `item:${item} like: ${loggedInUser.like.includes(
+            item,
+          )} dislike: ${loggedInUser.dislike.includes(item)}`,
+        );
+        return (
+          !loggedInUser.like.includes(item) &&
+          !loggedInUser.dislike.includes(item)
+        );
+      });
+
+      // const dislikeList: string[] = compareUser.like.filter(
+      //   items => !loggedInUser.dislike.includes(items),
+      // );
+
+      console.log('Recommended list', recommededList);
+
+      // console.log('DISLIKE LIST', dislikeList);
+
+      // const recommededList = [...dislikeList, ...likeList];
 
       const actualProduct: Promise<Product>[] = recommededList.map(productid =>
         getProduct(productid),
@@ -79,7 +100,7 @@ export default class ProductMatchesScreen extends Component<Props, State> {
           <Image
             source={{
               uri:
-                'https://i38.photobucket.com/albums/e124/ranuseh/Pngtreemz%20%20shopping%20cart%20hover_253051_zpsxd2buyna.png',
+                'https://i38.photobucket.com/albums/e124/ranuseh/Pngtreemz%20%20shopping%20cart%20hover_253051_zpsxd2buyna.png?width=50&height=50&crop=1:1,smart',
             }}
             style={styles.piccart}
           />
@@ -112,7 +133,7 @@ export default class ProductMatchesScreen extends Component<Props, State> {
 
 const styles = StyleSheet.create({
   paragraph: {
-    margin: 24,
+    // margin: 24,
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -128,18 +149,18 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   pic: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
   },
   piccart: {
-    width: 30,
-    height: 30,
+    width: 20,
+    height: 20,
   },
   mblTxtbutton: {
     color: '#D21242',
     fontSize: 16,
     textAlign: 'center',
-    margin: 20,
+    margin: 10,
     backgroundColor: 'white',
   },
   picturerow: {
