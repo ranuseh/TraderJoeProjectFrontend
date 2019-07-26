@@ -13,7 +13,6 @@ export default class LoginScreen extends Component<Props> {
     try {
       const token = await AsyncStorage.getItem('userToken');
 
-      console.log('token', token);
       this.getUserId(token);
     } catch (error) {
       console.log(error.message);
@@ -69,8 +68,25 @@ export default class LoginScreen extends Component<Props> {
     return (
       <View style={styles.container}>
         <View style={styles.header}>
-          <Image source={require('../config/images/flower.png')} />
-          <Image source={require('../config/images/logo.png')} />
+          <Image
+            source={{
+              uri:
+                'https://i38.photobucket.com/albums/e124/ranuseh/Screen%20Shot%202019-07-22%20at%2010.17.30%20AM_zpsl9aqlxle.png',
+            }}
+          />
+          <Image
+            source={{
+              uri:
+                'https://i38.photobucket.com/albums/e124/ranuseh/Screen%20Shot%202019-07-22%20at%2010.23.27%20AM_zpsezaqxo5x.png',
+            }}
+          />
+        </View>
+        <View style={styles.body}>
+          <CustomText style={styles.bodyContent}>Make Connections</CustomText>
+          <CustomText style={styles.bodyContent}>
+            Discover New Products
+          </CustomText>
+          <CustomText style={styles.bodyContent}>Buy, Rate, Repeat</CustomText>
         </View>
         <Text style={styles.buttonContainer} onPress={() => this.logIn()}>
           <CustomText>Login</CustomText>
@@ -81,6 +97,19 @@ export default class LoginScreen extends Component<Props> {
 }
 
 const styles = StyleSheet.create({
+  body: {
+    flex: 1,
+    backgroundColor: 'white',
+    flexDirection: 'column',
+  },
+  bodyContent: {
+    fontSize: 18,
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    backgroundColor: 'white',
+    textAlign: 'center',
+    paddingTop: 15,
+  },
   header: {
     flex: 1,
     marginTop: 100,
