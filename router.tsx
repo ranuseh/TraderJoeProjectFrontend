@@ -129,7 +129,7 @@ const Tabs = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'List',
       tabBarIcon: () => (
-        <Icon name="ios-basket" type="ionicon" size={28} color="#1E52BD" />
+        <Icon name="shopping-cart" type="entypo" size={26} color="#1E52BD" />
       ),
     },
   },

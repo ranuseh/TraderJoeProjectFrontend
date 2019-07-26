@@ -73,12 +73,14 @@ export default class LoginScreen extends Component<Props> {
               uri:
                 'https://i38.photobucket.com/albums/e124/ranuseh/Screen%20Shot%202019-07-22%20at%2010.17.30%20AM_zpsl9aqlxle.png',
             }}
+            style={styles.emojipic}
           />
           <Image
             source={{
               uri:
-                'https://i38.photobucket.com/albums/e124/ranuseh/Screen%20Shot%202019-07-22%20at%2010.23.27%20AM_zpsezaqxo5x.png',
+                'https://i38.photobucket.com/albums/e124/ranuseh/Screen%20Shot%202019-07-26%20at%204.08.31%20PM_zpsdmz5h6h5.png',
             }}
+            style={styles.headerpic}
           />
         </View>
         <View style={styles.body}>
@@ -112,7 +114,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
-    marginTop: 100,
+    marginTop: 125,
     justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#fffff',
@@ -121,7 +123,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#fffff',
+    backgroundColor: 'white',
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -131,5 +133,20 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
     backgroundColor: '#fffff',
     fontSize: 18,
+  },
+  emojipic: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // margin: 40,
+    width: 60,
+    height: 60,
+    backgroundColor: 'white',
+  },
+  headerpic: {
+    flexDirection: 'row',
+    // margin: 40,
+    width: 300,
+    height: 70,
+    backgroundColor: 'white',
   },
 });

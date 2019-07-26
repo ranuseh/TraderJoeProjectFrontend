@@ -21,7 +21,6 @@ export class Card extends React.Component<Props, {}> {
             resizeMode="contain"
           />
         </View>
-        {/* https://i38.photobucket.com/albums/e124/ranuseh/31802-fresh-apricots_zpsp5xu3dtb.jpg?width=200&height=200&crop=1:1,smart */}
         <View style={styles.vote}>
           <Image
             source={{

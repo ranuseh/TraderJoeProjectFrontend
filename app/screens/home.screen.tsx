@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Image, Text } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import { Card } from 'react-native-elements';
 import User from '../model/user.model';
@@ -16,7 +16,17 @@ export default class HomeScreen extends Component<Props, {}> {
       <View style={styles.container}>
         <CustomText style={styles.welcome}>
           WELCOME {this.props.user.name.toUpperCase()}!
+          <CustomText>
+            <Image
+              source={{
+                uri:
+                  'https://i38.photobucket.com/albums/e124/ranuseh/Screen%20Shot%202019-07-22%20at%2010.17.30%20AM_zpsl9aqlxle.png',
+              }}
+              style={styles.emojipic}
+            />
+          </CustomText>
         </CustomText>
+
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('Product')}
         >
@@ -72,5 +82,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     color: 'black',
+  },
+  emojipic: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 50,
+    height: 50,
+    backgroundColor: 'white',
   },
 });
