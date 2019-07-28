@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  Text,
 } from 'react-native';
 
 import User from '../model/user.model';
@@ -72,8 +73,30 @@ export default class UserMatchesScreen extends Component<Props, State> {
               {listRenderItemInfo.item[0].name}
             </CustomText>
             <CustomText style={styles.mblTxt}>
-              {listRenderItemInfo.item[1].toFixed(0)}%
+              {listRenderItemInfo.item[1].toFixed(0)}% Match
             </CustomText>
+          </View>
+          <View style={styles.inforow}>
+            <Text style={styles.nameTxt}>
+              <Image
+                source={{
+                  uri:
+                    'https://i38.photobucket.com/albums/e124/ranuseh/kisspng-world-emoji-day-earth-globe-emojipedia-world-emoji-meaning-with-pictures-from-a-to-z-5cb9cd5b1e7ad2.2002949515556806_zps1j94myx4.png',
+                }}
+                style={styles.emojipic}
+              />
+              <CustomText>Seattle, WA</CustomText>
+            </Text>
+            <Text style={styles.nameTxt}>
+              <Image
+                source={{
+                  uri:
+                    'https://i38.photobucket.com/albums/e124/ranuseh/PinClipart.com_free-emoji-clipart_453763_zpsa6twl54m.png',
+                }}
+                style={styles.emojipic}
+              />
+              <CustomText>Shops at: Capitol Hill </CustomText>
+            </Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -86,11 +109,11 @@ export default class UserMatchesScreen extends Component<Props, State> {
   public render() {
     if (this.state.allUsers.length === 0) {
       return (
-        <View style={styles.container}>
+        <View style={styles.emptycontainer}>
           <NavigationEvents onWillFocus={() => this.loadScores()} />
           <CustomText style={styles.paragraph}>No Matches yet. </CustomText>
 
-          <CustomText style={styles.paragraph}>
+          <CustomText style={styles.paragraph1}>
             Play to get your matches!
           </CustomText>
         </View>
@@ -98,7 +121,7 @@ export default class UserMatchesScreen extends Component<Props, State> {
     } else {
       return (
         <View>
-          <CustomText style={styles.welcome}>Here are your matches!</CustomText>
+          <CustomText style={styles.welcome}>Top 5 Matches</CustomText>
 
           <NavigationEvents onWillFocus={() => this.loadScores()} />
           <FlatList
@@ -118,57 +141,80 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'white',
-    padding: 5,
+    // backgroundColor: 'white',
+    // padding: 5,
   },
-  paragraph: {
+  emptycontainer: {
     flex: 1,
     flexDirection: 'column',
-    margin: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: 'black ',
+
+    // backgroundColor: 'white',
+    // padding: 5,
+  },
+  paragraph: {
+    // flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    fontSize: 18,
+    // textAlign: 'center',
+    // color: 'black ',
+  },
+  paragraph1: {
+    // flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    // margin: 24,
+    fontSize: 18,
+    // textAlign: 'center',
+    // color: 'black ',
   },
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderColor: '#DCDCDC',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     borderBottomWidth: 1,
-    paddingTop: 15,
-    paddingBottom: 15,
+    paddingTop: 22,
+    paddingBottom: 5,
   },
   pic: {
     borderRadius: 30,
     width: 60,
     height: 60,
+    // backgroundColor: 'white',
   },
   nameContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: 280,
+    // backgroundColor: 'white',
   },
   nameTxt: {
     marginLeft: 15,
     fontWeight: '600',
-    color: '#222',
-    fontSize: 16,
+    // color: '#222',
+    fontSize: 14,
     width: 170,
   },
   mblTxt: {
-    fontWeight: '200',
+    // fontWeight: '200',
     color: '#D21242',
-    fontSize: 20,
+    fontSize: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   msgContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   msgTxt: {
-    fontWeight: '400',
-    color: '#008B8B',
+    // fontWeight: '400',
+    // color: '#008B8B',
     fontSize: 12,
     marginLeft: 15,
   },
@@ -176,6 +222,31 @@ const styles = StyleSheet.create({
     color: 'black',
     textAlign: 'center',
     paddingTop: 5,
-    fontSize: 16,
+    fontSize: 18,
+  },
+  // toppic: {
+  //   // width: 20,
+  //   // height: 20,
+  // },
+  inforow: {
+    flex: 1,
+    flexDirection: 'column',
+    // backgroundColor: 'white',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-start',
+    padding: 10,
+  },
+  // rowpic: {
+  //   width: 20,
+  //   height: 20,
+  //   justifyContent: 'space-between',
+  // },
+  emojipic: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 12,
+    height: 12,
+    // backgroundColor: 'white',
+    fontFamily: 'Chalkduster',
   },
 });

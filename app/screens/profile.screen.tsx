@@ -29,14 +29,15 @@ export default class ProfileScreen extends Component<Props, {}> {
     return (
       <View style={styles.container}>
         <View style={styles.header}></View>
-        <CustomText style={styles.name}>{this.props.user.name}</CustomText>
 
+        <CustomText style={styles.name}>{this.props.user.name}</CustomText>
         <Image
           style={styles.avatar}
           source={{
             uri: this.props.user.image,
           }}
         />
+
         <View>
           <View style={styles.bodyContent}>
             <TouchableOpacity
@@ -83,7 +84,7 @@ export default class ProfileScreen extends Component<Props, {}> {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#D21242',
-    height: 200,
+    height: 150,
   },
   container: {
     justifyContent: 'center',
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: '600',
     textAlign: 'center',
-    padding: 10,
+    paddingTop: 50,
   },
   bodyContent: {
     flex: 1,
@@ -135,5 +136,10 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 30,
     backgroundColor: '#808080',
+  },
+  rowpic: {
+    width: 60,
+    height: 60,
+    justifyContent: 'space-between',
   },
 });

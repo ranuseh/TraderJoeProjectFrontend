@@ -11,6 +11,7 @@ import { Vote, deleteProductFromUser } from './app/api/product.api';
 interface State {
   token: string;
   user: User;
+  color: boolean;
 }
 
 export interface LoginInfo {
@@ -27,6 +28,7 @@ export default class App extends Component<{}, State> {
     this.state = {
       token: null,
       user: null,
+      color: false,
     };
   }
   private onLogIn = async (loginInfo: LoginInfo) => {
@@ -82,7 +84,7 @@ export default class App extends Component<{}, State> {
         product.productId,
       );
 
-      this.setState({ user: returnUserAfterUpdate });
+      this.setState({ user: returnUserAfterUpdate, color: true });
     }
   };
 
@@ -112,12 +114,13 @@ export default class App extends Component<{}, State> {
       return (
         <AppContainer
           persistNavigationState={this.persistNavigationState}
-          // loadNavigationState={this.loadNavigationState}
+          loadNavigationState={this.loadNavigationState}
           screenProps={{
             token: this.state.token,
             onLogOutCallback: this.onLogOut,
             updateShoppingListCallback: this.updateShoppingList,
             user: this.state.user,
+            color: this.state.color,
           }}
         />
       );

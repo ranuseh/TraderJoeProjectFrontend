@@ -91,8 +91,16 @@ export default class LoginScreen extends Component<Props> {
           <CustomText style={styles.bodyContent}>Buy, Rate, Repeat</CustomText>
         </View>
         <Text style={styles.buttonContainer} onPress={() => this.logIn()}>
-          <CustomText>Login</CustomText>
+          <CustomText style={styles.login}>Login</CustomText>
         </Text>
+
+        <Image
+          source={{
+            uri:
+              'https://i38.photobucket.com/albums/e124/ranuseh/Screen%20Shot%202019-07-26%20at%204.21.41%20PM_zpsnlbnkumg.png',
+          }}
+          style={styles.headerlogin}
+        />
       </View>
     );
   }
@@ -126,7 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 20,
@@ -140,13 +148,22 @@ const styles = StyleSheet.create({
     // margin: 40,
     width: 60,
     height: 60,
-    backgroundColor: 'white',
+    backgroundColor: 'green',
   },
   headerpic: {
     flexDirection: 'row',
-    // margin: 40,
     width: 300,
     height: 70,
+    backgroundColor: 'white',
+  },
+  login: {
+    margin: 60,
+    backgroundColor: 'white',
+  },
+  headerlogin: {
+    width: 300,
+    height: 100,
+    padding: 40,
     backgroundColor: 'white',
   },
 });

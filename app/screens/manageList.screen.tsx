@@ -75,10 +75,9 @@ export default class ManageListScreen extends Component<Props, State> {
     console.log('IN CART', this.state.cart);
     if (this.state.cart.length === 0) {
       return (
-        <View>
+        <View style={styles.container}>
           <NavigationEvents onWillFocus={() => this.loadList(action)} />
           <CustomText style={styles.paragraph}>Nothing here</CustomText>
-
           <CustomText style={styles.paragraph}>
             Play to start adding items!
           </CustomText>
@@ -153,21 +152,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'white',
     // marginTop: 40,
+    backgroundColor: 'white',
   },
   paragraph: {
-    margin: 24,
+    flexDirection: 'column',
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
     color: 'black',
+    backgroundColor: 'white',
   },
   row: {
     flex: 3,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     borderColor: '#DCDCDC',
     backgroundColor: 'white',
     borderBottomWidth: 1,

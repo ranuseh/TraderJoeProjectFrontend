@@ -6,6 +6,7 @@ import {
   FlatList,
   ListRenderItemInfo,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import User from '../model/user.model';
@@ -15,6 +16,7 @@ import { CustomText } from '../components/CustomText';
 
 interface State {
   recommended: Product[];
+  added: boolean;
 }
 
 interface NavigationProps {
@@ -23,6 +25,8 @@ interface NavigationProps {
 interface Props {
   navigation: NavigationScreenProp<{}, NavigationProps>;
   user: User;
+  color: boolean;
+
   updateShoppingListCallback: (product: Product, action: Vote) => void;
 }
 
@@ -32,6 +36,7 @@ export default class ProductMatchesScreen extends Component<Props, State> {
 
     this.state = {
       recommended: [],
+      added: false,
     };
   }
 
@@ -41,32 +46,12 @@ export default class ProductMatchesScreen extends Component<Props, State> {
       const compareUser = navigation.getParam('user', null);
       const loggedInUser = this.props.user;
 
-      console.log('COMPARE USER LIKE', compareUser.like);
-      console.log('LOGGED IN USER like', loggedInUser.like);
-
-      console.log('LOGGED IN USER DISIKE', loggedInUser.dislike);
-
       const recommededList: string[] = compareUser.like.filter(item => {
-        console.log(
-          `item:${item} like: ${loggedInUser.like.includes(
-            item,
-          )} dislike: ${loggedInUser.dislike.includes(item)}`,
-        );
         return (
           !loggedInUser.like.includes(item) &&
           !loggedInUser.dislike.includes(item)
         );
       });
-
-      // const dislikeList: string[] = compareUser.like.filter(
-      //   items => !loggedInUser.dislike.includes(items),
-      // );
-
-      console.log('Recommended list', recommededList);
-
-      // console.log('DISLIKE LIST', dislikeList);
-
-      // const recommededList = [...dislikeList, ...likeList];
 
       const actualProduct: Promise<Product>[] = recommededList.map(productid =>
         getProduct(productid),
@@ -87,6 +72,10 @@ export default class ProductMatchesScreen extends Component<Props, State> {
           source={{ uri: listRenderItemInfo.item.imageUrl }}
           style={styles.pic}
         />
+        <View style={styles.inforow}>
+          <CustomText style={styles.infotxt}>Name of Food</CustomText>
+          <CustomText style={styles.infotxt}>$ 6.99</CustomText>
+        </View>
       </View>
       <TouchableOpacity
         onPress={() =>
@@ -104,7 +93,7 @@ export default class ProductMatchesScreen extends Component<Props, State> {
             }}
             style={styles.piccart}
           />
-          <CustomText> Add to List</CustomText>
+          <CustomText> Add </CustomText>
         </View>
       </TouchableOpacity>
     </View>
@@ -113,21 +102,39 @@ export default class ProductMatchesScreen extends Component<Props, State> {
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
-    return (
-      <View>
-        <CustomText
-          style={styles.mblTxtbutton}
-          onPress={() => this.props.navigation.navigate('Shopping List')}
-        >
-          Go To Shopping List
-        </CustomText>
-        <FlatList
-          data={this.state.recommended}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderItem}
-        />
-      </View>
-    );
+    if (this.props.color === true) {
+      return (
+        <View>
+          <CustomText
+            style={styles.mblTxtbutton}
+            onPress={() => this.props.navigation.navigate('Shopping List')}
+          >
+            Go To Shopping List
+          </CustomText>
+          <FlatList
+            data={this.state.recommended}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderItem}
+          />
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <CustomText
+            style={styles.mblTxtbutton}
+            onPress={() => this.props.navigation.navigate('Shopping List')}
+          >
+            Go To Shopping List
+          </CustomText>
+          <FlatList
+            data={this.state.recommended}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderItem}
+          />
+        </View>
+      );
+    }
   }
 }
 
@@ -140,7 +147,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   row: {
-    flex: 2,
+    flex: 3,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -164,6 +171,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   picturerow: {
+    flex: 3,
+    flexDirection: 'row',
     backgroundColor: 'white',
     padding: 20,
   },
@@ -174,5 +183,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 15,
+  },
+  inforow: {
+    flex: 2,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
+  infotxt: {
+    paddingLeft: 30,
+    paddingBottom: 20,
   },
 });
