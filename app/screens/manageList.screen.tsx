@@ -63,6 +63,22 @@ export default class ManageListScreen extends Component<Props, State> {
           style={styles.pic}
         />
       </View>
+      <View style={styles.textrow}>
+        <View style={styles.inforow}>
+          <CustomText style={styles.infotxt}>Product Name: </CustomText>
+          <CustomText style={styles.infotxt}>Product Price: </CustomText>
+          <CustomText style={styles.infotxt}>Product Category:</CustomText>
+        </View>
+      </View>
+      <View style={styles.picturerowarrow}>
+        <Image
+          source={{
+            uri:
+              'https://i38.photobucket.com/albums/e124/ranuseh/pngkey.com-bracket-png-4411331_zps4kzhgudr.png',
+          }}
+          style={styles.picarrow}
+        />
+      </View>
     </View>
   );
 
@@ -105,7 +121,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     )
                   }
                 >
-                  Dislike
+                  <CustomText style={styles.swipetxt}>Dislike </CustomText>
                 </CustomText>
                 <CustomText
                   style={styles.rowBackright}
@@ -113,7 +129,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     this.props.updateShoppingListCallback(rowData.item, 'like')
                   }
                 >
-                  Like
+                  <CustomText style={styles.swipetxt}>Like </CustomText>
                 </CustomText>
                 <CustomText
                   style={styles.rowBackdelete}
@@ -124,7 +140,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     )
                   }
                 >
-                  Delete
+                  <CustomText style={styles.swipetxt}>Delete </CustomText>
                 </CustomText>
                 <CustomText
                   style={styles.rowBacksave}
@@ -135,7 +151,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     )
                   }
                 >
-                  Save
+                  <CustomText style={styles.swipetxt}>Save </CustomText>
                 </CustomText>
               </View>
             )}
@@ -152,7 +168,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    // marginTop: 40,
+    marginTop: 40,
     backgroundColor: 'white',
   },
   paragraph: {
@@ -173,49 +189,53 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
   pic: {
-    width: 70,
-    height: 70,
+    width: 80,
+    height: 80,
+  },
+  picarrow: {
+    width: 40,
+    height: 40,
   },
   picturerow: {
     backgroundColor: 'white',
     padding: 20,
   },
+  textrow: {
+    backgroundColor: 'white',
+  },
+  picturerowarrow: {
+    backgroundColor: 'white',
+    padding: 20,
+    paddingTop: 35,
+    alignItems: 'flex-end',
+  },
   rowBackleft: {
-    backgroundColor: '#DD9296',
+    backgroundColor: '#ffa951',
     textAlign: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    alignContent: 'center',
+    flexDirection: 'row',
     width: 67,
-    height: 110,
+    height: 120,
   },
   rowBackright: {
-    backgroundColor: '#87B38D',
+    backgroundColor: '#ff975e',
     textAlign: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
     width: 67,
-    height: 110,
+    height: 120,
   },
   rowBackdelete: {
-    backgroundColor: '#CC76A1',
+    backgroundColor: '#f95c5c',
     textAlign: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
     width: 67,
-    height: 110,
+    height: 120,
   },
   rowBacksave: {
-    backgroundColor: '#F2B7C6',
+    backgroundColor: '#e54b4b',
     textAlign: 'center',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'row',
     width: 67,
-    height: 110,
+    height: 120,
   },
   swipecontainer: {
     flex: 2,
@@ -234,7 +254,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-end',
     backgroundColor: 'white',
-    fontSize: 12,
+    fontSize: 16,
     textAlign: 'center',
+    color: '#D21242',
+    padding: 10,
+  },
+  inforow: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    paddingRight: 40,
+  },
+  infotxt: {
+    paddingBottom: 5,
+  },
+  swipetxt: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

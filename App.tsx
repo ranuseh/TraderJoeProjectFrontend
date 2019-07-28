@@ -11,7 +11,6 @@ import { Vote, deleteProductFromUser } from './app/api/product.api';
 interface State {
   token: string;
   user: User;
-  color: boolean;
 }
 
 export interface LoginInfo {
@@ -28,7 +27,6 @@ export default class App extends Component<{}, State> {
     this.state = {
       token: null,
       user: null,
-      color: false,
     };
   }
   private onLogIn = async (loginInfo: LoginInfo) => {
@@ -84,7 +82,7 @@ export default class App extends Component<{}, State> {
         product.productId,
       );
 
-      this.setState({ user: returnUserAfterUpdate, color: true });
+      this.setState({ user: returnUserAfterUpdate });
     }
   };
 
@@ -120,7 +118,6 @@ export default class App extends Component<{}, State> {
             onLogOutCallback: this.onLogOut,
             updateShoppingListCallback: this.updateShoppingList,
             user: this.state.user,
-            color: this.state.color,
           }}
         />
       );

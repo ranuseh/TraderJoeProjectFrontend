@@ -5,7 +5,8 @@ import {
   createBottomTabNavigator,
   NavigationScreenProp,
 } from 'react-navigation';
-import { Icon } from 'react-native-elements';
+import { Icon, Badge } from 'react-native-elements';
+import { View } from 'react-native';
 
 import ProductScreen from './app/screens/product.screen';
 import HomeScreen from './app/screens/home.screen';
@@ -129,7 +130,15 @@ const Tabs = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'List',
       tabBarIcon: () => (
-        <Icon name="shopping-cart" type="entypo" size={26} color="#1E52BD" />
+        <View>
+          <Icon name="shopping-cart" type="entypo" size={26} color="#1E52BD" />
+
+          <Badge
+            value="10"
+            status="error"
+            containerStyle={{ position: 'absolute', top: -4, right: -10 }}
+          />
+        </View>
       ),
     },
   },

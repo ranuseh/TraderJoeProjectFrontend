@@ -6,7 +6,7 @@ import {
   FlatList,
   ListRenderItemInfo,
   TouchableOpacity,
-  Alert,
+  Text,
 } from 'react-native';
 import { NavigationScreenProp } from 'react-navigation';
 import User from '../model/user.model';
@@ -25,7 +25,6 @@ interface NavigationProps {
 interface Props {
   navigation: NavigationScreenProp<{}, NavigationProps>;
   user: User;
-  color: boolean;
 
   updateShoppingListCallback: (product: Product, action: Vote) => void;
 }
@@ -73,8 +72,36 @@ export default class ProductMatchesScreen extends Component<Props, State> {
           style={styles.pic}
         />
         <View style={styles.inforow}>
-          <CustomText style={styles.infotxt}>Name of Food</CustomText>
-          <CustomText style={styles.infotxt}>$ 6.99</CustomText>
+          <Text style={styles.nameTxt}>
+            <Image
+              source={{
+                uri:
+                  'https://i38.photobucket.com/albums/e124/ranuseh/heart_zpsmhbnee4n.png',
+              }}
+              style={styles.emojipic}
+            />
+            <CustomText> 9 Likes</CustomText>
+          </Text>
+          <Text style={styles.nameTxt}>
+            <Image
+              source={{
+                uri:
+                  'https://i38.photobucket.com/albums/e124/ranuseh/cancel_zpsjmgn1gym.png',
+              }}
+              style={styles.emojipic}
+            />
+            <CustomText> 2 Dislikes </CustomText>
+          </Text>
+          <Text style={styles.nameTxt}>
+            <Image
+              source={{
+                uri:
+                  'https://i38.photobucket.com/albums/e124/ranuseh/neutral_zpsun8ttyzo.png',
+              }}
+              style={styles.emojipic}
+            />
+            <CustomText> 15 Never Tried </CustomText>
+          </Text>
         </View>
       </View>
       <TouchableOpacity
@@ -93,7 +120,7 @@ export default class ProductMatchesScreen extends Component<Props, State> {
             }}
             style={styles.piccart}
           />
-          <CustomText> Add </CustomText>
+          <CustomText> Add</CustomText>
         </View>
       </TouchableOpacity>
     </View>
@@ -102,39 +129,21 @@ export default class ProductMatchesScreen extends Component<Props, State> {
   private _keyExtractor = (product: Product) => product.productId.toString();
 
   public render() {
-    if (this.props.color === true) {
-      return (
-        <View>
-          <CustomText
-            style={styles.mblTxtbutton}
-            onPress={() => this.props.navigation.navigate('Shopping List')}
-          >
-            Go To Shopping List
-          </CustomText>
-          <FlatList
-            data={this.state.recommended}
-            keyExtractor={this._keyExtractor}
-            renderItem={this._renderItem}
-          />
-        </View>
-      );
-    } else {
-      return (
-        <View>
-          <CustomText
-            style={styles.mblTxtbutton}
-            onPress={() => this.props.navigation.navigate('Shopping List')}
-          >
-            Go To Shopping List
-          </CustomText>
-          <FlatList
-            data={this.state.recommended}
-            keyExtractor={this._keyExtractor}
-            renderItem={this._renderItem}
-          />
-        </View>
-      );
-    }
+    return (
+      <View>
+        <CustomText
+          style={styles.mblTxtbutton}
+          onPress={() => this.props.navigation.navigate('Shopping List')}
+        >
+          Go To Shopping List
+        </CustomText>
+        <FlatList
+          data={this.state.recommended}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderItem}
+        />
+      </View>
+    );
   }
 }
 
@@ -168,7 +177,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     margin: 10,
-    backgroundColor: 'white',
+  },
+  mblTxtbuttontrue: {
+    backgroundColor: 'yellow',
   },
   picturerow: {
     flex: 3,
@@ -192,6 +203,26 @@ const styles = StyleSheet.create({
   },
   infotxt: {
     paddingLeft: 30,
-    paddingBottom: 20,
+    paddingBottom: 5,
+  },
+  tinypic: {
+    width: 15,
+    height: 15,
+    backgroundColor: 'green',
+  },
+  nameTxt: {
+    marginLeft: 15,
+    fontWeight: '600',
+    // color: '#222',
+    fontSize: 14,
+    width: 170,
+  },
+  emojipic: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 12,
+    height: 12,
+    // backgroundColor: 'white',
+    fontFamily: 'Chalkduster',
   },
 });
