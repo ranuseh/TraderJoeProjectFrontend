@@ -83,13 +83,11 @@ export default class ProfileScreen extends Component<Props, {}> {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: '#D21242',
     height: 150,
   },
   container: {
     justifyContent: 'center',
     backgroundColor: 'white',
-    padding: 20,
   },
   avatar: {
     width: 130,
@@ -100,7 +98,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     alignSelf: 'center',
     position: 'absolute',
-    marginTop: 130,
+    marginTop: 100,
   },
   name: {
     fontSize: 22,

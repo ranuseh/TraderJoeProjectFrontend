@@ -10,7 +10,6 @@ interface Props {
 export class Card extends React.Component<Props, {}> {
   public render() {
     return (
-      
       <View style={styles.container}>
         <CustomText style={styles.nevertried}>Never Tried</CustomText>
 
@@ -35,15 +34,11 @@ export class Card extends React.Component<Props, {}> {
 
 const styles = StyleSheet.create({
   card: {
-    // flexDirection: 'column',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     width: 300,
     height: 300,
-    // backgroundColor: 'white',
   },
   container: {
-    flex: 3,
+    flex: 4,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -55,7 +50,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 300,
     width: 300,
-    // padding: 10,
   },
   vote: {
     flexDirection: 'row',
@@ -64,15 +58,11 @@ const styles = StyleSheet.create({
     maringTop: 50,
     width: 300,
     height: 100,
-    // backgroundColor: 'white',
   },
   welcome: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 200,
-    height: 100,
-    fontSize: 30,
   },
   like: {
     flexDirection: 'row',
@@ -102,6 +92,6 @@ const styles = StyleSheet.create({
   },
   welcometxt: {
     fontSize: 20,
-    paddingTop: 20,
+    paddingTop: 30,
   },
 });

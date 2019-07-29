@@ -11,6 +11,7 @@ import { Vote, deleteProductFromUser } from './app/api/product.api';
 interface State {
   token: string;
   user: User;
+  disabled: boolean;
 }
 
 export interface LoginInfo {
@@ -27,11 +28,10 @@ export default class App extends Component<{}, State> {
     this.state = {
       token: null,
       user: null,
+      disabled: false,
     };
   }
   private onLogIn = async (loginInfo: LoginInfo) => {
-    console.log('on login:', loginInfo.facebookId);
-
     if (loginInfo.token != null) {
       try {
         AsyncStorage.setItem('userToken', loginInfo.token);
@@ -82,8 +82,11 @@ export default class App extends Component<{}, State> {
         product.productId,
       );
 
-      this.setState({ user: returnUserAfterUpdate });
+      console.log('DISABLED STATE BEFORE', this.state.disabled);
+
+      this.setState({ user: returnUserAfterUpdate, disabled: true });
     }
+    console.log('DISABLED STATE AFTER', this.state.disabled);
   };
 
   private navigationScreenKey = 'navigationScreen';
@@ -106,6 +109,7 @@ export default class App extends Component<{}, State> {
   };
 
   public render() {
+    // console.log('APPRENDER', this.state.disabled);
     if (this.state.user == null) {
       return <LoginScreen onLoginCallback={this.onLogIn} />;
     } else {
@@ -118,6 +122,7 @@ export default class App extends Component<{}, State> {
             onLogOutCallback: this.onLogOut,
             updateShoppingListCallback: this.updateShoppingList,
             user: this.state.user,
+            disabled: this.state.disabled,
           }}
         />
       );

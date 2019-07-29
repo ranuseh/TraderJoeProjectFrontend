@@ -27,6 +27,7 @@ interface NavigationProps {
 }
 interface Props {
   screenProps: ScreenProps;
+  user: User;
   navigation: NavigationScreenProp<{}, NavigationProps>;
 }
 
@@ -114,7 +115,14 @@ const Tabs = createBottomTabNavigator({
     navigationOptions: {
       tabBarLabel: 'Matches',
       tabBarIcon: () => (
-        <Icon name="heart" type="entypo" size={28} color="#1E52BD" />
+        <View>
+          <Icon name="heart" type="entypo" size={28} color="#1E52BD" />
+          <Badge
+            value="5"
+            status="warning"
+            containerStyle={{ position: 'absolute', top: -2, right: -10 }}
+          />
+        </View>
       ),
     },
   },
@@ -134,7 +142,7 @@ const Tabs = createBottomTabNavigator({
           <Icon name="shopping-cart" type="entypo" size={26} color="#1E52BD" />
 
           <Badge
-            value="10"
+            value="5"
             status="error"
             containerStyle={{ position: 'absolute', top: -2, right: -10 }}
           />

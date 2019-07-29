@@ -102,8 +102,8 @@ export default class ManageListScreen extends Component<Props, State> {
     } else {
       return (
         <View style={styles.container}>
-          <CustomText style={styles.welcome}>{action} list page </CustomText>
-          <CustomText style={styles.welcome1}>Swipe for options </CustomText>
+          <CustomText style={styles.paragraph}>{action} list page </CustomText>
+          <CustomText style={styles.paragraph}>Swipe for options </CustomText>
 
           <NavigationEvents onWillFocus={() => this.loadList(action)} />
           <SwipeListView
@@ -151,7 +151,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     )
                   }
                 >
-                  <CustomText>Save </CustomText>
+                  <CustomText>Never Tried </CustomText>
                 </CustomText>
               </View>
             )}
