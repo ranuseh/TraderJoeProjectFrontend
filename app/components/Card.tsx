@@ -10,6 +10,7 @@ interface Props {
 export class Card extends React.Component<Props, {}> {
   public render() {
     return (
+      
       <View style={styles.container}>
         <CustomText style={styles.nevertried}>Never Tried</CustomText>
 

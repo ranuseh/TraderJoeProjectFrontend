@@ -121,7 +121,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     )
                   }
                 >
-                  <CustomText style={styles.swipetxt}>Dislike </CustomText>
+                  <CustomText>Dislike </CustomText>
                 </CustomText>
                 <CustomText
                   style={styles.rowBackright}
@@ -129,7 +129,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     this.props.updateShoppingListCallback(rowData.item, 'like')
                   }
                 >
-                  <CustomText style={styles.swipetxt}>Like </CustomText>
+                  <CustomText>Like </CustomText>
                 </CustomText>
                 <CustomText
                   style={styles.rowBackdelete}
@@ -140,7 +140,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     )
                   }
                 >
-                  <CustomText style={styles.swipetxt}>Delete </CustomText>
+                  <CustomText>Delete </CustomText>
                 </CustomText>
                 <CustomText
                   style={styles.rowBacksave}
@@ -151,7 +151,7 @@ export default class ManageListScreen extends Component<Props, State> {
                     )
                   }
                 >
-                  <CustomText style={styles.swipetxt}>Save </CustomText>
+                  <CustomText>Save </CustomText>
                 </CustomText>
               </View>
             )}
@@ -193,8 +193,8 @@ const styles = StyleSheet.create({
     height: 80,
   },
   picarrow: {
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
   },
   picturerow: {
     backgroundColor: 'white',
@@ -206,12 +206,14 @@ const styles = StyleSheet.create({
   picturerowarrow: {
     backgroundColor: 'white',
     padding: 20,
-    paddingTop: 35,
+    paddingTop: 40,
     alignItems: 'flex-end',
   },
   rowBackleft: {
     backgroundColor: '#ffa951',
     textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
     flexDirection: 'row',
     width: 67,
     height: 120,
@@ -238,7 +240,7 @@ const styles = StyleSheet.create({
     height: 120,
   },
   swipecontainer: {
-    flex: 2,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
@@ -268,9 +270,5 @@ const styles = StyleSheet.create({
   },
   infotxt: {
     paddingBottom: 5,
-  },
-  swipetxt: {
-    justifyContent: 'center',
-    alignItems: 'center',
   },
 });

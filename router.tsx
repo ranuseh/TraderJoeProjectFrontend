@@ -136,7 +136,7 @@ const Tabs = createBottomTabNavigator({
           <Badge
             value="10"
             status="error"
-            containerStyle={{ position: 'absolute', top: -4, right: -10 }}
+            containerStyle={{ position: 'absolute', top: -2, right: -10 }}
           />
         </View>
       ),
