@@ -6,4 +6,6 @@ export default interface User {
   dislike: string[];
   neverTried: string[];
   shoppingList: string[];
+  location: string;
+  store: string;
 }

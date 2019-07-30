@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { NavigationScreenProp, NavigationEvents } from 'react-navigation';
 import { SwipeListView } from 'react-native-swipe-list-view';
 
-import { StyleSheet, View, ListRenderItemInfo, Image } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ListRenderItemInfo,
+  Image,
+  Text,
+} from 'react-native';
 
 import User from '../model/user.model';
 import Product from '../model/product.model';
@@ -65,9 +71,14 @@ export default class ManageListScreen extends Component<Props, State> {
       </View>
       <View style={styles.textrow}>
         <View style={styles.inforow}>
-          <CustomText style={styles.infotxt}>Product Name: </CustomText>
-          <CustomText style={styles.infotxt}>Product Price: </CustomText>
-          <CustomText style={styles.infotxt}>Product Category:</CustomText>
+          <CustomText style={styles.infotxt}>Name: </CustomText>
+          <CustomText style={styles.infotxt}>Price: </CustomText>
+          <CustomText style={styles.infotxt}>Category:</CustomText>
+          <Text style={styles.infotxt}>
+            <CustomText>
+              In {listRenderItemInfo.item.shoppingListCount} users carts
+            </CustomText>
+          </Text>
         </View>
       </View>
       <View style={styles.picturerowarrow}>
@@ -270,5 +281,12 @@ const styles = StyleSheet.create({
   },
   infotxt: {
     paddingBottom: 5,
+  },
+  emojipic: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 12,
+    height: 12,
+    fontFamily: 'Chalkduster',
   },
 });

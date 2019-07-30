@@ -34,3 +34,47 @@ export const deleteProductFromUser = (
     .then(response => response.json())
     .catch(error => console.log(error));
 };
+
+export const incrementProduct = (
+  // facebookId: string,
+  productId: string[] | string,
+) => {
+  return fetch(
+    `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/add/${productId}`,
+    {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify({
+        productId,
+      }),
+    },
+  )
+    .then(response => response.json())
+    .catch(error => console.log(error));
+};
+
+export const decrementProduct = (
+  // facebookId: string,
+  productId: string[] | string,
+) => {
+  return fetch(
+    `http://traderjoeprojectbackend-env.ybsmmpegn5.us-west-2.elasticbeanstalk.com/add/${productId}`,
+    {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify({
+        productId,
+      }),
+    },
+  )
+    .then(response => response.json())
+    .catch(error => console.log(error));
+};

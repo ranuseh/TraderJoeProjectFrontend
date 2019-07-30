@@ -40,6 +40,8 @@ export const addNewUser = async (
     dislike: [],
     neverTried: [],
     shoppingList: [],
+    location: '',
+    store: '',
   };
 
   try {

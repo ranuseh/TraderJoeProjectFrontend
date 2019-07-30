@@ -84,7 +84,10 @@ export default class ProductMatchesScreen extends Component<Props, State> {
                 }}
                 style={styles.emojipic}
               />
-              <CustomText> 9 Likes</CustomText>
+              <CustomText>
+                {' '}
+                {listRenderItemInfo.item.likeCount} Likes
+              </CustomText>
             </Text>
             <Text style={styles.nameTxt}>
               <Image
@@ -94,7 +97,10 @@ export default class ProductMatchesScreen extends Component<Props, State> {
                 }}
                 style={styles.emojipic}
               />
-              <CustomText> 2 Dislikes </CustomText>
+              <CustomText>
+                {' '}
+                {listRenderItemInfo.item.dislikeCount} Dislikes{' '}
+              </CustomText>
             </Text>
             <Text style={styles.nameTxt}>
               <Image
@@ -104,7 +110,10 @@ export default class ProductMatchesScreen extends Component<Props, State> {
                 }}
                 style={styles.emojipic}
               />
-              <CustomText> 15 Never Tried </CustomText>
+              <CustomText>
+                {' '}
+                {listRenderItemInfo.item.neverTriedCount} Never Tried{' '}
+              </CustomText>
             </Text>
           </View>
         </View>

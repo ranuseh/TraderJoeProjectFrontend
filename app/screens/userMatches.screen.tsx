@@ -85,7 +85,7 @@ export default class UserMatchesScreen extends Component<Props, State> {
                 }}
                 style={styles.emojipic}
               />
-              <CustomText>Seattle, WA</CustomText>
+              <CustomText> {listRenderItemInfo.item[0].location}</CustomText>
             </Text>
             <Text style={styles.nameTxt}>
               <Image
@@ -95,7 +95,7 @@ export default class UserMatchesScreen extends Component<Props, State> {
                 }}
                 style={styles.emojipic}
               />
-              <CustomText>Shops at: Capitol Hill </CustomText>
+              <CustomText> {listRenderItemInfo.item[0].store}</CustomText>
             </Text>
           </View>
         </View>

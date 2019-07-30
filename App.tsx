@@ -6,7 +6,11 @@ import { getOrCreateUser, updateUser } from './app/api/user.api';
 import User from './app/model/user.model';
 import ProductModel from './app/model/product.model';
 import { NavigationState } from 'react-navigation';
-import { Vote, deleteProductFromUser } from './app/api/product.api';
+import {
+  Vote,
+  deleteProductFromUser,
+  incrementProduct,
+} from './app/api/product.api';
 
 interface State {
   token: string;
@@ -79,6 +83,8 @@ export default class App extends Component<{}, State> {
         action,
         product.productId,
       );
+
+      // await incrementProduct(product.productId);
 
       this.setState({ user: returnUserAfterUpdate });
     }
