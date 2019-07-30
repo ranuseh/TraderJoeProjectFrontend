@@ -119,7 +119,7 @@ const Tabs = createBottomTabNavigator({
           <Icon name="heart" type="entypo" size={28} color="#1E52BD" />
           <Badge
             value="5"
-            status="warning"
+            status="success"
             containerStyle={{ position: 'absolute', top: -2, right: -10 }}
           />
         </View>
@@ -142,7 +142,7 @@ const Tabs = createBottomTabNavigator({
           <Icon name="shopping-cart" type="entypo" size={26} color="#1E52BD" />
 
           <Badge
-            value="5"
+            value="3"
             status="error"
             containerStyle={{ position: 'absolute', top: -2, right: -10 }}
           />

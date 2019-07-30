@@ -68,9 +68,6 @@ export default class ProductMatchesScreen extends Component<Props, State> {
       listRenderItemInfo.item.productId,
     );
 
-    console.log('PRODUCT ID', listRenderItemInfo.item.productId);
-    console.log('SHOPPING LIST', this.props.user.shoppingList);
-
     return (
       <View style={styles.row}>
         <View style={styles.picturerow}>
@@ -247,9 +244,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
   },
   test1: {
-    backgroundColor: 'green',
-  },
-  item: {
-    backgroundColor: 'orange',
+    // backgroundColor: 'green',
   },
 });
